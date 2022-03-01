@@ -1,0 +1,29 @@
+.porBaixo{
+    background: purple;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.porCima{
+    margin-left: 3%;
+    margin-top: 3%;
+    position: absolute;
+    z-index: 9999;
+}
+
+.modalPorCima{
+    position: absolute;
+}
+
+.porCima2{
+    margin-left: 6%;
+    margin-top: 3%;
+    position: absolute;
+    z-index: 9999;
+}
+
+.modalPorCima2{
+    position: absolute;
+    height: 100vh;
+}

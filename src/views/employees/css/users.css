@@ -1,0 +1,46 @@
+.newUser{
+    margin-right: 10px;
+}
+
+
+.icon-css{
+    cursor: pointer;
+    margin-left: 10px;
+    color: white;
+}
+
+.usersContainer{
+    border-radius: 10px;
+}
+.menuUser{
+    margin-bottom: 1%;
+}
+
+.paginacaoContainer{
+    background: red;
+}
+
+.usersTableContainer{
+    background: white;
+}
+
+.newUser-input-IncorrectEmail{
+    background: rgb(245, 163, 56);
+    margin-top: 1%;
+    padding: 0.5%;
+    border-radius: 5px;
+}
+
+.user-icons{
+    font-size: 20pt;
+}
+
+.container-users-notFind{
+    background: rgb(228, 228, 228) ;
+    border-radius: 10px;
+    padding: 3%;
+}
+
+.btn-user-pagination{
+    margin: 0.5%;
+}

@@ -1,0 +1,25 @@
+.newUser{
+    margin-right: 10px;
+}
+
+
+.icon-css{
+    cursor: pointer;
+    margin-left: 10px;
+    color: white;
+}
+.deviceContainer{
+    border-radius: 10px;
+}
+
+.deviceTableContainer{
+    border-bottom-right-radius: 10px;
+    background: white;
+    border-bottom-left-radius: 10px;
+}
+.menuDeviceContainer{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-bottom: 1%;
+    /* background: #AEAEAE; */
+}

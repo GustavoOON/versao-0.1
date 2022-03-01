@@ -1,0 +1,61 @@
+
+
+
+.text-titulo-follow{
+    font-size: 10pt;
+    font-weight: 400;
+}
+
+.text-conteudo-follow{
+    font-size: 12;
+    font-weight: 700;
+    margin-bottom: 2%;
+}
+
+.text-conteudo-follow2{
+    font-size: 12;
+    font-weight: 700;
+    margin-bottom: 2%;
+    text-decoration:underline;
+}
+
+.container-pdf{
+    
+    padding: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+.BTN-font{
+    margin-bottom: 2%;
+    font-size: 10pt;
+    width: 100%;
+    text-align: end;
+}
+
+.iconContainer{
+    margin-left: 3% ;
+}
+
+.container-logs{
+    padding: 2%;
+}
+
+.container-msg{
+    border-radius: 10px;
+    padding: 1%;
+}
+.container-msg-atual{
+    background: rgba(219, 219, 219, 0.35);
+    border-radius: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 0.8%;
+}
+
+.cardFollow{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}

@@ -1,0 +1,215 @@
+/* Follow Call */
+
+.container-header-titulo{
+    margin-top: 1%;
+}
+.Container-header-grid{
+    width: 100%;
+    display: grid;
+}
+.container-header-followCall{
+    width: 50%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  
+}
+.container-header-restart{
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+    align-items: center;
+    
+}
+
+.container-btn-restart{
+    float: right;
+}
+
+.container-infos-id{
+    width: 100%;
+    height: 100%;
+    margin: 30%;
+}
+
+.container-infos-follow{
+    padding: 10px;
+    width: 100%;
+}
+
+.container-btn-follow{
+    float: right;
+    margin-right: 3%;    
+}
+
+.container-infos-type{
+    padding: 1.1%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    margin: 1%;
+    border-radius: 15px;
+    font-size: 10pt;
+}
+
+.container-infos-status{
+    padding: 1.1%;
+    background: rgb(109, 109, 109) ; ;
+    color: white;
+    margin: 1%;
+    border-radius: 15px;
+    font-size: 10pt;
+}
+
+.container-infos-time{
+    padding: 1.1%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    margin: 1%;
+    border-radius: 15px;
+    font-size: 10pt;
+}
+
+.container-infos-employer{
+    padding: 1.1%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    margin: 1%;
+    border-radius: 15px;
+    font-size: 10pt;
+}
+
+.container-header-client{
+    padding: 2%;
+}
+
+.container-header-client-restart{
+    padding-left:0%;
+    padding-top: 0%;
+}
+
+
+.container-infos-type2{
+    padding: 1.5%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    font-size: 10pt;
+    margin-right: 1%;
+    border-radius: 15px;
+}
+
+.container-infos-status2{
+    padding: 1.5%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    font-size: 10pt;
+    margin-right: 1%;
+    border-radius: 15px;
+}
+
+.container-infos-time2{
+    padding: 1.5%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    font-size: 10pt;
+    margin-right: 1%;
+    border-radius: 15px;
+}
+
+.container-infos-employer2{
+    padding: 1.5%;
+    background: rgb(109, 109, 109) ;
+    color: white;
+    font-size: 10pt;
+    margin-right: 1%;
+    border-radius: 15px;
+}
+
+.container-informacoes{
+    margin-top: 0%;
+}
+
+.container-body-clientInfo{
+    /* background: red; */
+    padding: 1%;
+}
+
+.container-info-km{
+    background: rgb(199, 199, 199);
+    padding:1%;
+    border-radius: 15px;
+    margin: 1%;
+    font-size: 10pt;
+}
+
+.container-infos-km-time{
+    background: #c0c0c0;
+    padding:1%;
+    border-radius: 15px;
+    font-size: 10pt;
+}
+.container-body-values{
+    margin-top: 2%;
+}
+
+.container-listPrestadores{
+    margin: 5px;
+}
+
+.container-render-listPrestadores{
+    /* background: rgb(240, 240, 240); */
+    margin: 0.2%;
+}
+
+.btn-select-prestador{
+    float: right;
+}
+
+.container-body-list-prestadores{
+    height: 100%;
+    padding:1%;
+}
+
+.label-listPrestadores{
+    background: #c0c0c0;
+    padding:1%;
+    border-radius: 15px;
+    margin-bottom: 1%;
+    margin-right: 1.5%;
+    font-size: 10pt;
+}
+
+.btn-backList{
+    float:left;
+}
+
+.btn-select{
+    float: right;
+}
+
+.container-prestador-select{
+    padding: 2%;
+}
+
+.btn-selectRoute{
+    float: right;
+}
+
+.container-followCall-confirmValues{
+    padding: 2%;
+    height: 100%;
+}
+
+.container-values{
+    margin-top:1% ;
+    padding-left: 1%;
+    
+}
+
+
+.btn-back-confirm{
+    float: left;
+}
+
+.btn-start-confirm{
+    float: right;
+}
