@@ -8,7 +8,7 @@ import ponto from '../../../../assets/images/greenPoint.png'
 const FollowMap = (props) =>{
     const containerStyle = {
         width: '100%' ,
-        height: '80vh'
+        height: '100%'
       };
       
       const center = {
@@ -123,75 +123,78 @@ const FollowMap = (props) =>{
     return isLoaded ? (
      
         <>  
+          <div  className='container-map-follow'>
             <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={10}
-              onUnmount={onUnmount}
-              options={options} // muda a estilizacao do mapa
-            >
-               { props == null ? 
-                  null
-                :
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={10}
+                onUnmount={onUnmount}
+                options={options} // muda a estilizacao do mapa
+              >
+                { props == null ? 
+                    null
+                  :
 
-                (
-                  // Caso vem algo no props mudar aqui 
-                  <>
-                    {direcoes ?
-                      ( 
+                  (
+                    // Caso vem algo no props mudar aqui 
+                    <>
+                      {direcoes ?
+                        ( 
 
-                        <> 
-                          <DirectionsRenderer
-                            directions={direcoes}
-                            options={options2}
-                          />
+                          <> 
+                            <DirectionsRenderer
+                              directions={direcoes}
+                              options={options2}
+                            />
 
-                          <Marker
+                            <Marker
+                                key={props.posicao}
+                                position={{lat: prestadorPos.lat, lng: prestadorPos.lng} }
+                                icon={{
+                                    url:ponto,
+                                    scaledSize: new window.google.maps.Size(25,25),
+                                    origin: new window.google.maps.Point(0,0),
+                                    anchor: new window.google.maps.Point(15,15),
+                                }} 
+                            />
+
+                            <Marker
                               key={props.posicao}
-                              position={{lat: prestadorPos.lat, lng: prestadorPos.lng} }
+                              position={{lat:props.cliente.adressOcorrency.lat, lng:props.cliente.adressOcorrency.lng} }
                               icon={{
-                                  url:ponto,
+                                  url:pontoFinal,
                                   scaledSize: new window.google.maps.Size(25,25),
                                   origin: new window.google.maps.Point(0,0),
                                   anchor: new window.google.maps.Point(15,15),
                               }} 
-                          />
+                            />
 
-                          <Marker
-                            key={props.posicao}
-                            position={{lat:props.cliente.adressOcorrency.lat, lng:props.cliente.adressOcorrency.lng} }
-                            icon={{
-                                url:pontoFinal,
-                                scaledSize: new window.google.maps.Size(25,25),
-                                origin: new window.google.maps.Point(0,0),
-                                anchor: new window.google.maps.Point(15,15),
-                            }} 
-                          />
+                            <Marker
+                              key={props.prestador.posicao.lat}
+                              position={{lat:props.cliente.adressDestino.lat, lng:props.cliente.adressDestino.lng} }
+                              icon={{
+                                  url:pontoFinal,
+                                  scaledSize: new window.google.maps.Size(25,25),
+                                  origin: new window.google.maps.Point(0,0),
+                                  anchor: new window.google.maps.Point(15,15),
+                              }} 
+                            />
 
-                          <Marker
-                            key={props.prestador.posicao.lat}
-                            position={{lat:props.cliente.adressDestino.lat, lng:props.cliente.adressDestino.lng} }
-                            icon={{
-                                url:pontoFinal,
-                                scaledSize: new window.google.maps.Size(25,25),
-                                origin: new window.google.maps.Point(0,0),
-                                anchor: new window.google.maps.Point(15,15),
-                            }} 
-                          />
+                          </>
+                          
+                        )
+                        : null
+                      }
+                    
 
-                        </>
-                        
-                      )
-                      : null
-                    }
-                   
+                    </>
+                  )
 
-                  </>
-                )
-
-                }
-             
-            </GoogleMap>
+                  }
+              
+              </GoogleMap>
+          </div>
+           
         </>
     )
     : null

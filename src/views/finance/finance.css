@@ -4,14 +4,21 @@
 
 .cardsFinance{
     border-radius: 20px;
+    height: 100%;
+    
+}
+
+.cardsFinance2{
+    border-radius: 20px;
+    height: 100%;
+    margin-top: 2%;
 }
 
 /* Calendario  */
 .cardsFinance3{
     border-radius: 20px;
     align-items: center;
-    height: 98%;
- 
+    height: 101%;
 
 }
 

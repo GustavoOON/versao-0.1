@@ -27,9 +27,12 @@ const CalendarioOcorrencia = () =>{
             {protocolo:'2222', status:'Em andamento', data:'02/02/2023', hora:'14:45'},
             {protocolo:'1111', status:'Recém aberto', data:'12/12/2022', hora:'12:45'},
             {protocolo:'2222', status:'Em andamento', data:'02/02/2023', hora:'14:45'},
+            {protocolo:'2222', status:'Em andamento', data:'02/02/2023', hora:'14:45'},
+            {protocolo:'1111', status:'Recém aberto', data:'12/12/2022', hora:'12:45'},
+            {protocolo:'2222', status:'Em andamento', data:'02/02/2023', hora:'14:45'},
            
         ]
-        )
+    )
 
     return  (
         <> 
@@ -47,7 +50,7 @@ const CalendarioOcorrencia = () =>{
                 <CTable align="middle"  hover responsive>
                     <CTableBody>
                         {ocorrencias.map((i, index) => {
-                            if (index < 10){
+                            if (index < 11){
                                 return (
                                     <CTableRow>
                                         <CTableDataCell >

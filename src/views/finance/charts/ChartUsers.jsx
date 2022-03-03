@@ -26,7 +26,7 @@ const ChartUsers = () =>{
                 <CCardBody>
                     <CRow>
                         <CCol  className = 'esq23'sm="auto">
-                            <label className="fincTitulo"> Planos</label>
+                            <label className="fincTitulo"> Usuários</label>
                             <br />
                             <label  className="fincSub"> Dez 2021</label>
                         </CCol>

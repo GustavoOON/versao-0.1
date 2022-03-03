@@ -1,7 +1,67 @@
 /* Follow Call */
+.font-titulo{
+    font-size: 16pt;
+    font-weight: 600;
+    
+}
+
+.iconInit{
+    color: rgb(248, 228, 52);
+    margin-right: 1%;
+}
+
+.iconExclamantion{
+    margin-right: 1%;
+    color:rgb(196, 0, 0)
+}
+
+.iconFlag{
+    margin-right: 1%;
+    color: rgb(104, 190, 18);
+}
+
+.font-conteudo{
+    font-size: 12pt;
+}
+
+.container-prestadore{
+    background: rgb(212, 212, 212);
+    margin-bottom: 1%;
+    padding: 1%;
+    border-radius: 10px;
+}
+
+.container-prestadores{
+    overflow-y: scroll;
+    height: 35vh;
+    padding: 2%;
+}
+
+.font-types{
+    background: lavender;
+    margin: 1%;
+    padding:0.3%;
+    border-radius: 5px;
+}
+
+
+.font-assistence-titulo{
+    font-size: 10pt;
+    font-weight: 700;
+    font-style: inherit;
+}
+
+.container-followCall-header1{
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .container-header-titulo{
-    margin-top: 1%;
+    padding: 1%;
+    width: 100%;
 }
 .Container-header-grid{
     width: 100%;
@@ -14,11 +74,7 @@
   
 }
 .container-header-restart{
-    width: 10%;
-    display: flex;
-    flex-direction: row;
-    justify-content:left;
-    align-items: center;
+    float: right;
     
 }
 
@@ -32,9 +88,12 @@
     margin: 30%;
 }
 
-.container-infos-follow{
+.container-followCall-client{ 
     padding: 10px;
     width: 100%;
+    background: rgb(241, 241, 241);
+    margin-top: 2%;
+    border-radius: 10px;
 }
 
 .container-btn-follow{
@@ -50,6 +109,7 @@
     border-radius: 15px;
     font-size: 10pt;
 }
+
 
 .container-infos-status{
     padding: 1.1%;
@@ -93,84 +153,41 @@
     background: rgb(109, 109, 109) ;
     color: white;
     font-size: 10pt;
-    margin-right: 1%;
+    margin: 1%;
     border-radius: 15px;
 }
 
-.container-infos-status2{
-    padding: 1.5%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    font-size: 10pt;
-    margin-right: 1%;
-    border-radius: 15px;
-}
-
-.container-infos-time2{
-    padding: 1.5%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    font-size: 10pt;
-    margin-right: 1%;
-    border-radius: 15px;
-}
-
-.container-infos-employer2{
-    padding: 1.5%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    font-size: 10pt;
-    margin-right: 1%;
-    border-radius: 15px;
-}
 
 .container-informacoes{
     margin-top: 0%;
 }
 
-.container-body-clientInfo{
-    /* background: red; */
-    padding: 1%;
-}
 
-.container-info-km{
-    background: rgb(199, 199, 199);
-    padding:1%;
-    border-radius: 15px;
+
+.container-follow-client{
+    /* background: rosybrown; */
     margin: 1%;
-    font-size: 10pt;
 }
 
-.container-infos-km-time{
-    background: #c0c0c0;
-    padding:1%;
-    border-radius: 15px;
-    font-size: 10pt;
-}
-.container-body-values{
-    margin-top: 2%;
-}
 
-.container-listPrestadores{
-    margin: 5px;
-}
 
 .container-render-listPrestadores{
-    /* background: rgb(240, 240, 240); */
-    margin: 0.2%;
+    background: rgb(226, 226, 226);
+    border:1px;
+    padding: 1%;
+    margin-top: 1%;
+    border-radius: 10px;
+    flex-direction: row;
+    display: flex;
 }
 
 .btn-select-prestador{
     float: right;
 }
 
-.container-body-list-prestadores{
-    height: 100%;
-    padding:1%;
-}
 
 .label-listPrestadores{
-    background: #c0c0c0;
+    background: #ececec;
     padding:1%;
     border-radius: 15px;
     margin-bottom: 1%;
@@ -193,10 +210,20 @@
 .btn-selectRoute{
     float: right;
 }
+.container-listPrestadores-left{
+    width: 50%;
+}
+
+.container-listPrestadores-right{
+    padding: 1%;
+    width: 20%;
+}
+
 
 .container-followCall-confirmValues{
     padding: 2%;
-    height: 100%;
+    height: 100vh;
+    /* background: salmon; */
 }
 
 .container-values{
@@ -212,4 +239,38 @@
 
 .btn-start-confirm{
     float: right;
+}
+
+.container-mapa-followCall{
+    height: 100vh;
+}
+
+
+.container-followCall-body-clientInfo{
+    padding: 1%;
+    background: rgb(48, 153, 57);
+    height: 77vh;
+}
+
+.container-list-prestadores{
+    height: 52vh;
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 2%;
+    background: rgb(66, 46, 139);
+}
+
+.container-followCall-clients{
+    height: 82vh;
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 3%;
+    margin: 0;
+}
+
+
+
+/* MAPA  */
+.container-map-follow{
+    height: 100%;
 }

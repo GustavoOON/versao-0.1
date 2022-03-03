@@ -120,7 +120,7 @@ const Sinistro = () =>{
 
     return (
         <>
-            <div className=" cardSetting">
+            <div className="container-sinister-menu">
                     
                 <CRow>
 
@@ -128,7 +128,7 @@ const Sinistro = () =>{
 
                         {protocolo == null ? (
                             <> 
-                               <div className='containerSiderBar'>
+                               <div className='containerSiderBarSinister'>
                                     <CButton color="dark" className='btn-sidebar-sinistro' active={op1} variant='ghost' onClick={() => escolhaMenu('home')} >Home</CButton>
                                     <hr />
                                     <CButton color="dark" className='btn-sidebar-sinistro' disabled active={op2} variant='ghost' onClick={() => escolhaMenu('acompanhamento')} >Acompanhamento</CButton>
@@ -144,7 +144,7 @@ const Sinistro = () =>{
                             </>
                         )
                             : (
-                                <div className='containerSiderBar'>
+                                <div className='containerSiderBarSinister'>
                                     <CButton color="dark" className='btn-sidebar-sinistro' active={op1} variant='ghost' onClick={() => escolhaMenu('home')} >Home</CButton>
                                     <hr />
                                     <CButton color="dark" className='btn-sidebar-sinistro' active={op2} variant='ghost' onClick={() => escolhaMenu('acompanhamento')} >Acompanhamento</CButton>
@@ -209,7 +209,7 @@ const Sinistro = () =>{
                                             </CCardBody>
                                         </CCard>
                                         <br />
-                                        <CCard className='cardEsquerda'>
+                                        <CCard className='cardEsq'>
                                             <CCardBody>
                                                 <EventsChart />
                                             </CCardBody>

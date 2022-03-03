@@ -8,7 +8,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import './css/followCall.css'
-import { BsGeoAltFill, BsFlagFill, BsExclamationTriangleFill } from "react-icons/bs";
 import MapFollow from './google-map/MapFollowCall'
 
 import Cookies from 'js-cookie'
@@ -286,147 +285,128 @@ const FollowCall = () =>{
                                 <div className='container-header-titulo'>
                                     <label className='font-titulo'>Acompanhar</label>
                                 </div>
-                                <hr />
-                                <div> 
-                                    <CButton onClick={removeCli} className='container-btn-follow' size='md' variant='outline' color="dark">
-                                        <CIcon icon={cilChevronLeft} size="lg"/>
-                                    </CButton>
-                                    <label className='font-assistence-titulo'> Nome cliente </label>
-                                    <br />
-                                    <label className='font-conteudo'>{client.name}</label>
-                                    <br />
-                                    <label className='font-assistence-titulo'> Placa </label>
-                                    <br />
-                                    <label className='font-conteudo'>XYZ-1234</label>
-
-                                    <br />
-
-                                    <label className='font-types'>Tipo</label>
-                                    <label className='font-types'>Iniciado</label>
-                                    <label className='font-types'>Tempo</label>
-                                    <label className='font-types'>Nome prestador</label>
-
-                                </div>
-
-                                <hr />
-                                
-                                {/*  VERIFICA O STATUS DO CLIENTE */}
-                                {client.status == "Prestador a caminho" ? 
-                                    (
-                                        <>
-                                            <div >
-                                                <label className='font-assistence-titulo'> Endereço Prestador </label>
+                               
+                                <div className='container-followCall-header1'>
+                                        <CCol className="container-header-followCall">
+                                            <div className='container-header-client'>
+                                                <label className='font-follow-titulo'>{client.name}</label>
                                                 <br />
-                                                <BsGeoAltFill className='iconInit'/>  
-                                                <label className='font-conteudo'> Av Raja </label>
+                                                <label className='font-follow-sub'> XYZ 1415</label>
                                                 <br />
-                                                <label className='font-assistence-titulo'> Endereço ocorrência </label>
-                                                <br />
-                                                <BsExclamationTriangleFill  className='iconExclamantion'/>
-                                                <label className='font-conteudo'> Av Professor Mario Werneck</label>
-                                                <br />
-                                                <label className='font-assistence-titulo'> Endereço destino </label>
-                                                <br />
-                                                <BsFlagFill className='iconFlag' />
-                                                <label className='font-conteudo'> Av Barao Homem de Melo</label>
-                                            </div>
-
-                                            <hr />
-
-                                            <div> 
-                                                <label className='font-assistence-titulo'> Nome Prestador </label>
-                                                <br />
-                                                <label className='font-conteudo'> Luizinoho Borracheiro</label>
-                                                <br />
-
-                                                <label className='font-assistence-titulo'> Endereço Prestador </label>
-                                                <br />
-                                                <label className='font-conteudo'> Av Sete de setembro</label>
-                                                <br />
-                                                <label className='font-assistence-titulo'> Telefone Prestador </label>
-                                                <br />
-                                                <label className='font-conteudo'> 31 998788755 </label>
-                                                <br />
-                                                <label className='font-assistence-titulo'> Dados de viagem origem a ocorrência</label>
-                                                <br />
-                                                <label className='font-types'>32 Kms</label>
-                                                <label className='font-types'>31 Min</label>
-                                            </div> 
-                                            <br />
-                                            <CButton onClick={removeCli}  size='md' variant='outline' color="dark">
-                                                Voltar
-                                            </CButton>
-                                            <CButton  className='container-btn-follow' size='md'  color="success">
-                                                Finalizar 
-                                            </CButton>
-                                            
-                                        </>
-                                    )
-                                    :null
-                            
-                                }
-                                 {client.status != "Prestador a caminho" ? 
-                                    (
-                                        <>
-                                            <div >
-                                                {
-                                                    infoPrestador.addressPrestador !=  '' ?
-                                                    (
-                                                        <>
-                                                            <label className='font-assistence-titulo'> Endereço prestador </label>
-                                                            <br />
-                                                            <label className='font-conteudo'>  {infoPrestador.addressPrestador}  </label>
-                                                            <label className='font-types'  > {infoPrestador.distanceProviderOcorrency} </label>
-                                                            <label className='font-types'  > {infoPrestador.timeProviderOcorrency} </label>
-                                                        
-                                                            <CButton className='btn-selectRoute' size='sm' onClick={verificarInfos}>Selecionar </CButton>
-                                                            <br />
-                                                        </>
-                                                    )
-                                                    :null
-                                                }
-                                                <label className='font-assistence-titulo'> Endereço ocorrência </label>
-                                                <br />
-                                                <BsExclamationTriangleFill  className='iconExclamantion'/>
-                                                <label className='font-conteudo'> Av Professor Mario Werneck</label>
-                                                <br />
-                                                <label className='font-assistence-titulo'> Endereço destino </label>
-                                                <br />
-                                                <BsFlagFill className='iconFlag' />
-                                                <label className='font-conteudo'> Av Barao Homem de Melo</label>
-                                            </div>
-
-                                            <hr />
-
-                                            <div>
-                                                <label className='font-assistence-titulo' > Prestadoress</label>
-                                                <br />
-
-                                                <div className='container-prestadores'>
-                                                    {listPrestadores.map(item => { 
-                                                        return(
-                                                            <> 
-                                                                <div className='container-prestadore'>
-                                                                    <CButton className='btn-selectRoute' size='sm'  onClick={()=>{selectPrestador(item)}} color='dark'>Ver Rota</CButton>
-                                                                    <label > {item.name} </label>    
-                                                                    <br />
-                                                                    <label> {item.status} </label>
-                                                                    <br />
-                                                                </div>
-                                                                
-                                                            </>
-                                                        )
-                                                    })}
+                                                <div className='container-informacoes'>
+                                                    <label className='container-infos-type2'  > Tipo </label>
+                                                    <label className='container-infos-type2' > Iniciado </label> 
+                                                    <label className='container-infos-type2'> Tempo </label>
+                                                    <label className='container-infos-type2'> Nome Prestador </label>
                                                 </div>
                                             </div>
+                                        </CCol>
+                                    
+                                        <CCol className="container-header-client-restart">
+                                            <CButton onClick={removeCli} className='container-btn-follow' size='md' variant='outline' color="dark">
+                                                <CIcon icon={cilChevronLeft} size="lg"/>
+                                            </CButton>
+                                        </CCol>
+                                </div>
 
-                                        </>
-                                    )
-                                    :null
-                            
-                                }
+
+                                {/* VERIFICA o status da chamada */}
+                                <div className='container-followCall-body-clientInfo'>
+                                    {client.status == "Prestador a caminho" ? 
+                                        (   
+                                            <div className='container-follow-client'> 
+                                                <div className='container-body-values1'>
+                                                    <h3> { client.namePrestador }</h3>
+                                                    <label className='label-listPrestadores' >Local iniciado pelo prestador</label>
+                                                    <label className='label-listPrestadores'  > {client.namePrestador}</label>
+                                                    <br />
+                                                    <label className='label-listPrestadores'   > asdas  </label>
+                                                    <label className='label-listPrestadores'  > Iniciado </label> 
+                                                </div>
+
+                                                <hr />
+                                                
+                                                <label className='font-assistence-titulo'>Rota selecionada</label>
+                                                <div className='container-prestador-select'>
+                                                    <label className='font-assistence-sub'>{client.namePrestador}</label>
+                                                    <br />
+                                                    <label className='label-listPrestadores'  > {client.status} </label>
+                                                    <label className='label-listPrestadores'  > {client.distance} KM </label>
+                                                    <label className='label-listPrestadores'  > {client.tempo} Min </label>
+                                                </div>
+                                                <br /> <br />
+                                                <CButton className='btn-backList' onClick={removePrestador} color='secondary'>Voltar para lista</CButton>
+                                                <CButton className='btn-select'  color='success'> Selecionar {prestadorSelecionado.name}</CButton>   
+                                            </div>
+                                           
+                                            
+                                        )
+                                            :
+                                        (   
+                                            <>  
+                                                {infoPrestador.addressPrestador !=  '' ?
+                                                    (
+                                                        <div className='container-body-values'>
+                                                            <label className='font-assistence-titulo'>Origem Prestador</label>
+                                                            <br />
+                                                            <label className='font-assistence-sub'>   {infoPrestador.addressPrestador} </label>
+                                                            <br />
+                                                            <label className='label-listPrestadores'  > {infoPrestador.distanceProviderOcorrency} </label>
+                                                            <label className='label-listPrestadores'  > {infoPrestador.timeProviderOcorrency} </label>
+                                                            <CButton size='sm' onClick={verificarInfos}>Selecionar prestador </CButton>
+                                                       </div>
+                                                     )
+                                                    : null    
+                                                }
+                                                
+            
+                                                <div className='container-body-values'>
+                                                    <label className='font-assistence-titulo'>Ocorrência</label>
+                                                    <br />
+                                                    <label className='font-assistence-sub'> Av XXX  -- pegar valor do end point </label>
+                                                </div>
+           
+                                                <div className='container-body-values'>
+                                                    <label className='font-assistence-titulo'>Destino</label>
+                                                    <br />
+                                                    <label className='font-assistence-sub'> Av XXX  -- pegar valor do end point </label>
+                                                </div>
+                                                {/* <CButton onClick={routeUser} > Ver no Mapa  </CButton>  */}
+                                           
+
+
+                                                <hr />
+                                                <label className='font-assistence-titulo'>Lista de prestadores</label>
+                                                <div className='container-list-guia'>
+                                                    <div className='container-list-prestadores'> 
+                                                        {listPrestadores.map(item => {
+                                                            return(
+                                                                <>
+                                                                    <div className='container-render-listPrestadores'>
+                                                                        <CCol className='container-listPrestadores-left'>
+                                                                            <label className='font-assistence-sub'>{item.name}</label>
+                                                                            <br />
+                                                                            <label className='label-listPrestadores'  > {item.status} </label>
+                                                                            {/*<label className='label-listPrestadores'  > {infoPrestador.distanceProviderOcorrency} </label>
+                                                                            <label className='label-listPrestadores'  > {infoPrestador.timeProviderOcorrency} </label> */}
+                                                                        </CCol>
+                                                                        <CCol className='container-listPrestadores-right' >
+                                                                            <CButton className='btn-selectRoute' onClick={()=>{selectPrestador(item)}} color='dark'>Ver Rota</CButton>
+                                                                        </CCol>
+                                                                    </div>
+                                                                </> 
+                                                            )
+                                                        })}
+                                                    </div> 
+                                                </div>
+                                                
+                                            </>
+                                        )
+                                    
+                                    }
                                 
-                                
+                                   
+                                </div> 
 
                             </CCol>
                         )

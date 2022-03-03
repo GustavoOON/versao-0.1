@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios  from "axios"
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
-
+var CryptoJS = require("crypto-js");
 
 import { Form  }  from 'react-bootstrap';
 import {
@@ -84,34 +84,35 @@ const Login = () => {
     if(response.status == 200){
 
       // encriptar valores sensiveis
-      criptar(response)
+       criptar(response)
+     // conversoes()
      
     }
   }
 
   function criptar(response){
+
     setFlag(true)
 
-    // console.log('antes da encriptografi',response.data.usertype )
+    console.log('antes da encriptografi',response.data.usertype )
 
-    
+    // encriptografado
+    var encrypted = CryptoJS.AES.encrypt(response.data.usertype, 'secret');
+  
+    // decritpado
+    var decrypted = CryptoJS.AES.decrypt(response.data.usertype, 'secret');
+    console.log('DECRIPTEDE', decrypted)
 
-    // const encrypted = ncrypt.encrypt('This is my secret message', 'Secret key');
-    // console.log(encrypted);
-    // const decrypted = ncrypt.decrypt(encrypted);
-    // console.log(decrypted);
+    // Cookies.set('userType2', decrypted.toString())
+    Cookies.set('userType2', JSON.stringify(decrypted))
+
+    // Desencriptografado
+    var convertido = decrypted.toString(CryptoJS.enc.Utf8);
+    console.log('convertido vem ', convertido)
 
 
-
-
-
-
-
-
-
-
-    Cookies.set('TokenID', '')
     Cookies.set('TokenID', response.data.token)
+    // Cookies.set('userType', JSON.stringify(decrypted))  // Adicionar valor encriptografado
     Cookies.set('userType', response.data.usertype)
   }
 

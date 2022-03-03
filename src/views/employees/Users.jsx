@@ -3,6 +3,8 @@ import axios  from "axios"
 import './css/users.css'
 import Cookies from 'js-cookie'
 
+var CryptoJS = require("crypto-js");
+
 import NameCli from './render/Name'
 import IdCli from './render/Id'
 import EmailCli from './render/Email'
@@ -56,8 +58,15 @@ const Clients = () => {
   const verifica = ()=>setShow(true)
   const [busca2, setBusca] = useState('')
   let busca = ''
+  const [n_employeer, setN_employeer] =  useState()
 
+  // ARRUMAR UMA FORMA DE DESEMCRIPTAR A INFORMACAO 
+
+
+  // TENHO QUE DESEMCRIPTAR AQUI 
   const userType = Cookies.get('userType')
+
+
   const token = Cookies.get('TokenID')
   
   const options = [
@@ -83,6 +92,7 @@ const Clients = () => {
   const [searchValue, setSearchValue] = useState('')
   const [flagSearch, setFlagSearch] = useState(false)
   const[openSearch, setOpenSearch] = useState('')
+
   function searchMail(){
     //setOpenSearch('')
     //setSearchValue('')
@@ -96,7 +106,7 @@ const Clients = () => {
        
       })
       .catch(r =>{ 
-        console.log('error', r), alert('Login expirado'),window.location.reload()
+        console.log('Não encontrado', alert('Não encontrado!') , r)
       }) // window.location.reload();
       //.catch(r =>{ console.log('erro na api....', r), setOpenSearch('err'), setFlagSearch(false)})
   }
@@ -147,14 +157,26 @@ const Clients = () => {
   var TotalPages
   const [arrayUsers, setArrayUsers] =  useState()
 
+
+  function pegaToken () {
+    const userType2  =  Cookies.get('userType2')
+    var aux  = JSON.parse(userType2)
+    console.log('AQUI doido ', aux.toString(CryptoJS.enc.Utf8))
+
+  }
+
+
   useEffect( async () => {
+
     await axios 
       .get("http://dashboardbff.oonpayperuse.com.br/employees?pageSize=10", config)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
+
+        pegaToken()
+        setN_employeer(response.data.totalElements)
         // Paginacao 
-        console.log('mostra',response.data)
         initPages(response)
         setNumberOfPages(response.data.totalPages)
       })
@@ -218,6 +240,8 @@ const Clients = () => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
         setNumberOfPages(response.data.totalPages)
+        
+        //
       })
       .catch(r =>{ 
         console.log('error', r), alert('Login expirado'),window.location.reload()
@@ -333,7 +357,7 @@ const Clients = () => {
                       ) 
                       :null
                     }
-{/* 
+                    {/* 
                     {userType == 'ADMIN' ?(
                         <CTableHeaderCell className="text-center" >Permissões</CTableHeaderCell>
                       ) 
@@ -349,7 +373,7 @@ const Clients = () => {
                     
                   </CTableRow>
                 </CTableHead>
-
+                
                 <CTableBody>
                   {/* Percorre os usuarios  */}
                   { dados.map((item, index) => (
@@ -402,42 +426,44 @@ const Clients = () => {
               </CTable>
               <br />
               <br />
-              <CPagination color='dark' align="center" aria-label="Page navigation example">
-                  
-                {previousPage != '' ?
-                  (
-                    <> 
-                      <CButton className='btn-user-pagination' color='dark' onClick={ () =>{capturePrevious(previousPage, numberOfPages)}} variant='outline'> <BsChevronDoubleLeft/> </CButton>
-                      <CButton className='btn-user-pagination' color='dark' onClick={ () => {capturePrevious(previousPage, numberOfPages)}} variant='outline'> {previousPage} </CButton>
-                    </>
-                    
-                  )
-                  :null
-                }
 
-                {currentPage == 0 ?
-                  (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage+1}</CButton>)
-                  :
-                  (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage}</CButton>)
-              
-                }
+              <CPagination className='container-users-pagination' color='dark'  aria-label="Page navigation example">
+                <label className='container-qtd-employeer'> Há {n_employeer} empregados</label>
+                <div className='container-pagination-align'>
+                  
+                  {previousPage != '' ?
+                    (
+                      <> 
+                        <CButton className='btn-user-pagination' color='dark' onClick={ () =>{capturePrevious(previousPage, numberOfPages)}} variant='outline'> <BsChevronDoubleLeft/> </CButton>
+                        <CButton className='btn-user-pagination' color='dark' onClick={ () => {capturePrevious(previousPage, numberOfPages)}} variant='outline'> {previousPage} </CButton>
+                      </>
+                      
+                    )
+                    :null
+                  }
+
+                  {currentPage == 0 ?
+                    (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage+1}</CButton>)
+                    :
+                    (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage}</CButton>)
                 
-                {nextPage != '' ? 
-                  (
-                    <>
-                      <CButton className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage,numberOfPages)} variant='outline' >  {nextPage} </CButton>
-                      <CButton  className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage, numberOfPages)} variant='outline' > <BsChevronDoubleRight /> </CButton>
-                    </>
-                  )
-                  :null
-                }
-                
+                  }
+                  
+                  {nextPage != '' ? 
+                    (
+                      <>
+                        <CButton className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage,numberOfPages)} variant='outline' >  {nextPage} </CButton>
+                        <CButton  className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage, numberOfPages)} variant='outline' > <BsChevronDoubleRight /> </CButton>
+                      </>
+                    )
+                    :null
+                  }
+                </div>
                 
               </CPagination>
-            
             </CCardBody>
         </CCard>
-        </div>
+      </div>
     )
   }else{
     return (

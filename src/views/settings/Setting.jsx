@@ -63,7 +63,7 @@ const Setting = () =>{
 
                     <CCol xs={2} className='cardEsq'> 
 
-                        <div className='containerSiderBar'>
+                        <div className='containerSiderBarSetting'>
                             <CButton 
                                 color="dark" 
                                 className='btn-help-sideBar' 

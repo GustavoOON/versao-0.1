@@ -94,7 +94,7 @@ const admin = [
   },
   {
     component: CNavItem,
-    name: 'Assistencia',
+    name: 'Assistência',
     to: '/assistencia',
     icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
   },

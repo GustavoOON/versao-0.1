@@ -227,9 +227,8 @@ const WidgetsDropdown = () => {
 
 
         <CCol xs={4}>
-          <CCard className='card1'>
+          <CCard className='container-dash-card3' >
             <CCardBody>
-              <CCardText>
                 <CRow>
                   <CCol xs={1} className='leftSimbol' sm="auto">
                     <p className='textFontSimbol' > <div className='simbolo1'> </div> </p>
@@ -258,8 +257,6 @@ const WidgetsDropdown = () => {
                     </CDropdown>
                   </CCol>
                 </CRow>
-                
-              </CCardText>
             </CCardBody>
           </CCard>
         </CCol>

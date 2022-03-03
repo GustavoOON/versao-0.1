@@ -49,7 +49,8 @@ const Users = () =>{
 
     return (
         <>
-            <CCard className="cardsFinance">
+            
+            <CCard className="cardsFinance2">
                 <CCardBody>
                     <CRow className='container-linha-top-card'>
                         <CCol  className = 'esq23'>
