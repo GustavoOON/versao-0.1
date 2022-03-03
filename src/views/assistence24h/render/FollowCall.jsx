@@ -376,6 +376,7 @@ const FollowCall = () =>{
                                                             <label className='font-assistence-titulo'> Endereço prestador </label>
                                                             <br />
                                                             <label className='font-conteudo'>  {infoPrestador.addressPrestador}  </label>
+                                                            <br />
                                                             <label className='font-types'  > {infoPrestador.distanceProviderOcorrency} </label>
                                                             <label className='font-types'  > {infoPrestador.timeProviderOcorrency} </label>
                                                         
