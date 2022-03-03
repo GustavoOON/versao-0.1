@@ -2,7 +2,7 @@
   "name": "oon-seguros",
   "version": "4.1.0",
   "description": "DashBoard OON-SEGUROS",
-  "homepage": ".",
+  "homepage":  "https://GustavoOON.github.io/versao-0.1",
   "bugs": {
     "url": "http://oonsegurosdashboard........"
   },
@@ -13,6 +13,8 @@
   "license": "MIT",
   "author": "Gustavo Antonio C. de Alcântara",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts --openssl-legacy-provider build",
     "changelog": "auto-changelog --starting-version 4.1.0 --commit-limit false --hide-credit",
     "eject": "react-scripts eject",
@@ -80,6 +82,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "prettier": "2.5.0",
     "react-scripts": "^4.0.3",
     "sass": "^1.43.5"
