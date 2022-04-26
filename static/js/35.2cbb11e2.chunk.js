@@ -1,0 +1,2 @@
+(this["webpackJsonpoon-seguros"]=this["webpackJsonpoon-seguros"]||[]).push([[35],{751:function(e,t,s){"use strict";s.r(t);var c=s(158),n=s(2),o=s(27);t.default=function(){var e=Object(n.useState)(0),t=Object(c.a)(e,2),s=(t[0],t[1],Object(n.useState)()),a=Object(c.a)(s,2);a[0],a[1];return Object(o.jsx)(o.Fragment,{children:Object(o.jsx)("h2",{children:"Testando socket web depois   "})})}}}]);
+//# sourceMappingURL=35.2cbb11e2.chunk.js.map
