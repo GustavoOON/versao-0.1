@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
-import { Button, Modal,  Form  }  from 'react-bootstrap'; 
+import React, { useState } from "react";
 import axios  from "axios"
 import './associate.css'
 import Cookies from 'js-cookie'
+
+import UrlDomain from './../../../../config'
 
 import {
     CButton,
@@ -13,13 +14,7 @@ import {
     CTableHeaderCell,
     CFormCheck,
     CTableRow,
-    CNavbar,
-    CFormSelect,
-    CNavLink ,
     CForm,
-    CNavbarNav,
-    CNavbarToggler,
-    CNavItem,
     CCard,
     CCardBody,
     CFormInput,
@@ -29,13 +24,12 @@ import {
   } from '@coreui/react'
   
   import CIcon from '@coreui/icons-react'
-  import {cilPlus, cilLoopCircular, cilFilter , cilMinus } from '@coreui/icons'
-  import { Spinner }  from 'react-bootstrap';
+  import {cilPlus, cilFilter , cilMinus } from '@coreui/icons'
 
 const Associate = (props) =>{
 
     // variaveis sem hooks
-    const userType = Cookies.get('userType')
+    // const userType = Cookies.get('userType')
     const token = Cookies.get('TokenID')
     let buscaDisp
     const dados2 = []
@@ -48,7 +42,7 @@ const Associate = (props) =>{
     let departFilt
     let config = {
       headers: {
-        'Authorization': token, 
+        'Authorization': `Bearer ${token}`, 
         'Content-Type': 'application/json;charset=UTF-8',
         "Access-Control-Allow-Origin": "*",
       }
@@ -83,20 +77,20 @@ const Associate = (props) =>{
         // console.log('tam ori', props.data.length  ,'tam associate', arrayAux.length)
         setAuxAssociate(arrayAux)
         assoc=arrayAux
+        
+        setShow(true)
 
-        await axios 
-          .get("http://dashboardbff.oonpayperuse.com.br/users", config)
-          .then((response) => {
-              // pegando dados do associate pelo id
-              // setDataAssociateOri(response)
-              setShow(true)
-              // tira usuario selecionado da lista
-              filterUsers()
+        // await axios 
+        //   .get(`${UrlDomain}/employeers`, config)
+        //   .then((response) => {
+        //       // pegando dados do associate pelo id
+        //       // setDataAssociateOri(response)
+        //       setShow(true)
+        //       // tira usuario selecionado da lista
+        //       filterUsers()
               
-              
-              
-          })
-          .catch(r =>{ console.log('erro na api....', r)}) // window.location.reload();
+        //   })
+        //   .catch(r =>{ console.log('erro na api....', r)}) // window.location.reload();
     }  
 
     const filterUsers = () =>{
@@ -182,6 +176,8 @@ const Associate = (props) =>{
             console.log('entrei no sem new e remove')
             setShow(false)
         }
+
+        props.handleClose()
     }
 
     const saveNewAssociate =  async () =>{
@@ -189,7 +185,7 @@ const Associate = (props) =>{
         let newAssociate =  {managerId:props.user.id, usersIds:newAssociates}
         console.log('new associate', newAssociate, config)
         await axios 
-            .post("http://dashboardbff.oonpayperuse.com.br/users/associate",  newAssociate, config )
+            .post(`${UrlDomain}/users/associate`,  newAssociate, config )
             .then((response) => {
                 console.log('newAssociate', response)
                 if(removeAssociate.length > 0){
@@ -208,7 +204,7 @@ const Associate = (props) =>{
         let removendoAssociados =  {managerId:props.user.id, usersIds:removeAssociate}
         console.log('removendo associate', removendoAssociados)
         await axios 
-            .post("http://dashboardbff.oonpayperuse.com.br/users/removeAssociation",  removendoAssociados, config )
+            .post(`${UrlDomain}/users/removeAssociation`,  removendoAssociados, config )
             .then((response) => {
                 console.log('RemoveAssociate', response)
                 setShow(false)
@@ -271,7 +267,6 @@ const Associate = (props) =>{
             }
         }else if(auxUser != null){
             // selecionou o aux user - tipo dele 
-            console.log('selecionou o tipo user', auxUser)
             let i 
             for(i =0; i < dataAssociateOri.length; i++){
                 let aux1 = dataAssociateOri[i].firstName.toLocaleLowerCase() // trocar por departamento
@@ -284,7 +279,6 @@ const Associate = (props) =>{
             }
         }else if(auxDepart != null){
             // selecionou o departamento
-            console.log('selecionou o departamento', auxDepart)
             let i 
             for(i =0; i < dataAssociateOri.length; i++){
                 let aux1 = dataAssociateOri[i].firstName.toLocaleLowerCase() // trocar por departamento
@@ -304,225 +298,206 @@ const Associate = (props) =>{
 
     return (
         <> 
-           <CButton  className='btn-modal' color='dark' size="sm" onClick={OpenModal}> Associações  </CButton>
-
-           <Modal 
-                show={show} 
-                onHide={handleClose}
-                // dialogClassName="modal-90w"
-                size="xl"
-                dialogClassName='my-modal'
-                bsPrefix='modal'
-                aria-labelledby="example-custom-modal-styling-title"
-            >
-                
-                <Modal.Body bsPrefix='modal-body' >
-                    <div className='container-header-associate'>
-                    <CRow >
-                        <CCol >
-                        <label className="container-fontName-titulo">Associados</label>
-                        </CCol>
-                        <CCol  >
-                            <label className="container-fontName-associado">{props.user.firstName}</label>
-                            <br /> <br />
-                            <label className="container-fontDepart-associado"> {props.user.employeeRole.toLowerCase()} TI  </label>
-                        </CCol>
-                    </CRow>
-                        
-                    </div> 
-                    
-
-                    <CRow className="container-associate">
-                        <CCol >
-                            <CCard className="container-card-disponible">
-                                <CRow className="align-items-end">
-
-                                    <CCol className="container-coluna-esq-associate">
-                                        <label className="container-card-fontTit"> Disponível</label>
-                                    </CCol>
-
-                                    <CCol className="container-coluna-dir-associate">
-                                        <CForm className="d-flex">
-                                            <CFormInput type="text" onChange={Pegandobusca} value={buscaDisponible} size="sm" className="me-2" placeholder="Pesquise" />
-                                            <CPopover
-                                                // onShow={showPop}
-                                                content={
-                                                    <div className="container-pophover-associate"> 
-
-                                                         <label className='font-popOver'> Departamento </label>    
-                                                         <CForm>
-                                                            <CFormCheck type="radio" onChange={() =>{selectDepart('maria')}} name= "tiposDepart" id="userDepart" label="maria"/>
-                                                            <CFormCheck type="radio" onChange={() =>{selectDepart('joao')}}  name= "tiposDepart" id="userDepart" label="joao"/>
-                                                            <CFormCheck type="radio" onChange={() =>{selectDepart('ti')}}    name= "tiposDepart" id="userDepart" label="Ti"/>
-                                                            <CFormCheck type="radio" onChange={() =>{selectDepart('outro')}} name= "tiposDepart" id="userDepart" label="outro"/>
-                                                         </CForm>
-                                                        <br />
-                                                         <label className='font-popOver' > Tipo Usuário</label>
-                                                         <CForm>
-                                                            <CFormCheck type="radio" onChange={() =>{selectUser('admin')}}   name="tiposUsuarios" id="userType" label="Admin"/>
-                                                            <CFormCheck type="radio" onChange={() =>{selectUser('manager')}} name= "tiposUsuarios" id="userType" label="Gerente"/>
-                                                            <CFormCheck type="radio" onChange={() =>{selectUser('support')}} name= "tiposUsuarios" id="userType" label="Suporte"/>
-                                                         </CForm>
-                                                        
-
-                                                        <br />
-                                                        <div className="container-btn-popover" >
-                                                            <CButton  size="sm"  onClick={filterDisponible}color="dark" handleClose>
-                                                                Filtrar
-                                                            </CButton>
-                                                        </div>
-                                                        
-
-                                                    </div>
-                                                    
-                                                }
-                                                placement="right"
-                                            >
-                                                <CButton variant='ghost' size="md"  color="secondary">
-                                                    <CIcon icon={cilFilter} size="lg" /> 
-                                                </CButton>
-                                            </CPopover>
-                                          
-                                        </CForm>
-                                    </CCol>
-
-                                </CRow>
-                                
-                                <CCardBody> 
-                                        <CTable  >
-                                            <CTableHead>
-                                                <CTableRow>
-                                                <CTableHeaderCell >Nome</CTableHeaderCell>
-                                                <CTableHeaderCell >Departamento</CTableHeaderCell>
-                                                <CTableHeaderCell >Tipo</CTableHeaderCell>
-                                                <CTableHeaderCell >Adicionar </CTableHeaderCell>
-                                                </CTableRow>
-                                            </CTableHead>
-                                            {aux.map( (user, index) =>{
-                                                if(index < limUsers){
-                                                    return(
-                                                        <> 
-                                                        
-                                                            <CTableBody key={index}>
-                                                                <CTableRow>
-                                                                    <CTableDataCell>{user.name}</CTableDataCell>
-                                                                    <CTableDataCell> ## </CTableDataCell>
-                                                                    <CTableDataCell>{user.type}</CTableDataCell>
-                                                                    <CTableDataCell align='middle'> 
-                                                                        <CButton variant='outline' color='info' size="sm" onClick={()=>{AddAssociate(user)}}> 
-                                                                            <CIcon color='dark' icon={cilPlus} size="lg"/>
-                                                                        </CButton> 
-                                                                    </CTableDataCell>
-                                                                </CTableRow>
-                                                            </CTableBody>
-                                                            
-                                                        </>
-                                                    )
-                                                }else{
-                                                    var falta = aux.length - limUsers
-                                                    
-                                                    // Parar o laço com break 
-                                                    if(flag < 1){
-                                                        flag = 1
-                                                        return(
-                                                            <> 
-                                                                <br />
-                                                                <h6> Há mais {falta} funcionários </h6>
-                                                            </>
-                                                        )
-                                                    }
-                                                    
-                                                }
-                                                
-                                            })}
-                                    </CTable>
-                                </CCardBody>
-                            </CCard>
-                        </CCol>
-
-                        <CCol className="associate-dir">
-                             <CCard className="container-card-disponible">
-                             <CRow >
-                                <CCol className="container-coluna-esq-associate">
-                                    <label className="container-card-fontTit"> Associados</label>
-                                </CCol>
-
-                                <CCol className="container-coluna-dir-associate">
-                                    <CForm className="d-flex">
-                                        <CFormInput type="text" size="sm" className="me-2" placeholder="Pesquise" />
-                                        <CButton  variant='ghost' size="sm"  color="secondary" >
-                                            <CIcon icon={cilFilter} size="lg" /> 
-                                        </CButton>
-                                    </CForm>
-                                </CCol>
-
-                                </CRow>
-                                <CCardBody> 
-                                    <CTable  >
-                                        <CTableHead>
-                                            <CTableRow>
-                                            <CTableHeaderCell >Nome</CTableHeaderCell>
-                                            <CTableHeaderCell >Departamento</CTableHeaderCell>
-                                            <CTableHeaderCell >Tipo</CTableHeaderCell>
-                                            <CTableHeaderCell >Adicionar </CTableHeaderCell>
-                                            </CTableRow>
-                                        </CTableHead>
-
-                                        {/* ALTERAR QUANDO REQUISITAR A API  */}
-
-                                        {auxAssociate.map( (user, index) =>{
-                                            if(index < limUsers){
-                                                return(
-                                                    <> 
-                                                    
-                                                        <CTableBody>
-                                                            <CTableRow>
-                                                                <CTableDataCell>{user.name}</CTableDataCell>
-                                                                <CTableDataCell> ## </CTableDataCell>
-                                                                <CTableDataCell>{user.type}</CTableDataCell>
-                                                                <CTableDataCell align='middle'> 
-                                                                    <CButton variant='outline' color='danger' size="sm" onClick={()=>{RemoveAssociate(user)}}> 
-                                                                        <CIcon  icon={cilMinus} size="lg"/>
-                                                                    </CButton> 
-                                                                </CTableDataCell>
-                                                            </CTableRow>
-                                                        </CTableBody>
-                                                        
-                                                    </>
-                                                )
-                                            }else{
-                                                var falta = auxAssociate.length - limUsers
-                                                
-                                                // Parar o laço com break 
-                                                if(flag < 1){
-                                                    flag = 1
-                                                    return(
-                                                        <> 
-                                                            <br />
-                                                            <h6> Há mais {falta} funcionários </h6>
-                                                        </>
-                                                    )
-                                                }
-                                                
-                                            }
-                                            
-                                        })}
-                                    </CTable>
-                                </CCardBody>
-                            </CCard>
-                        </CCol>
-
-                    </CRow>
-
-                    <br />
-                    <div className='container-btns-associate'> 
-                        <CButton className='btn-associate-salvar' size="sm" color="secondary" onClick={salvarInfos}> Salvar e sair </CButton>
-                    </div>
-                    
-                </Modal.Body>
-                
-            </Modal>
+        <div className='container-header-associate'>
+        <CRow >
+            <CCol >
+            <label className="container-fontName-titulo">Associados</label>
+            </CCol>
+            <CCol  >
+                <label className="container-fontName-associado">{props.user.firstName}</label>
+                <br /> <br />
+                <label className="container-fontDepart-associado"> {props.user.employeeRole.toLowerCase()} TI  </label>
+            </CCol>
+        </CRow>
+            
+        </div> 
         
+
+        <CRow>
+            <CCol >
+                <CCard className="container-card-disponible">
+                    <CRow className="align-items-end">
+                        <CCol className="container-coluna-esq-associate">
+                            <label className="container-card-fontTit"> Disponível</label>
+                        </CCol>
+
+                        <CCol className="container-coluna-dir-associate">
+                            <CForm className="d-flex">
+                                <CFormInput type="text" onChange={Pegandobusca} value={buscaDisponible} size="sm" className="me-2" placeholder="Pesquise" />
+                                <CPopover
+                                    // onShow={showPop}
+                                    content={
+                                        <div className="container-pophover-associate"> 
+
+                                                <label className='font-popOver'> Departamento </label>    
+                                                <CForm>
+                                                <CFormCheck type="radio" onChange={() =>{selectDepart('maria')}} name= "tiposDepart" id="userDepart" label="maria"/>
+                                                <CFormCheck type="radio" onChange={() =>{selectDepart('joao')}}  name= "tiposDepart" id="userDepart" label="joao"/>
+                                                <CFormCheck type="radio" onChange={() =>{selectDepart('ti')}}    name= "tiposDepart" id="userDepart" label="Ti"/>
+                                                <CFormCheck type="radio" onChange={() =>{selectDepart('outro')}} name= "tiposDepart" id="userDepart" label="outro"/>
+                                                </CForm>
+                                            <br />
+                                                <label className='font-popOver' > Tipo Usuário</label>
+                                                <CForm>
+                                                <CFormCheck type="radio" onChange={() =>{selectUser('admin')}}   name="tiposUsuarios" id="userType" label="Admin"/>
+                                                <CFormCheck type="radio" onChange={() =>{selectUser('manager')}} name= "tiposUsuarios" id="userType" label="Gerente"/>
+                                                <CFormCheck type="radio" onChange={() =>{selectUser('support')}} name= "tiposUsuarios" id="userType" label="Suporte"/>
+                                                </CForm>
+                                            
+
+                                            <br />
+                                            <div className="container-btn-popover" >
+                                                <CButton  size="sm"  onClick={filterDisponible}color="dark" handleClose>
+                                                    Filtrar
+                                                </CButton>
+                                            </div>
+                                            
+
+                                        </div>
+                                        
+                                    }
+                                    placement="right"
+                                >
+                                    <CButton variant='ghost' size="sm"  color="secondary">
+                                        <CIcon icon={cilFilter} size="lg" /> 
+                                    </CButton>
+                                </CPopover>
+                                
+                            </CForm>
+                        </CCol>
+
+                    </CRow>
+                    
+                    <CCardBody> 
+                            <CTable  >
+                                <CTableHead>
+                                    <CTableRow>
+                                    <CTableHeaderCell >Nome</CTableHeaderCell>
+                                    <CTableHeaderCell >Departamento</CTableHeaderCell>
+                                    <CTableHeaderCell >Tipo</CTableHeaderCell>
+                                    <CTableHeaderCell >Adicionar </CTableHeaderCell>
+                                    </CTableRow>
+                                </CTableHead>
+                                {aux.map( (user, index) =>{
+                                    if(index < limUsers){
+                                        return(
+                                            <> 
+                                            
+                                                <CTableBody key={index}>
+                                                    <CTableRow>
+                                                        <CTableDataCell>{user.name}</CTableDataCell>
+                                                        <CTableDataCell> ## </CTableDataCell>
+                                                        <CTableDataCell>{user.type}</CTableDataCell>
+                                                        <CTableDataCell align='middle'> 
+                                                            <CButton variant='outline' color='info' size="sm" onClick={()=>{AddAssociate(user)}}> 
+                                                                <CIcon color='dark' icon={cilPlus} size="lg"/>
+                                                            </CButton> 
+                                                        </CTableDataCell>
+                                                    </CTableRow>
+                                                </CTableBody>
+                                                
+                                            </>
+                                        )
+                                    }else{
+                                        var falta = aux.length - limUsers
+                                        
+                                        // Parar o laço com break 
+                                        if(flag < 1){
+                                            flag = 1
+                                            return(
+                                                <> 
+                                                    <br />
+                                                    <h6> Há mais {falta} funcionários </h6>
+                                                </>
+                                            )
+                                        }
+                                        
+                                    }
+                                    
+                                })}
+                        </CTable>
+                    </CCardBody>
+                </CCard>
+            </CCol>
+
+            <CCol>
+                    <CCard className="container-card-disponible">
+                    <CRow className="align-items-end">
+                    <CCol className="container-coluna-esq-associate">
+                        <label className="container-card-fontTit"> Associados</label>
+                    </CCol>
+
+                    <CCol className="container-coluna-dir-associate">
+                        <CForm className="d-flex">
+                            <CFormInput type="text" size="sm" className="me-2" placeholder="Pesquise" />
+                            <CButton  variant='ghost' size="sm"  color="secondary" >
+                                <CIcon icon={cilFilter} size="lg" /> 
+                            </CButton>
+                        </CForm>
+                    </CCol>
+
+                    </CRow>
+                    <CCardBody> 
+                        <CTable  >
+                            <CTableHead>
+                                <CTableRow>
+                                <CTableHeaderCell >Nome</CTableHeaderCell>
+                                <CTableHeaderCell >Departamento</CTableHeaderCell>
+                                <CTableHeaderCell >Tipo</CTableHeaderCell>
+                                <CTableHeaderCell >Adicionar </CTableHeaderCell>
+                                </CTableRow>
+                            </CTableHead>
+
+                            {/* ALTERAR QUANDO REQUISITAR A API  */}
+
+                            {auxAssociate.map( (user, index) =>{
+                                if(index < limUsers){
+                                    return(
+                                        <> 
+                                        
+                                            <CTableBody>
+                                                <CTableRow>
+                                                    <CTableDataCell>{user.name}</CTableDataCell>
+                                                    <CTableDataCell> ## </CTableDataCell>
+                                                    <CTableDataCell>{user.type}</CTableDataCell>
+                                                    <CTableDataCell align='middle'> 
+                                                        <CButton variant='outline' color='danger' size="sm" onClick={()=>{RemoveAssociate(user)}}> 
+                                                            <CIcon  icon={cilMinus} size="lg"/>
+                                                        </CButton> 
+                                                    </CTableDataCell>
+                                                </CTableRow>
+                                            </CTableBody>
+                                            
+                                        </>
+                                    )
+                                }else{
+                                    var falta = auxAssociate.length - limUsers
+                                    
+                                    // Parar o laço com break 
+                                    if(flag < 1){
+                                        flag = 1
+                                        return(
+                                            <> 
+                                                <br />
+                                                <h6> Há mais {falta} funcionários </h6>
+                                            </>
+                                        )
+                                    }
+                                    
+                                }
+                                
+                            })}
+                        </CTable>
+                    </CCardBody>
+                </CCard>
+            </CCol>
+
+        </CRow>
+
+        <br />
+        <div className='container-btns-associate'> 
+            <CButton className='btn-associate-salvar' size="sm" color="secondary" onClick={salvarInfos}> Salvar e sair </CButton>
+        </div>
         </>
     )
 }

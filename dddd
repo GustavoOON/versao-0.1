@@ -1,1 +1,0 @@
-open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/tmp/MiCarpeta" --disable-web-security

@@ -1,476 +1,270 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import axios  from "axios"
-import './css/users.css'
-import Cookies from 'js-cookie'
-
-var CryptoJS = require("crypto-js");
-
-import NameCli from './render/Name'
-import IdCli from './render/Id'
-import EmailCli from './render/Email'
-import BtnEdit from './render/BtnEdit'
-import NewUser from './render/NewUser'
-import Permission from '../permissons/Permissions'
-import DepartCli from './render/Depart'
-import PhoneCli from './render/Phone'
-import Associate from './render/associate/Associate'
-
-import { BsSearch, BsArrowClockwise, BsChevronDoubleRight , BsChevronDoubleLeft } from 'react-icons/bs';
-
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
+import { BsArrowCounterclockwise } from 'react-icons/bs';
 import {
   CButton,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
   CContainer,
-  CTableRow,
   CNavbar,
   CCollapse,
-  CFormSelect ,
+  CFormSelect,
   CNavbarBrand,
   CNavbarNav,
   CNavbarToggler,
-  CNavItem,
   CCard,
   CCardBody,
   CFormInput,
   CForm,
-  CPagination,
-  CPaginationItem,
 } from '@coreui/react'
+import { BiSearchAlt } from 'react-icons/bi';
+import { Spinner } from 'react-bootstrap';
 
-import CIcon from '@coreui/icons-react'
-import {cilLoopCircular, cilMagnifyingGlass, cilChevronRight, cilChevronLeft } from '@coreui/icons'
-import { Spinner }  from 'react-bootstrap';
+// var CryptoJS = require("crypto-js");
+import Decrypt from './../../security/decripty';
 
+import UrlDomain, { configCookies } from './../../config'
+import Pagination from '../components/Pagination';
+import NewUser from './render/NewUser'
+import DropdownFilter from './render/midia/DropdownFilter'
+import EmployeesList from './render/EmployeesList'
+
+import './css/users.css'
 
 const Clients = () => {
 
   const [dados, setDados] = useState([])
   const [dadosOri, setDadosOri] = useState([])
-  // const [dados2, setDados2] = useState([])
-  const dados2 =[]
-  const handleClose = () => setShow(false);
-  const [visible, setVisible] = useState(false)  
-  const [show, setShow] = useState(false);
-  const verifica = ()=>setShow(true)
+  const [visible, setVisible] = useState(false)
   const [busca2, setBusca] = useState('')
-  let busca = ''
-  const [n_employeer, setN_employeer] =  useState()
+  const [n_employeer, setN_employeer] = useState()
+  const [userType, setUserType] = useState()
+  const [searchValue, setSearchValue] = useState('')
+  const [flagSearch, setFlagSearch] = useState('')
+  const [openSearch, setOpenSearch] = useState(true)
+  const [previousPage, setPrevios] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [nextPage, setNextPage] = useState('')
+  const [numberOfPages, setNumberOfPages] = useState()
+  const [arrayUsers, setArrayUsers] = useState()
+  // const [userPermissions, setPermissions] = useState([])
+  // const tokenType = Cookies.get('typeToken')
 
-  // ARRUMAR UMA FORMA DE DESEMCRIPTAR A INFORMACAO 
 
-
-  // TENHO QUE DESEMCRIPTAR AQUI 
-  const userType = Cookies.get('userType')
-
-
-  const token = Cookies.get('TokenID')
-  
   const options = [
     { label: 'Todos ', value: 'todos' },
     { label: 'Ativos ', value: 'funcAtive' },
     { label: 'Desligados', value: 'funcDisable' }
   ]
-  let config = {
-    headers: {
-      'Authorization': token, 
-      'Content-Type': 'application/json;charset=UTF-8',
-      "Access-Control-Allow-Origin": "*",
+
+  // useEffect para limpar o state
+  useEffect(() => {
+    return () => {
+      setDados([])
+      setDadosOri([])
+      setVisible(false)
+      setBusca('')
+      setN_employeer()
+      setUserType()
+      setSearchValue('')
+      setFlagSearch('')
+      setOpenSearch(true)
     }
-  };
+  }, [])
 
-  const Pegandobusca = (e) =>{
+  const Pegandobusca = (e) => {
     setBusca(e.target.value)
-    busca = e.target.value
-
-    //BuscaUser()
   }
-  
-  const [searchValue, setSearchValue] = useState('')
-  const [flagSearch, setFlagSearch] = useState(false)
-  const[openSearch, setOpenSearch] = useState('')
 
-  function searchMail(){
-    //setOpenSearch('')
-    //setSearchValue('')
-    setFlagSearch('')
-    axios 
-      .get(`http://dashboardbff.oonpayperuse.com.br/employees/email/${busca2.toLocaleLowerCase()}`, config)
-      .then((response) => {
-        setSearchValue(response.data)
-        setFlagSearch(true)
-        setOpenSearch('open')
-       
-      })
-      .catch(r =>{ 
-        console.log('Não encontrado', alert('Não encontrado!') , r)
-      }) // window.location.reload();
+  function searchMail(e) {
+    if (e.key === "Enter" || e.type === 'click') {
+      setFlagSearch('')
+
+      axios
+        .get(`${UrlDomain}/employees/email/${busca2.toLocaleLowerCase()}`, configCookies)
+        .then((response) => {
+          setSearchValue(response.data)
+          setFlagSearch(true)
+          setOpenSearch(false)
+        })
+        .catch((r) => {
+          setOpenSearch(false)
+          setFlagSearch(false)
+          console.log('Não encontrado', r)
+        }) // window.location.reload();
       //.catch(r =>{ console.log('erro na api....', r), setOpenSearch('err'), setFlagSearch(false)})
+    }
   }
 
 
-  /* BUSCANDO NA FORMA ANTIGA
-  const BuscaUser = () =>{
-    let auxBusca = busca.toLocaleLowerCase()
-    dadosOri.map(item =>{
-      let auxName = item.firstName.toLocaleLowerCase()
-      let auxEmail = item.email.toLocaleLowerCase()
-      if((auxName.includes(auxBusca) || (auxEmail.includes(auxBusca)))){
-        dados2.push(item)
-        setDados(dados2)
-      }
-    })
-  }
-  */
 
-  const retiraFiltro = () =>{
+  const retiraFiltro = async () => {
     clear()
-
-    axios 
-      .get("http://dashboardbff.oonpayperuse.com.br/employees?pageSize=10", config)
+    axios
+      .get(`${UrlDomain}/employees?pageSize=12`, configCookies)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
         initPages(response)
         setBusca('')
         setNumberOfPages(response.data.totalPages)
-        busca=''
+        setN_employeer(response.data.totalElements)
       })
-      .catch(r =>{ 
-        console.log('error', r), alert('Login expirado'),window.location.reload()
+      .catch(r => {
+        console.log('error', r), alert('Login expirado'), window.location.reload()
       })
   }
 
-  function clear(){
+  function clear() {
     setDados([])
     setDadosOri([])
     setSearchValue('')
     setPrevios('')
-    setFlagSearch(false)
-    setOpenSearch('')
-  }
-  
-  const [numberOfPages, setNumberOfPages] = useState()
-  var TotalPages
-  const [arrayUsers, setArrayUsers] =  useState()
-
-
-  function pegaToken () {
-    const userType2  =  Cookies.get('userType2')
-    var aux  = JSON.parse(userType2)
-    console.log('AQUI doido ', aux.toString(CryptoJS.enc.Utf8))
-
+    setOpenSearch(true)
   }
 
-
-  useEffect( async () => {
-
-    await axios 
-      .get("http://dashboardbff.oonpayperuse.com.br/employees?pageSize=10", config)
+  useEffect(() => {
+    setUserType(Decrypt.UserTypeDecryption())
+    // setPermissions(Decrypt.userPermissionsDescription())
+    axios
+      .get(`${UrlDomain}/employees?pageSize=12`, configCookies)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
-
-        pegaToken()
         setN_employeer(response.data.totalElements)
-        // Paginacao 
         initPages(response)
         setNumberOfPages(response.data.totalPages)
       })
-      .catch(r =>{ 
-        console.log('error', r), alert('Login expirado'),window.location.reload()
+      .catch(r => {
+        console.log('error', r) //, alert('Login expirado'),window.location.reload()
       })
-  }, []) 
+  }, [])
 
-  const [previousPage, setPrevios] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [nextPage, setNextPage] = useState('')
 
-  function initPages(e){
-    if(e.data.totalPages > 1 ){
-      TotalPages = e.data.totalPages
+  function initPages(e) {
+    if (e.data.totalPages > 1) {
       setCurrentPage(1)
       setNextPage(2)
+      setPrevios("");
     }
   }
 
   // volta pagina
-  function capturePrevious(e, nPage){
-    if(currentPage == 1){
-      setPrevios('')
-      setNextPage(2)
-    }else{
-      setNextPage(currentPage )
-      setCurrentPage(currentPage - 1 )
-      setPrevios(currentPage - 2)
-    }
-    let aux = e -1
-    page(aux)
-  }
+  // function capturePrevious(e, nPage) {
+  //   if (currentPage == 1) {
+  //     setPrevios("");
+  //     setNextPage(2);
+  //   } else if (e === nPage) {
+  //     setNextPage(2);
+  //     setCurrentPage(1);
+  //     setPrevios("");
+  //   } else {
+  //     setNextPage(currentPage);
+  //     setCurrentPage(currentPage - 1);
+  //     setPrevios(currentPage - 2);
+  //   }
+  //   const aux = e - 1;
+  //   page(aux);
+  // }
 
-   // Proxima pagina
-   function captureNextPage(e, nPage){
-    if(currentPage == 1){
-      setNextPage(3)
-      setCurrentPage(currentPage + 1)
-      setPrevios(1)
-    }else if(currentPage < nPage -1){
-      setNextPage(currentPage + 2)
-      setCurrentPage(currentPage + 1)
-      setPrevios(currentPage )
-    }else{
-      setNextPage('')
-      setCurrentPage(currentPage + 1)
-      setPrevios(currentPage)
-    }
-    let aux = e -1
-    page(aux)
-  }
+  // //  Proxima pagina
+  // function captureNextPage(e, nPage) {
+  //   if (currentPage == 1 && nPage == 2) {
+  //     setCurrentPage(currentPage + 1);
+  //     setPrevios(1), setNextPage("");
+  //   } else if (e === nPage) {
+  //     setNextPage("");
+  //     setCurrentPage(e);
+  //     setPrevios(numberOfPages - 1);
+  //   } else if (currentPage == 1 && nPage != 2) {
+  //     setNextPage(3);
+  //     setCurrentPage(currentPage + 1);
+  //     setPrevios(1);
+  //   } else if (currentPage < nPage - 1) {
+  //     setNextPage(currentPage + 2);
+  //     setCurrentPage(currentPage + 1);
+  //     setPrevios(currentPage);
+  //   }
+
+  //   const aux = e - 1;
+  //   page(aux);
+  // }
 
   // escolha a pagina de acesso 
-   function page(e){
-
+  function page(e) {
     setDados([])
-     axios 
-      .get(`http://dashboardbff.oonpayperuse.com.br/employees?pageSize=10&pageNumber=${e}`, config)
+    axios
+      .get(`${UrlDomain}/employees?pageSize=12&pageNumber=${e}`, configCookies)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
         setNumberOfPages(response.data.totalPages)
-        
-        //
       })
-      .catch(r =>{ 
-        console.log('error', r), alert('Login expirado'),window.location.reload()
+      .catch(r => {
+        console.log('error', r), alert('Login expirado'), window.location.reload()
       })
   }
 
-  function userActive(e){
+  function userActive(e) {
     var arrayDisable = []
     var arrayActive = []
-    console.log('entrei em user activo', arrayUsers.length, e)
-    arrayUsers.map(user =>{
-      if(user.disabled == true){
+
+    arrayUsers.map(user => {
+      if (user.disabled == true) {
         arrayDisable.push(user)
-      }else{
+      } else {
         arrayActive.push(user)
       }
     })
 
-    if(e == 'todos' ){
-      setDados(arrayUsers)
-    }else if (e == 'funcAtive'){
+    if (e == 'todos') {
+      retiraFiltro();
+    } else if (e == 'funcAtive') {
       setDados(arrayActive)
-    }else if (e == 'funcDisable'){
+      setN_employeer(arrayActive.length)
+      initPages({ data: { TotalPages: 1 } })
+    } else if (e == 'funcDisable') {
       setDados(arrayDisable)
-    }else{
-      setDados(arrayUsers)
+      setN_employeer(arrayDisable.length)
+      initPages({ data: { TotalPages: 1 } })
+    } else {
+      retiraFiltro()
     }
-    
+
   }
 
-  const [ativos, setAtivos] = useState([])
-  const [desligados, setDesligados] = useState([])
-  const [menuChoice, setMenuChoice] = useState()
+  // const [menuChoice, setMenuChoice] = useState()
 
-  function menuUsers(e){
-    console.log('Escolha menu',e.target.value)
+
+  function menuUsers(e) {
+    // console.log('Escolha menu',e.target.value)
     // pega funcionarios desligados
-    if(e.target.value === 'todos' ){
-      setMenuChoice(e.target.value)
-    }else if(e.target.value === 'funcAtive'){
-      setMenuChoice(e.target.value)
-    }else if(e.target.value === 'funcDisable'){
-      setMenuChoice(e.target.value)
-    }else{
-      setMenuChoice(e.target.value)
-    }
-    
+    // if(e.target.value === 'todos' ){
+    //   setMenuChoice(e.target.value)
+    // }else if(e.target.value === 'funcAtive'){
+    //   setMenuChoice(e.target.value)
+    // }else if(e.target.value === 'funcDisable'){
+    //   setMenuChoice(e.target.value)
+    // }else{
+    //   setMenuChoice(e.target.value)
+    // } 
+
     userActive(e.target.value)
   }
-   
 
-  if (dados == ''){
-    return ( 
+
+  if (dados == '') {
+    return (
       <CCard className='usersContainer'>
         <CCardBody>
-          <h4> <Spinner animation="grow" variant="info" />  </h4> 
+          <h4> <Spinner animation="grow" variant="info" />  </h4>
         </CCardBody>
       </CCard>
     )
-  }else if (openSearch === ''){
+  } else if (openSearch) {
     return (
       <div>
         <CCard className='usersContainer'>
-            <CCardBody>
-                <CNavbar expand="lg"  className="menuUser">
-                  <CContainer fluid>
-                    <CNavbarToggler
-                      aria-label="Toggle navigation"
-                      aria-expanded={visible}
-                      onClick={() => setVisible(!visible)}
-                    />
-                    <CCollapse className="navbar-collapse" visible={visible}>
-                      {/* <CIcon icon={cilUser } size="xl"/> */}
-                      <CNavbarBrand> Funcionários </CNavbarBrand>
-                      <CNavbarBrand> 
-                        <CFormSelect 
-                          aria-label="Default select example"
-                          options={options}
-                          onChange={menuUsers}
-                        
-                        />
-                      </CNavbarBrand>
-                      <CNavbarNav className="me-auto mb-2 mb-lg-0">
-                      </CNavbarNav>
-                          <div className='newUser'>
-                            <NewUser callBack={retiraFiltro} /> 
-                          </div>
-                      <CForm className="d-flex">
-                        {/* <CFormInput type="text" onChange={Pegandobusca} value={busca2} size ='md' className="me-2" placeholder="Pesquise" /> */}
-                        <CFormInput type="text" onChange={Pegandobusca} value={busca2} size ='md' className="me-2" placeholder="Pesquise um e-mail" />
-                        <CButton onClick={searchMail}   variant='ghost'  color="secondary" >
-                          <BsSearch className='user-icons' />
-                        </CButton>
-                        <CButton onClick={retiraFiltro}   variant='ghost'  color="secondary" >
-                          <BsArrowClockwise className='user-icons' />
-                        </CButton>
-                      </CForm>
-                    </CCollapse>
-                  </CContainer>
-              </CNavbar>
-
-              <CTable align="middle" className="mb-0 usersTableContainer" hover striped responsive>
-                {/* Cabeca head da tabela do clientes */}
-                <CTableHead >
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center">id</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Nome</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">E-mail</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Contato</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Departamento</CTableHeaderCell>
-                    {userType == 'ADMIN' ?(
-                        <CTableHeaderCell className="text-center" >Ações</CTableHeaderCell>
-                      ) 
-                      :null
-                    }
-                    {/* 
-                    {userType == 'ADMIN' ?(
-                        <CTableHeaderCell className="text-center" >Permissões</CTableHeaderCell>
-                      ) 
-                      :null
-                    } */}
-
-                    {userType == 'ADMIN' ?(
-                        <CTableHeaderCell className="text-center" >Associação</CTableHeaderCell>
-                      ) 
-                      :null
-                    }
-                  
-                    
-                  </CTableRow>
-                </CTableHead>
-                
-                <CTableBody>
-                  {/* Percorre os usuarios  */}
-                  { dados.map((item, index) => (
-                    <CTableRow key={index}>
-                      <CTableDataCell className="text-center">
-                        <IdCli id={index+1} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <NameCli name={item.firstName} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <EmailCli email={item.email} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <PhoneCli phone={item.phone} />
-                      </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                          <DepartCli departamento={item.department} />
-                      </CTableDataCell>
-
-                      {userType == 'ADMIN' ?(
-                        <CTableDataCell className="text-center">
-                          <BtnEdit callBack={retiraFiltro} editar={item} />
-                        </CTableDataCell>
-                      )
-
-                      :null
-                        
-                      } 
-                      
-                      {/* {userType =='ADMIN' ?(
-                          <CTableDataCell className="text-center">
-                            <Permission attPage={retiraFiltro} user={item}/>
-                          </CTableDataCell>
-                        )
-                        :null
-                      } */}
-
-                      {userType =='ADMIN' ?(
-                          <CTableDataCell className="text-center">
-                            <Associate user={item} data={dadosOri} />
-                          </CTableDataCell>
-                        ):null
-                      }
-
-                    </CTableRow> 
-                  ))}
-
-                </CTableBody>
-              </CTable>
-              <br />
-              <br />
-
-              <CPagination className='container-users-pagination' color='dark'  aria-label="Page navigation example">
-                <label className='container-qtd-employeer'> Há {n_employeer} empregados</label>
-                <div className='container-pagination-align'>
-                  
-                  {previousPage != '' ?
-                    (
-                      <> 
-                        <CButton className='btn-user-pagination' color='dark' onClick={ () =>{capturePrevious(previousPage, numberOfPages)}} variant='outline'> <BsChevronDoubleLeft/> </CButton>
-                        <CButton className='btn-user-pagination' color='dark' onClick={ () => {capturePrevious(previousPage, numberOfPages)}} variant='outline'> {previousPage} </CButton>
-                      </>
-                      
-                    )
-                    :null
-                  }
-
-                  {currentPage == 0 ?
-                    (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage+1}</CButton>)
-                    :
-                    (<CButton className='btn-user-pagination' defaultChecked color='dark' active={true}  > {currentPage}</CButton>)
-                
-                  }
-                  
-                  {nextPage != '' ? 
-                    (
-                      <>
-                        <CButton className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage,numberOfPages)} variant='outline' >  {nextPage} </CButton>
-                        <CButton  className='btn-user-pagination' color='dark' onClick={() => captureNextPage(nextPage, numberOfPages)} variant='outline' > <BsChevronDoubleRight /> </CButton>
-                      </>
-                    )
-                    :null
-                  }
-                </div>
-                
-              </CPagination>
-            </CCardBody>
-        </CCard>
-      </div>
-    )
-  }else{
-    return (
-      <>
-        <CCard >
           <CCardBody>
-            <CNavbar expand="lg"  className="menuUser">
+            <CNavbar expand="lg" className="menuUser">
               <CContainer fluid>
                 <CNavbarToggler
                   aria-label="Toggle navigation"
@@ -478,148 +272,103 @@ const Clients = () => {
                   onClick={() => setVisible(!visible)}
                 />
                 <CCollapse className="navbar-collapse" visible={visible}>
-                  {/* <CIcon icon={cilUser } size="xl"/> */}
-                  <CNavbarBrand> Funcionários </CNavbarBrand>
-                  <CNavbarBrand> 
-                    <CFormSelect 
+                  <CNavbarBrand>Funcionários </CNavbarBrand>
+                  <CNavbarBrand>
+                    <CFormSelect
                       aria-label="Default select example"
                       options={options}
                       onChange={menuUsers}
-                    
                     />
                   </CNavbarBrand>
                   <CNavbarNav className="me-auto mb-2 mb-lg-0">
                   </CNavbarNav>
-                      <div className='newUser'>
-                        <NewUser callBack={retiraFiltro} /> 
-                      </div>
                   <CForm className="d-flex">
-                    {/* <CFormInput type="text" onChange={Pegandobusca} value={busca2} size ='md' className="me-2" placeholder="Pesquise" /> */}
-                    <CFormInput type="text" onChange={Pegandobusca} value={busca2} size ='md' className="me-2" placeholder="Pesquise um e-mail" />
-                    <CButton onClick={searchMail}   variant='ghost'  color="secondary" >
-                      <BsSearch className='user-icons' />
+                    <CFormInput type="text" onChange={Pegandobusca} value={busca2} className="me-2 input-filter" placeholder="Pesquise um e-mail"
+                      onKeyPress={searchMail} />
+
+                    <CButton onClick={searchMail} className="btn-filter" variant='ghost' color="secondary" >
+                      <BiSearchAlt style={{ padding: 0, fontSize: '2em' }} />
                     </CButton>
-                    <CButton onClick={retiraFiltro}   variant='ghost'  color="secondary" >
-                      <BsArrowClockwise className='user-icons' />
-                    </CButton>
+                    <DropdownFilter />
                   </CForm>
+                  <div className='newUser'>
+                    <NewUser callBack={retiraFiltro} />
+                  </div>
+                </CCollapse>
+              </CContainer>
+            </CNavbar>
+            <EmployeesList dados={dados} userType={userType} retiraFiltro={retiraFiltro} dadosOri={dadosOri} />
+            <br />
+            <br />
+            <Pagination page={page} numberOfPages={numberOfPages} previousPage={previousPage} setPreviousPage={setPrevios} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} setNextPage={setNextPage} qtdElements={n_employeer} />
+          </CCardBody>
+        </CCard>
+      </div>
+    )
+  } else {
+    return (
+      <>
+        <CCard className='usersContainer'>
+          <CCardBody>
+            <CNavbar expand="lg" className="menuUser">
+              <CContainer fluid>
+                <CNavbarToggler
+                  aria-label="Toggle navigation"
+                  aria-expanded={visible}
+                  onClick={() => setVisible(!visible)}
+                />
+                <CCollapse className="navbar-collapse" visible={visible}>
+                  <CNavbarBrand> Funcionário </CNavbarBrand>
+                  <CNavbarNav className="me-auto mb-2 mb-lg-0">
+                  </CNavbarNav>
+                  <CForm className="d-flex">
+                    <CFormInput type="text" onChange={Pegandobusca} value={busca2} className="me-2 input-filter" placeholder="Pesquise um e-mail"
+                      onKeyPress={searchMail} />
+
+                    <CButton onClick={searchMail} variant='ghost' className="btn-filter" color="secondary" >
+                      <BiSearchAlt style={{ padding: 0, fontSize: '2em' }} />
+                    </CButton>
+
+                  </CForm>
+                  <div className='newUser'>
+                    <NewUser callBack={retiraFiltro} />
+                  </div>
+                  <CButton onClick={retiraFiltro} variant='ghost' color="secondary" >
+                    <BsArrowCounterclockwise className='user-icons' />
+                  </CButton>
                 </CCollapse>
               </CContainer>
             </CNavbar>
 
-            {flagSearch === true ? 
-              (
-                <>
-                  <CTable>
-                    <CTableHead >
-                        <CTableRow>
-                          <CTableHeaderCell className="text-center">Nome</CTableHeaderCell>
-                          <CTableHeaderCell className="text-center">E-mail</CTableHeaderCell>
-                          <CTableHeaderCell className="text-center">Contato</CTableHeaderCell>
-                          <CTableHeaderCell className="text-center">Departamento</CTableHeaderCell>
-                          {userType == 'ADMIN' ?(
-                              <CTableHeaderCell className="text-center" >Ações</CTableHeaderCell>
-                            ) 
-                            :null
-                          }
-
-                          {userType == 'ADMIN' ?(
-                              <CTableHeaderCell className="text-center" >Permissões</CTableHeaderCell>
-                            ) 
-                            :null
-                          }
-
-                          {userType == 'ADMIN' ?(
-                              <CTableHeaderCell className="text-center" >Associação</CTableHeaderCell>
-                            ) 
-                            :null
-                          }
-                      </CTableRow>
-                    </CTableHead>
-
-                    <CTableBody>
-                      <CTableRow >
-                        <CTableDataCell className="text-center">
-                          <label > {searchValue.firstName}</label>
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                          <label > {searchValue.email}</label>
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                          <label > {searchValue.phone}</label>
-                        </CTableDataCell>
-                        <CTableDataCell className="text-center">
-                          <label > {searchValue.department}</label>
-                        </CTableDataCell>
-
-                        {userType == 'ADMIN' ?(
-                          <CTableDataCell className="text-center">
-                            <BtnEdit callBack={retiraFiltro} editar={searchValue} />
-                          </CTableDataCell>
-                        )
-                        :null
-                          
-                        } 
-                        
-                        {userType =='ADMIN' ?(
-                            <CTableDataCell className="text-center">
-                              <Permission user={searchValue}/>
-                            </CTableDataCell>
-                          )
-                          :null
-                        }
-
-                        {userType =='ADMIN' ?(
-                            <CTableDataCell className="text-center">
-                              {/* ASSOCIATE ESTÁ quebrando quando pesquiso certo e logo apos pesquiso pessoa errada, zerar variavel, com campos definidos */}
-                              {/* <Associate user={searchValue} data={searchValue} /> */}
-                            </CTableDataCell>
-                          ):null
-                        }
-
-                      </CTableRow> 
-                    </CTableBody>
-
-                  </CTable>
-                </>
-              )
-                :null
-            }
-            
-            {flagSearch === false ? 
-              (
-                <div className='container-users-notFind'>
-                  <h3>E-mail não encontrado ...</h3>
-                  <br />
-                  <CButton onClick={retiraFiltro} variant='ghost'  color="dark" >
-                    Voltar a lista
-                  </CButton>
-                </div>
-              )
-              :null
-            }
-
-            {flagSearch === '' ? 
+            {flagSearch === '' ?
               (
                 <CCard className='usersContainer'>
                   <CCardBody>
-                    <h4> <Spinner animation="grow" variant="info" />  </h4> 
+                    <h4> <Spinner animation="grow" variant="info" /></h4>
                   </CCardBody>
                 </CCard>
               )
-              :null
+              : flagSearch ?
+                (
+                  <EmployeesList dados={[searchValue]} userType={userType} retiraFiltro={retiraFiltro} dadosOri={dadosOri} />
+                )
+                : (
+                  <div className='container-users-notFind'>
+                    <h3>E-mail não encontrado ...</h3>
+                    <br />
+                    <CButton onClick={retiraFiltro} variant='ghost' color="dark" >
+                      Voltar a lista
+                    </CButton>
+                  </div>
+                )
             }
-
             <br />
-
           </ CCardBody>
-        </CCard> 
-      
-      
+        </CCard>
       </>
     )
   }
-  
+
 }
 
-export default Clients
+export default Clients;

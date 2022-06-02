@@ -3,41 +3,12 @@
     border-radius: 10px;
     padding: 1%;
     width: 100%;
-}
-
-.container-home-header{
-    background: rgb(204, 204, 204);
-    padding: 1%;
-    border-radius: 7px;
-    
-}
-.font-home-titulo{
-    font-size: 16pt;
-    /* float: left; */
-}
-
-.container-home-esq{
-    /* background: rgb(230, 230, 230); */
-    border-radius: 10px;
-    margin:1%;
-    padding: 2%;
-}
-
-.container-home-dir{
-    height: 100%;
-    margin:1%;
-    padding: 2%;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-.btn-moreNews{
-    color:black
-}
-
-.container-home-newNews{
-    float: right;
-    
+.font-home-titulo{
+    font-size: 36px;
+    color: #6D6D6D;
+    font-weight: 700;
+    padding: 2%;
 }

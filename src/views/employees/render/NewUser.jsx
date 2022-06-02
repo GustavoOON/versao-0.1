@@ -7,6 +7,8 @@ import {cilLoopCircular, cilPlus } from '@coreui/icons'
 import Cookies from 'js-cookie'
 import './../css/newUser.css'
 
+import UrlDomain from './../../../config'
+
 import Permissions from './../permissons/NewUserPermissons'
 
 const NewUser = (props) => {
@@ -58,32 +60,13 @@ const NewUser = (props) => {
 
     const salvarInfos = () => {
         
-        let mySubString
-            if(email.length > 1){
-                mySubString = email.substring(
-                   email.lastIndexOf("@") + 1, 
-                   email.lastIndexOf(".")
-               );  
-           }else{
-               // Solucao temporaria
-               mySubString = 'errado'
-           }
-        
-
-        // Confere as senhas
-        if(password == passwordConfirm){
-            setFlagSenha(0)
-            // confere se o email possui dominio oon
-            if((mySubString === 'oonpayperuse') || (mySubString ==='oonseguros')){
-                setFlagEmail(0)
-                verififyNumberOfTelephone()
-
-            }else{
-                setFlagEmail(1)
-            }
+        if((email.includes('oonseguros')) || (email.includes('oonpayperuse'))){
+            setFlagEmail(0)
+            verififyNumberOfTelephone()
         }else{
-            setFlagSenha(1)
+            setFlagEmail(1)
         }
+        
     }
 
     function verififyNumberOfTelephone () {
@@ -104,12 +87,12 @@ const NewUser = (props) => {
         }
     }
 
-    const [arrayPermission, setArrayPermission] = useState()
-    let array
-    const gettingPermissions = (e) =>{
-        array = e
-        // setArrayPermission(e)
-    }
+    // const [arrayPermission, setArrayPermission] = useState()
+    // let array
+    // const gettingPermissions = (e) =>{
+    //     array = e
+    //     setArrayPermission(e)
+    // }
 
     // faz requisicao para api 
     const CreateUser = () =>{
@@ -118,23 +101,25 @@ const NewUser = (props) => {
         // Configuracoes para envio de mensagem 
         const token = Cookies.get('TokenID')
 
-        console.log('mostra valores que serao salvos ', array, newUser)
 
         let config = {
             headers: {
-            'Authorization': token, 
+            'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json;charset=UTF-8',
             "Access-Control-Allow-Origin": "*",
             }
         };
         axios 
-            .post("http://dashboardbff.oonpayperuse.com.br/employees",  newUser, config )
+            .post(`${UrlDomain}/employees`,  newUser, config )
             .then((response) => {
                 props.callBack()
-                setShow(false);
+                setShow(false);     
                 
             })
-            .catch(r =>{ console.log('erro na api createUser', r)})
+            .catch(r =>{ 
+                console.log('erro na api createUser', r )
+                alert('Ops... houve algum erro 🤕 \n - Tente um novo e-mail.\n - Se persistir o erro, realize um novo login.' )
+            })
 
     }
  
@@ -143,25 +128,24 @@ const NewUser = (props) => {
     if(user == 'ADMIN'){
         return (
             <div> 
-            
                 <CButton  color="secondary" className='icon-css' onClick={verifica}> 
                     <CIcon icon={cilPlus} /> Adicionar 
                 </CButton>
                 <Modal 
                     show={show} 
                     onHide={handleClose}
-                    size="xl"
+                    size="lg"
                 >
                     {/* <Modal.Header  closeButton>
                         <Modal.Title>Inserir Ususário </Modal.Title>
                     </Modal.Header> */}
-                    <Modal.Body className='container-body'>
+                    <Modal.Body style={{padding:'3em'}} className='container-body'>
                         
                         <CRow>
                             
-                            <CCol xs={3}>
+                            <CCol>
                                 <Form>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    {/* <Form.Group className="mb-3" controlId="formBasicEmail"> */}
                                         <label className='newUserTil'>Dados</label>
                                         <br />
                                         <br />
@@ -224,12 +208,12 @@ const NewUser = (props) => {
                                             <option value="MANAGER">Manager</option>
                                             <option value="ADMIN">Admin</option>
                                         </CFormSelect>
-                                    </Form.Group>
+                                    {/* </Form.Group> */}
                                 </Form> 
                             </CCol>
-                            <CCol className='container-newUser-permission'> 
-                                <Permissions choices = {gettingPermissions} /> 
-                            </CCol>
+                            {/* <CCol className='container-newUser-permission'> 
+                                <Permissions choices = {gettingPermissions} />  
+                            </CCol> */}
                             
                         </CRow>
                     </Modal.Body>

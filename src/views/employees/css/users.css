@@ -17,8 +17,14 @@
     margin-bottom: 1%;
 }
 
-.paginacaoContainer{
-    background: red;
+.container-employees-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-employees-action{
+    margin-left:4%;
 }
 
 .usersTableContainer{
@@ -68,4 +74,28 @@
     justify-content: center;
     align-items: center;
     width: 81%;
+}
+
+.filtro {
+    width: 8em;
+    margin: 10px;
+}
+
+.input-filter {
+    width: 15em;
+    margin: 10px;
+}
+
+.btn-filter {
+    margin: 8px;
+    padding: 5px;
+}
+.icon-filtro {
+    padding: 0px 6px 2px 0px;
+}
+
+.filter-text {
+    font-size: 9pt;
+    color: #C4C4C4;
+    padding: 10px;
 }

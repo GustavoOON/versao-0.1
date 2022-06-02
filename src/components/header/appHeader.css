@@ -24,3 +24,9 @@
     text-decoration: none;
     color: rgb(63, 63, 63);
 }
+
+.btn-header-exit{
+    /* margin-top: 10px; */
+    width: 100%;
+    text-align: initial;
+}

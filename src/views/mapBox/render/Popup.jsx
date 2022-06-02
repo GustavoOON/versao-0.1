@@ -4,7 +4,7 @@ import ReactMapGL, {Popup} from 'react-map-gl';
 
 import { CImage, CButton, CContainer, CRow, CCol } from '@coreui/react'
 import carro from './../../../assets/images/carro01.jpeg'
-import Midia from './../../devices/render/Midias/Midia'
+import BtnMidia from '../../devices/render/btn/BtnMidia'
 
 import { Modal } from 'react-bootstrap';
 import Report from './Report'
@@ -153,7 +153,7 @@ const PopupRen = ( props) => {
                         </Modal.Body>
                         <Modal.Footer>  
                             {/* Passar o props aqui do veículo depois  */}
-                            <Midia /> 
+                            <BtnMidia /> 
                         
                             <CButton  onClick={handleClose2}>
                                 Sair

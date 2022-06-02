@@ -4,6 +4,8 @@ import {  GoogleMap, InfoWindow, Marker,  useJsApiLoader, DirectionsRenderer } f
 import pontoFinal from '../../../../assets/images/blackPoint.png'
 import ponto from '../../../../assets/images/greenPoint.png'
 
+import tokenMap from './../../../../configMap'
+
 const FollowMap = (props) =>{
     const containerStyle = {
         width: '100%' ,
@@ -28,7 +30,7 @@ const FollowMap = (props) =>{
 
       const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyAHKaVOonbL8-sJ5BM_StSZhM2pAw2CK9A",  // trocar o token aqui, TOKEN PESSOAL 
+        googleMapsApiKey: tokenMap,  // trocar o token aqui, TOKEN PESSOAL 
         libraries,
       })
 
@@ -60,11 +62,13 @@ const FollowMap = (props) =>{
 
       useEffect(()=>{
         console.log(props)
-        if(props.history.adressOcorrency.lat != null ){
-          CarregaRotaPrestador()
+        if(isLoaded){
+          if(props.history.adressOcorrency.lat != null ){
+            CarregaRotaPrestador()
+          }
         }
-       
-      }, [props])
+        
+      }, [isLoaded])
 
     return isLoaded ? (
 

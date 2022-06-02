@@ -54,7 +54,7 @@ const Notify = () =>{
                     content={
                         <div>
                             <div className='container-lixeira'> 
-                                <CButton variant='outline' size='sm' color="danger" className="position-lixeira-relative" onClick={ClearNotify} > 
+                                <CButton variant='outline' size="sm" color="danger" className="position-lixeira-relative" onClick={ClearNotify} > 
                                     <CIcon icon={cilRecycle} size="xl" />
                                 </CButton>
                             </div>
@@ -63,7 +63,7 @@ const Notify = () =>{
                             {notificacao.map((item, index)=>{
                                     if(index < 5){
                                         return(
-                                            <div> 
+                                            <div key={index.toString()}> 
                                                 <label className='Titulo-notificacao'> {item.titulo}</label>
                                                 <br />
                                                 <p className='texto-notificacao'> {item.text}</p>
@@ -74,22 +74,20 @@ const Notify = () =>{
                                     }else if(cont <1){
                                         cont = 1
                                         return(
-                                            <>
+                                            <div key={index.toString()}>
                                                 {/* Abre um modal listando todas notificações. */}
-                                                <CButton onClick={verifica} className='btn-notificacao-modal' color='dark' variant='ghost'> Mais {rest} notificações </CButton>
+                                                <CButton onClick={verifica} size="sm" className='btn-notificacao-modal' color='dark' variant='ghost'> Mais {rest} notificações </CButton>
                                                 <Modal 
                                                     show={show} 
                                                     onHide={handleClose}
                                                     size="xl"
-                                                    
                                                 >
-                                                    
                                                     <Modal.Body className='container-body'>
                                                         <RenderNotify notificacoes = {notificacao} /> 
                                                     </Modal.Body>
                                                     
                                                 </Modal>
-                                            </>
+                                            </div>
                                         )
                                     }
                                 }
@@ -100,7 +98,7 @@ const Notify = () =>{
                     placement="bottom"
                     className='notificacao-popover'
                 >
-                    <CButton variant='ghost' size='xl' color="danger" onClick={ClearNotify} className="position-relative">
+                    <CButton variant='ghost' size="sm" color="danger" onClick={ClearNotify} className="position-relative">
                         <CIcon icon={cilBellExclamation} size="xl" />
                         <CBadge color="danger"  position="top-end" shape="rounded-pill">
                             {numNot}

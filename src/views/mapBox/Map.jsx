@@ -5,8 +5,8 @@ import ReactMapGL, {Marker, FullscreenControl, MapContext, Source, Layer } from 
 import './Map.css'
 // Estilizacao do mapa usado
 import MAP_STYLE from './map-V8.json';
-import carroAtivo from './../../assets/images/car_ativo.png'
-import carroDesativo from './../../assets/images/car_desativo.png'
+import carEnable from '../../assets/images/car_enable.png';
+import carDisable from '../../assets/images/car_disable.png'
 
 //componentes
 import Report from './render/Report.jsx'
@@ -142,7 +142,7 @@ const mapBox = () =>{
                                     <div> 
                                         
                                         <Marker latitude={item.lat} longitude={item.lng} offsetLeft={-20} offsetTop={-10}>
-                                            <CImage fluid onClick={ () =>{SelectedHotspot(item)}} src = {carroAtivo} width={30} height={30}  />
+                                            <CImage fluid onClick={ () =>{SelectedHotspot(item)}} src = {carEnable} width={30} height={30}  />
                                         </Marker>
 
                                         {dados !== null ? (
@@ -159,7 +159,7 @@ const mapBox = () =>{
                                 return(
                                     <> 
                                         <Marker latitude={item.lat} longitude={item.lng} offsetLeft={-20} offsetTop={-10}>
-                                            <CImage onClick={ () =>{SelectedHotspot(item)}} fluid src = {carroDesativo} width={25} height={25}  />
+                                            <CImage onClick={ () =>{SelectedHotspot(item)}} fluid src = {carDisable} width={25} height={25}  />
                                         </Marker> 
                                         {dados !== null ? (
                                             <> 

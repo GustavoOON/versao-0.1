@@ -20,7 +20,7 @@ const Resume = () =>{
     }
     return (
         <> 
-            <CButton onClick={verifica} > Gerar Relatório </CButton>
+            <CButton onClick={verifica} > Gerar relatório </CButton>
 
             <Modal 
                 show={show} 

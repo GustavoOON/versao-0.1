@@ -20,7 +20,6 @@ const Support = (props) => {
     function permissoes (e){
 
        array.push(e.target.value)
-       console.log(array)
        props.choices(array)
     }
 

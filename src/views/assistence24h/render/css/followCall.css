@@ -1,276 +1,44 @@
-/* Follow Call */
-.font-titulo{
-    font-size: 16pt;
-    font-weight: 600;
-    
-}
 
-.iconInit{
-    color: rgb(248, 228, 52);
-    margin-right: 1%;
-}
-
-.iconExclamantion{
-    margin-right: 1%;
-    color:rgb(196, 0, 0)
-}
-
-.iconFlag{
-    margin-right: 1%;
-    color: rgb(104, 190, 18);
-}
-
-.font-conteudo{
-    font-size: 12pt;
-}
-
-.container-prestadore{
-    background: rgb(212, 212, 212);
-    margin-bottom: 1%;
-    padding: 1%;
-    border-radius: 10px;
-}
-
-.container-prestadores{
+.container-render-calls{
     overflow-y: scroll;
-    height: 35vh;
-    padding: 2%;
+    height: 100%;
 }
 
-.font-types{
-    background: lavender;
-    margin: 1%;
-    padding:0.3%;
+.container-follow-body2{
+    height: 100%;
+}
+
+.container-render-call{
+    background: rgb(236, 236, 236);
+    margin:1%;
+    padding: 1%;
     border-radius: 5px;
-}
-
-
-.font-assistence-titulo{
-    font-size: 10pt;
-    font-weight: 700;
-    font-style: inherit;
-}
-
-.container-followCall-header1{
-    width: 100%;
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-header-titulo{
-    padding: 1%;
-    width: 100%;
-}
-.Container-header-grid{
-    width: 100%;
-    display: grid;
-}
-.container-header-followCall{
-    width: 50%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-  
-}
-.container-header-restart{
-    float: right;
     
 }
 
-.container-btn-restart{
+.boxes{
+    background: rgb(182, 182, 182);
+    margin-right: 1%;
+    margin-top: 8px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    font-size: 11pt;
+}
+
+.btnCall{
     float: right;
+    margin-right: 3%;
 }
 
-.container-infos-id{
-    width: 100%;
-    height: 100%;
-    margin: 30%;
+.container-follow-body{
+    margin-left: 3% ;
+    margin-right: 3%;
 }
 
-.container-followCall-client{ 
-    padding: 10px;
-    width: 100%;
-    background: rgb(241, 241, 241);
-    margin-top: 2%;
-    border-radius: 10px;
+.font-name{
+    font-size: 14pt;
 }
 
-.container-btn-follow{
-    float: right;
-    margin-right: 3%;    
-}
-
-.container-infos-type{
-    padding: 1.1%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    margin: 1%;
-    border-radius: 15px;
-    font-size: 10pt;
-}
-
-
-.container-infos-status{
-    padding: 1.1%;
-    background: rgb(109, 109, 109) ; ;
-    color: white;
-    margin: 1%;
-    border-radius: 15px;
-    font-size: 10pt;
-}
-
-.container-infos-time{
-    padding: 1.1%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    margin: 1%;
-    border-radius: 15px;
-    font-size: 10pt;
-}
-
-.container-infos-employer{
-    padding: 1.1%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    margin: 1%;
-    border-radius: 15px;
-    font-size: 10pt;
-}
-
-.container-header-client{
-    padding: 2%;
-}
-
-.container-header-client-restart{
-    padding-left:0%;
-    padding-top: 0%;
-}
-
-
-.container-infos-type2{
-    padding: 1.5%;
-    background: rgb(109, 109, 109) ;
-    color: white;
-    font-size: 10pt;
-    margin: 1%;
-    border-radius: 15px;
-}
-
-
-.container-informacoes{
-    margin-top: 0%;
-}
-
-
-
-.container-follow-client{
-    /* background: rosybrown; */
-    margin: 1%;
-}
-
-
-
-.container-render-listPrestadores{
-    background: rgb(226, 226, 226);
-    border:1px;
-    padding: 1%;
-    margin-top: 1%;
-    border-radius: 10px;
-    flex-direction: row;
-    display: flex;
-}
-
-.btn-select-prestador{
-    float: right;
-}
-
-
-.label-listPrestadores{
-    background: #ececec;
-    padding:1%;
-    border-radius: 15px;
-    margin-bottom: 1%;
-    margin-right: 1.5%;
-    font-size: 10pt;
-}
-
-.btn-backList{
-    float:left;
-}
-
-.btn-select{
-    float: right;
-}
-
-.container-prestador-select{
-    padding: 2%;
-}
-
-.btn-selectRoute{
-    float: right;
-}
-.container-listPrestadores-left{
-    width: 50%;
-}
-
-.container-listPrestadores-right{
-    padding: 1%;
-    width: 20%;
-}
-
-
-.container-followCall-confirmValues{
-    padding: 2%;
-    height: 100vh;
-    /* background: salmon; */
-}
-
-.container-values{
-    margin-top:1% ;
-    padding-left: 1%;
-    
-}
-
-
-.btn-back-confirm{
-    float: left;
-}
-
-.btn-start-confirm{
-    float: right;
-}
-
-.container-mapa-followCall{
-    height: 100vh;
-}
-
-
-.container-followCall-body-clientInfo{
-    padding: 1%;
-    background: rgb(48, 153, 57);
-    height: 77vh;
-}
-
-.container-list-prestadores{
-    height: 52vh;
-    overflow-y: scroll;
-    border-radius: 10px;
-    padding: 2%;
-    background: rgb(66, 46, 139);
-}
-
-.container-followCall-clients{
-    height: 82vh;
-    overflow-y: scroll;
-    border-radius: 10px;
-    padding: 3%;
-    margin: 0;
-}
-
-
-
-/* MAPA  */
-.container-map-follow{
-    height: 100%;
-}

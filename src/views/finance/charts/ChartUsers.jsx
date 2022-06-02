@@ -1,74 +1,72 @@
 import React from 'react'
-import ButtonGraph  from './../bottons/ButtonChart'
+import { CCard, CCardBody, CCol, CRow } from '@coreui/react'
+import { CChart } from '@coreui/react-chartjs'
 
-import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCol,
-    CCardText,
-    CRow,
-    CCardTitle,
-    CButtonGroup, 
-   
-  } from '@coreui/react'
+import ButtonGraph from '../buttons/ButtonGraph'
+import MonthAndYear from '../components/MonthAndYear'
 
-import {CChart} from '@coreui/react-chartjs'
-import CIcon from '@coreui/icons-react'
-import {cilOptions } from '@coreui/icons'
+const ChartUsers = () => {
+    const bodyWeek = {
+        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5'],
+        newUsers: [40, 10, 20, 60, 20],
+        recurringUsers: [30, 30, 10, 10, 63],
+    }
 
-const ChartUsers = () =>{
+    const saveFilter = (usersCity, usersType, initialDate, finalDate) => {
+        // endpoint para fazer o filtro
+    }
 
-    
-    return(
-        <>
-            <CCard className="cardsFinance">
-                <CCardBody>
-                    <CRow>
-                        <CCol  className = 'esq23'sm="auto">
-                            <label className="fincTitulo"> Usuários</label>
-                            <br />
-                            <label  className="fincSub"> Dez 2021</label>
-                        </CCol>
-                        <CCol className='dir23'>
-                            <div className='direita-container-top-card'>
-                                <CButtonGroup size="sm" role="group" aria-label="Basic outlined example">
-                                    <CButton color="primary" variant="outline" color="dark">
-                                        Dia
-                                    </CButton>
-                                    <CButton color="primary" variant="outline" color="dark">
-                                        Semana
-                                    </CButton>
-                                    <CButton color="primary"  variant="outline" color="dark">
-                                        Mês
-                                    </CButton>
-                                </CButtonGroup>
-                                
-                                <ButtonGraph />
-                            </div>
-                        </CCol>
-                    </CRow>
-                    
-                    <CChart
-                        type="bar"
-                        data={{
-                            labels: ['Ativo', 'Em análise', 'Cancelado'],
-                            datasets: [
-                            {
-                                label: 'Usuários',
-                                backgroundColor: ['#6BFF77', '#FF9500', '#FF2801' ],
-                                data: [40,10,20, 60],
+    return (
+        <CCard className="cards">
+            <CCardBody>
+                <CRow>
+                    <CCol sm="auto">
+                        <label className="finc-title">Total de usuários</label>
+                        <br />
+                        <label className="finc-sub"><MonthAndYear /></label>
+                    </CCol>
+                    <CCol className='btn-filter'>
+                        <ButtonGraph name={'dos usuários'} saveFilter={saveFilter} />
+                    </CCol>
+                </CRow>
+
+                <CChart
+                    labels="week"
+                    type="bar"
+                    options={{
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 8,
+                                    boxWidth: 30
+                                }
                             },
-                            ],
-                        }}
-                        width={"10%"}
-                        height={"10%"}
-                        labels="months"
-                    />
-                </CCardBody>
-            </CCard>
-        </>
+                        }
+                    }}
+                    data={{
+                        labels: bodyWeek.labels,
+                        datasets: [
+                            {
+                                label: 'Usuários novos',
+                                barPercentage: 0.6,
+                                backgroundColor: '#00F781',
+                                data: bodyWeek.newUsers,
+                            },
+                            {
+                                label: 'Usuários recorrentes',
+                                barPercentage: 0.6,
+                                backgroundColor: '#216CFF',
+                                data: bodyWeek.recurringUsers,
+                            },
+                        ],
+                    }}
+                    width={100}
+                    height={100}
+                />
+            </CCardBody>
+        </CCard>
     )
 }
 
-export default ChartUsers
+export default ChartUsers;

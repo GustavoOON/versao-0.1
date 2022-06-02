@@ -1,89 +1,39 @@
 import React from "react";
-// importando css
-import './finance.css'
-import GraphPlans from './charts/ChartPlans'
-import GraphUsers from './charts/ChartUsers'
-import Calendar from './charts/Calendar'
-import Users from './users/Users'
-import UserRanking from './ranking/UserRanking'
+import { CCol, CRow } from '@coreui/react';
 
-import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCol,
-    CCardText,
-    CRow,
-    CCardTitle,
-    CContainer,
-    CButtonGroup, 
-   
-  } from '@coreui/react'
+import GraphPlans from './charts/ChartPlans';
+import GraphUsers from './charts/ChartUsers';
+import Calendar from './charts/Calendar';
+import Users from './users/Users';
+import ToppingsAndDevices from "./charts/ToppingsAndDevices";
 
+import './css/finance.css';
 
-const Finance = () =>{
-/*
-    return(
-        <> 
-             <CRow>
-                <CCol sm={4}>
-                    <GraphPlans/>
-                    <br />
-                </CCol>
-                <CCol sm={4}>
-                    <GraphUsers />
-                    <br />
-                </CCol>
-                <CCol sm={4} >
-                    <Calendar />
-                    <br />
-                </CCol>
-
-                <br /> 
-                <CCol sm={8} >
-                    <Users />
-                    <br />
-                </CCol>
-                <CCol sm={4} >
-                    <UserRanking />
-                    <br />
-                </CCol>
-            </CRow> 
-                
-        </>
-    )
-
-    
-}
-*/
-
-    return(
-        <> 
+const Finance = () => {
+    return (
+        <>
             <CRow>
-                <CCol sm={8}>
-                    <CRow>
-                        <CCol sm={6}>
-                            <GraphPlans/>
-                            <br />
-                        </CCol>
-                        <CCol sm={6}>
-                            <GraphUsers />
-                            <br />
-                        </CCol>
-                        <CCol sm={12} >
-                            <Users />
-                            <br />
-                        </CCol>
-                    </CRow>
+                <CCol xs={4}>
+                    <GraphUsers />
                 </CCol>
-                <CCol sm={4}>
+                <CCol xs={4}>
+                    <GraphPlans />
+                </CCol>
+                <CCol xs={4}>
                     <Calendar />
                 </CCol>
-                
-
-            </CRow> 
-                <br />
+            </CRow>
+            <br />
+            <CRow>
+                <CCol xs={9}>
+                    <Users />
+                </CCol>
+                <CCol xs={3}>
+                    <ToppingsAndDevices />
+                </CCol>
+            </CRow>
         </>
     )
 }
-export default Finance 
+
+export default Finance;

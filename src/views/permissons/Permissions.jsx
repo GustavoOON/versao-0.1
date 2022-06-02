@@ -6,6 +6,8 @@ import { Spinner }  from 'react-bootstrap';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+import UrlDomain from './../../config'
+
 import Support from './Render/Support'
 
 const Permission = (props) =>{
@@ -41,7 +43,7 @@ const Permission = (props) =>{
     const token = Cookies.get('TokenID')
     let config = {
         headers: {
-            'Authorization': token, 
+            'Authorization': `Bearer ${token}`,
             "Accept": "*/*",
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
@@ -62,18 +64,16 @@ const Permission = (props) =>{
         // Verificar se o update user for alterado 
         if(updateUser != null){
             axios 
-                .patch(`http://dashboardbff.oonpayperuse.com.br/employees/${props.user.id}`,  updateUser, config )
+                .patch(`${UrlDomain}/employees/${props.user.id}`,  updateUser, config )
                 .then((response) => {
                     setShow(false)
                     props.attPage()
                 })
                 .catch(r =>{ 
-                    console.log('error', r), alert('Login expirado'),window.location.reload()
+                    console.log('error', r), alert('Login expirado'), window.location.reload()
                 })
         }
-
         // Salvar a lista de permissoes, TALVEZ DE para salvar a lista de permissoes no end point acima
-        console.log('oq vem da lista de permissoes ',  e)
 
     }
     return(

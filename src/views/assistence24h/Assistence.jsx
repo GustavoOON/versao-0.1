@@ -4,27 +4,20 @@ import Cookies from 'js-cookie'
 import { BsWrench } from 'react-icons/bs';
 
 import {
-    CCard,
-    CCardBody,
-    CContainer,
-    CRow,
+    
     CButton ,
-    CNavbarBrand,
-    CCollapse,
-    CNavbarNav,
-    CCol,
-    CNavbarToggler,
-    CNavLink,
+   
   } from '@coreui/react'
 
   // importando componentes
-  import Home from './render/Home'
-  import NewService from './render/NewService'
-  import FollowCall from './render/FollowCall'
-  import HistoryCalls from './render/History'
-  import ConfigAssistence from './render/Config'
-import { FaTruckMonster } from 'react-icons/fa'
-import ListService from './render/ListService';
+
+import FollowCall from './render/FollowCall'
+import HistoryCalls from './render/History'
+
+import { useEffect } from 'react';
+
+var CryptoJS = require("crypto-js");
+import Decrypt from './../../security/decripty'
 
 const Assistence24 = () =>{
 
@@ -38,139 +31,154 @@ const Assistence24 = () =>{
     const [visible, setVisible] = useState(false) 
     const [menu, setMenu] = useState('acompanhar')
     const flag = 'admin'
+
     // controle das telas
     const controle = (e) =>{
         setMenu(e)
 
         if(e == 'home'){
             setOp1(true)
-            setOp2(false)
+           // setOp2(false)
             setOp3(false)
             setOp4(false)
-            setOp5(false)
-            setOp6(false)
-        }else if(e == 'novoAtendimento'){
-            setOp1(false)
-            setOp2(true)
-            setOp3(false)
-            setOp4(false)
-            setOp5(false)
-            setOp6(false)
+           // setOp5(false)
+           // setOp6(false)
+        }
+        // else if(e == 'novoAtendimento'){
+        //     setOp1(false)
+        //     setOp2(true)
+        //     setOp3(false)
+        //     setOp4(false)
+        //     setOp5(false)
+        //     setOp6(false)
 
-        }else if(e == 'acompanhar'){
+        // }
+        else if(e == 'acompanhar'){
             setOp1(false)
-            setOp2(false)
+            //setOp2(false)
             setOp3(true)
             setOp4(false)
-            setOp5(false)
-            setOp6(false)
+            //setOp5(false)
+            //setOp6(false)
 
         }else if(e == 'historico'){
             setOp1(false)
-            setOp2(false)
+            //setOp2(false)
             setOp3(false)
             setOp4(true)
-            setOp5(false)
-            setOp6(false)
-        }else if(e == 'configuracoes'){
-            setOp1(false)
-            setOp2(false)
-            setOp3(false)
-            setOp4(false)
-            setOp5(true)
-            setOp6(false)
-        }else if( e == 'tipoServico'){
-            setOp1(false)
-            setOp2(false)
-            setOp3(false)
-            setOp4(false)
-            setOp5(false)
-            setOp6(true)
+            //setOp5(false)
+            //setOp6(false)
         }
+        // else if(e == 'configuracoes'){
+        //     setOp1(false)
+        //     setOp2(false)
+        //     setOp3(false)
+        //     setOp4(false)
+        //     setOp5(true)
+        //     setOp6(false)
+        // }
+        // else if( e == 'tipoServico'){
+        //     setOp1(false)
+        //     setOp2(false)
+        //     setOp3(false)
+        //     setOp4(false)
+        //     setOp5(false)
+        //     setOp6(true)
+        // }
     }
+
+    const [userType, setUserType] = useState()
+    const [permissions, setPermissions] = useState()
+
+    useEffect(()=>{
+        setUserType(Decrypt.UserTypeDecryption)
+        setPermissions(Decrypt.permissions)
+    },[])
+
     const token = Cookies.get('TokenID')
-    const userType = Cookies.get('userType')
+    
 
     return (
 
         <> 
             <div className='container-assistence'  >
 
-                    <div className='container-assistence-header'> 
-                        <label className="font-icon-header"> <BsWrench /> </label>
-                        <label className="font-name-header" >  Assistência </label> 
-                        
-                        {/* <CButton 
-                            className='btn-assistence'
-                            color='dark' 
-                            active={op1} 
-                            size='md'
-                            onClick={()=>{controle('home')}} 
-                            variant='ghost' > 
-                                Assistência 
-                        </CButton>  */}
-                        
-                        <CButton 
-                            className='btn-assistence'
-                            color='dark' 
-                            active={op2}
-                            size='md' 
-                            onClick={()=>{controle('novoAtendimento')}} 
-                            variant='ghost' > 
-                                Novo chamado
-                        </CButton>
+                <div className='container-assistence-header'> 
+                    {/* <label className="font-icon-header"> <BsWrench /> </label> */}
+                    <label className="font-name-header" >  Assistência  </label> 
+                    
+                    {/* <CButton 
+                        className='btn-assistence'
+                        color='dark' 
+                        active={op1} 
+                        size='md'
+                        onClick={()=>{controle('home')}} 
+                        variant='ghost' > 
+                            Assistência 
+                    </CButton>  */}
+                    
+                    {/* <CButton 
+                        className='btn-assistence'
+                        color='dark' 
+                        active={op2}
+                        size="sm" 
+                        onClick={()=>{controle('novoAtendimento')}} 
+                        variant='ghost' > 
+                            Novo chamado
+                    </CButton> */}
 
-                        <CButton 
-                            className='btn-assistence'
-                            color='dark' 
-                            active={op3} 
-                            size='md'
-                            onClick={()=>{controle('acompanhar')}} 
-                            variant='ghost' > 
-                                Acompanhar
-                        </CButton>       
+                    <CButton 
+                        className='btn-assistence'
+                        color='dark' 
+                        active={op3} 
+                        size="sm"
+                        onClick={()=>{controle('acompanhar')}} 
+                        variant='ghost' > 
+                            Acompanhar
+                    </CButton>       
 
+                    <CButton 
+                        className='btn-assistence'
+                        color='dark' 
+                        active={op4} 
+                        onClick={()=>{controle('historico')}} 
+                        variant='ghost'
+                        size="sm"
+                    > 
+                        Histórico
+                    </CButton>   
+
+                    
+
+                    {/* {userType=="ADMIN" ? 
+                    (
                         <CButton 
                             className='btn-assistence'
                             color='dark' 
-                            active={op4} 
-                            onClick={()=>{controle('historico')}} 
+                            active={op5} 
+                            onClick={()=>{controle('configuracoes')}} 
                             variant='ghost'
-                            size='md' > 
-                                Histórico
-                        </CButton>   
-
-                        
-
-                        {userType=="ADMIN" ? 
-                        (
-                            <CButton 
-                                className='btn-assistence'
-                                color='dark' 
-                                active={op5} 
-                                onClick={()=>{controle('configuracoes')}} 
-                                variant='ghost'
-                                size='md' > 
-                                    Configurações
-                            </CButton>  
-                        )
-                            :
-                            null
-                        }
-
-                        <CButton 
-                            className='btn-assistence'
-                            color='dark' 
-                            active={op6} 
-                            onClick={()=>{controle('tipoServico')}} 
-                            variant='ghost'
-                            size='md' > 
-                                Tipos de serviços
+                            size="sm" > 
+                                Configurações
                         </CButton>  
-                        
-                        
-                        
-                    </div>
+                    )
+                        :
+                        null
+                    }
+
+                    <CButton 
+                        className='btn-assistence'
+                        color='dark' 
+                        active={op6} 
+                        onClick={()=>{controle('tipoServico')}} 
+                        variant='ghost'
+                        size='sm' > 
+                            Tipos de serviços
+                    </CButton>   */}
+                    
+                    
+                    
+                </div>
                       
 
                     {menu == 'home' ? 
@@ -183,14 +191,14 @@ const Assistence24 = () =>{
                         : null
                     }
 
-                    {menu == 'novoAtendimento' ? 
+                    {/* {menu == 'novoAtendimento' ? 
                         (
                             <> 
                                <NewService />
                             </>
                         )
                         : null
-                    }
+                    } */}
 
                     {menu == 'acompanhar' ? 
                         (
@@ -210,7 +218,7 @@ const Assistence24 = () =>{
                         : null
                     }
 
-                    {menu == 'configuracoes' ? 
+                    {/* {menu == 'configuracoes' ? 
                         (
                             <> 
                                 <ConfigAssistence 
@@ -229,7 +237,7 @@ const Assistence24 = () =>{
                             </>
                         )
                         : null
-                    }
+                    } */}
 
             </div>
         </>

@@ -11,8 +11,8 @@ const IconService = (props) =>{
 
     return (
         <>
-            <CButton variant='white'  >
-                <CIcon icon={props.item}  size="md" />
+            <CButton  >
+                <CIcon icon={props.item}  size="lg" />
             </CButton>
         </>
     )

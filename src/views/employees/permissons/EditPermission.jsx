@@ -32,7 +32,7 @@ const Support = () => {
             <br />
             <div className='container-permissoes'>
                 <div className='container-left-componentes'>
-                    <label className='font-titulo-permission'>Telas</label>
+                    <label className='font-titulo-permission'>Módulos</label>
                     
                     <CFormCheck className='container-checkForm' id="painel" onClick={gettingValues} value={'dispositivo'} label="Dispositivos" defaultChecked={ativo}/>
                     

@@ -5,6 +5,8 @@ import IconRender from './IconNewService'
 import CIcon from '@coreui/icons-react'
 import Cookies  from 'js-cookie'
 
+import UrlDomain from './../../../config'
+
 import {
     cilAddressBook, 
     cilAirplaneModeOff, 
@@ -87,14 +89,14 @@ const BtnNewService = (props)=>{
         const userType = Cookies.get('userType')
         let config = {
             headers: {
-            'Authorization': token, 
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
             }
         };
 
         axios 
-            .post("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", save, config)
+            .post(`${UrlDomain}/coverages`, save, config)
             .then((response) => { 
                 setShow(false);
                 props.attPage()                

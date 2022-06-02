@@ -1,69 +1,46 @@
 import React from 'react'
-import './call.css'
+import { CCol, CRow } from '@coreui/react';
 
-// importando telas
-import AtendimentosChart from './render/Atendimentos'
-import AtendimentoQTD from './render/AtendimentoQTD'
-import AtendimentoRamo from './render/AtendimentoRamo'
-import Canal from './render/Canal'
-import AtendimentoRealizado from './render/AtendimentosRealizados'
-import Calendario from './render/CalendarioAtts'
+import Calls from './render/Calls'
+import CallsQTD from './render/CallsQTD'
+import CallsBranch from './render/CallsBranch'
+import Channel from './render/Channel'
+import CallsPerformance from './render/CallsPerformance'
+import CalendarAtts from './render/CalendarAtts'
 
+import './css/call.css'
 
-import {
-    CCol,
-    CRow,
-  } from '@coreui/react'
-
-
-const Call = () =>{
-
-    return(
+const Call = () => {
+    return (
         <>
             <CRow>
-
                 <CCol xs={8}>
-                    <AtendimentosChart />
+                    <Calls />
                 </CCol>
-
-                <CCol xs={4}> 
-                    <AtendimentoQTD />
+                <CCol xs={4}>
+                    <CallsQTD />
                 </CCol>
-
             </CRow>
-
             <br />
-
             <CRow>
-
                 <CCol xs={8}>
-                    <AtendimentoRamo />
+                    <CallsBranch />
                 </CCol>
-
-                <CCol xs={4}> 
-                    <Canal />
+                <CCol xs={4}>
+                    <Channel />
                 </CCol>
-
             </CRow>
-
             <br />
-
             <CRow>
-
                 <CCol xs={8}>
-                    <AtendimentoRealizado />
+                    <CallsPerformance />
                 </CCol>
-
-                <CCol xs={4}> 
-                    <Calendario />
+                <CCol xs={4}>
+                    <CalendarAtts />
                 </CCol>
-
             </CRow>
-
-            
-
         </>
     )
 }
 
-export default Call
+export default Call;

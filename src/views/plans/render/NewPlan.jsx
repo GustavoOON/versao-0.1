@@ -4,6 +4,8 @@ import axios from 'axios'
 import Multiselect from 'multiselect-react-dropdown';
 import Cookies  from 'js-cookie'
 
+import UrlDomain, { configCookies } from './../../../config'
+
 import {
     CFormCheck,
     CRow,
@@ -15,12 +17,15 @@ import {
 
 const NewPlan = (props) => {
     
-    const token = Cookies.get('TokenID')
+    // const token = Cookies.get('TokenID')
     const userType = Cookies.get('userType')
    
     const [visible, setVisible] = useState(false)  
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => { 
+        setShow(false);
+        setPlanPerson(false)
+    }
     const [coverages, setCoverages] = useState([])
     const [listCoverages, setListCoverages] = useState([])
     const [descricao, setDescricao] = useState()
@@ -28,15 +33,15 @@ const NewPlan = (props) => {
     const [valorPorKm, setValorPorKm] = useState()
     const [planPerson, setPlanPerson] = useState()
     // pegando coberturas disponiveis 
-    let config = {
-        headers: {
-          'Authorization': token, 
-          "Accept": "*/*",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "PATCH"
-        }
-      };
+    // let config = {
+    //     headers: {
+    //         'Authorization': `Bearer ${token}`,
+    //         "Accept": "*/*",
+    //         "Content-Type": "application/json",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Methods": "PATCH"
+    //     }
+    //   };
     const namePLanSet = (e) =>{
         setDescricao(e.target.value)
     }
@@ -67,7 +72,7 @@ const NewPlan = (props) => {
         }
 
         await axios 
-            .post("http://dashboardbff.oonpayperuse.com.br/plansService/plans", save, config)
+            .post(`${UrlDomain}/plans`, save, configCookies)
             .then((response) => { 
                 setShow(false);
                 props.attPage()
@@ -76,17 +81,23 @@ const NewPlan = (props) => {
         
     }
 
-    useEffect( () =>{
+    // useEffect( () =>{
+    //     axios 
+    //         .get(`${UrlDomain}/coverages`, config)
+    //         .then((response) => { 
+    //             setCoverages(response.data)
+    //         })
+    //         .catch(r =>{ console.log('erro na api....', setCoverages('error, atualize a página...'))}) // window.location.reload();
+    // }, [])
+
+    const openModal =  () => {
+        const handleShow =  setShow(true);
         axios 
-            .get("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", config)
+            .get(`${UrlDomain}/coverages`, configCookies)
             .then((response) => { 
                 setCoverages(response.data)
             })
             .catch(r =>{ console.log('erro na api....', setCoverages('error, atualize a página...'))}) // window.location.reload();
-    }, [])
-
-    const openModal =  () => {
-        const handleShow =  setShow(true);
     }
 
     function onSelect(selectedList, selectedItem) {
@@ -107,8 +118,7 @@ const NewPlan = (props) => {
 
     return (
         <>
-            <CButton className='btn-newPlan'  size='md' onClick={openModal} > Novo </CButton>
-
+            <CButton className='btn-newPlan' color='dark'   size='sm' onClick={openModal} > Novo </CButton>
 
             <Modal 
                 show={show} 
@@ -128,7 +138,7 @@ const NewPlan = (props) => {
                                 <br />
                                 <CFormLabel >Plano pode ser personalizado ? </CFormLabel>
                                 <CFormCheck type="radio" name="person1" onChange={() => setPlanPersonalizado(true)}  id="PersonYes" label="Sim" />
-                                <CFormCheck type="radio" name="person1" onChange={() => setPlanPersonalizado(false)} id="PersonNo" label="Não" />
+                                <CFormCheck type="radio" name="person1" onChange={() => setPlanPersonalizado(false)} color="dark" defaultChecked id="PersonNo" label="Não" />
 
 
                                 {/* Verificar */}
@@ -140,7 +150,7 @@ const NewPlan = (props) => {
                                 <CFormLabel> Valor Base</CFormLabel>
                                 <CFormInput type="text" id="valuePlan" onChange={setValueBase} placeholder="R$32,00"/>
                                 <br />
-                                {planPerson === false ? 
+                                {planPerson === true ? 
                                     (   
                                         <> 
                                             <CFormLabel >Serviços </CFormLabel>

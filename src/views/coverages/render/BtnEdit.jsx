@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import Cookies  from 'js-cookie'
 
+import UrlDomain from './../../../config'
+var CryptoJS = require("crypto-js");
+
 import { Button, Modal,  Form, Container, Row, Col    }  from 'react-bootstrap';
 import {
     CButton ,
@@ -19,10 +22,16 @@ import {
 
 const EditarService = (props) =>{
     const token = Cookies.get('TokenID')
-    const userType = Cookies.get('userType')
+    
+    var usT = Cookies.get('userType')
+    var msg  = CryptoJS.AES.decrypt(usT, 'OnnSeguros');
+    var msgOri = msg.toString(CryptoJS.enc.Utf8);
+
+    const userType = msgOri
+
     let config = {
         headers: {
-          'Authorization': token, 
+          'Authorization': `Bearer ${token}`, 
           "Accept": "*/*",
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -55,17 +64,15 @@ const EditarService = (props) =>{
         setShow(false);
         let save = {id:props.item.id , description:servico , disabled:status, valuePerKm:valueKm}
         console.log(save)
-
         
        await  axios 
-            .patch("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", save, config)
+            .patch(`${UrlDomain}/coverages`, save, config)
             .then((response) => { 
-                console.log(response)
                 setShow(false);
                 props.parentCallback()
             })
             .catch(r =>{ 
-                console.log('error', r), alert('Login expirado'),window.location.reload()
+                console.log('error', r), alert('Login expirado') //,window.location.reload()
             }) // window.location.reload();
     }
 
@@ -73,7 +80,7 @@ const EditarService = (props) =>{
 
     return (
         <>
-            <CButton  onClick={verifica} color="light">Editar</CButton>
+            <CButton disabled onClick={verifica} color="light">Editar</CButton>
 
             <Modal 
                 show={show} 

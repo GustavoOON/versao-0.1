@@ -1,13 +1,5 @@
 
 /* HISTORY */
-
-.col-id{
-
-}
-
-.col-conteudo{
-}
-
 .col-btn{
     /* background: lightblue; */
     display: flex;
@@ -28,6 +20,23 @@
     font-size: 10pt;
 }
 
+.btn-header-history{
+    font-weight: 600;
+    font-size: 14pt;
+}
+
+.btn-header-historyOn{
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 11pt;
+}
+
+.btn-header-historyOff{
+    font-weight: 600;
+    font-size: 11pt;
+}
+
+
 .container-history-status{
     background: rgb(185, 185, 185);
     margin-right: 0.5%;
@@ -38,11 +47,10 @@
 }
 
 .container-history-time{
-    background: rgb(143, 143, 143);
+    background: rgb(204, 204, 204);
     margin-right: 0.5%;
-    padding: 0.8%;
-    border-radius: 15px;
-    color: white;
+    padding: 0.5%;
+    border-radius: 5px;
     font-size: 10pt;
 }
 
@@ -57,9 +65,26 @@
 }
 
 .container-history-header{
-    margin-top: 1%;
-    margin-bottom: 1.5%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-bottom: 1%;
 }
+
+.font-title-header{
+    font-size: 14pt;
+    font-weight: 700;
+}
+
+.container-history-header-right{
+    margin-left: 1%;
+}
+
+
+.container-history-header-left{
+    margin-left: 1%;
+}
+
 
 .container-history{
     background: red;
@@ -75,6 +100,7 @@
 .btn-history-back{
     float: right;
     margin: 5%;
+    
 }
 
 .label-history-select{
@@ -93,4 +119,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.font-tit-history{
+    font-size: 18pt;
 }

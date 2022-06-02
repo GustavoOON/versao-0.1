@@ -1,71 +1,52 @@
 import React from 'react'
+import { CCard, CCardBody, CCol, CRow } from '@coreui/react'
+import { CChart } from '@coreui/react-chartjs'
 
-import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCol,
-    CCardText,
-    CRow,
-    CCardTitle,
-    CButtonGroup
-   
-  } from '@coreui/react'
-  import { cilLoop } from '@coreui/icons'
-  import CIcon from '@coreui/icons-react'
-  import {CChart} from '@coreui/react-chartjs'
-  import ButtonGraph  from './../bottons/ButtonChart'
+import MonthAndYear from '../components/MonthAndYear'
+import ButtonGraph from '../buttons/ButtonGraph'
 
-const ChartPlan = () =>{
+const ChartPlan = () => {
+    const saveFilter = (usersCity, usersType, initialDate, finalDate) => {
+        // endpoint para fazer o filtro
+    }
 
-
-    return(
+    return (
         <>
-            <CCard className="cardsFinance">
+            <CCard className="cards">
                 <CCardBody>
-                    <CRow className='container-linha-top-card'>
-                        <CCol  className = 'esq23'>
-                            <label className="fincTitulo">Planos</label>
+                    <CRow>
+                        <CCol>
+                            <label className="finc-title">Planos</label>
                             <br />
-                            <label  className="fincSub"> Dez 2021</label>
+                            <label className="finc-sub"> <MonthAndYear /></label>
                         </CCol>
-                        
-                        <CCol className='dir23'>
-                            <div className='direita-container-top-card'>
-                                <CButtonGroup size="sm" role="group" aria-label="Basic outlined example">
-                                    <CButton color="primary" size="sm" variant="outline" color="dark">
-                                        Dia
-                                    </CButton>
-                                    <CButton color="primary" size="sm" variant="outline" color="dark">
-                                        Semana
-                                    </CButton>
-                                    <CButton color="primary" size="sm" variant="outline" color="dark">
-                                        Mês
-                                    </CButton>
-                                    <CButton color="primary" size="sm"  variant="outline" color="dark">
-                                        <CIcon icon={cilLoop}  size="sm"/>
-                                    </CButton>
-                                    
-                                </CButtonGroup>
-                                
-                                <ButtonGraph />
-                            </div>
+                        <CCol className='btn-filter'>
+                            <ButtonGraph name={'dos planos'} saveFilter={saveFilter} />
                         </CCol>
                     </CRow>
-                    
+
                     <CChart
-                        type="doughnut"
+                        type="bar"
+                        options={{
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                }
+                            }
+                        }}
                         data={{
                             datasets: [
-                            {
-                                backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                                data: [40, 20, 80, 10],
-                            },
+                                {
+                                    backgroundColor: ['#00F781', '#FF6711', '#FF2828'],
+                                    barPercentage: 0.7,
+                                    data: [40, 20, 10],
+                                }
                             ],
-                            labels: ['Plano Ouro', 'Plano Prata', 'Plano Bronze', 'Customizado'],
+                            labels: ['Ativos', 'Em análise', 'Cancelado',],
                         }}
+                        width={5}
+                        height={5}
                     />
-                   
                 </CCardBody>
             </CCard>
         </>

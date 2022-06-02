@@ -1,0 +1,75 @@
+.login-esq {
+    background: #C4C4C4;
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fundo-body {
+    background: blue;
+    /* O fundo não está aderindo ao background */
+    padding-left: 0%;
+}
+
+.title-login-esq {
+    font-size: 64px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    color: #737373;
+    margin: 0;
+}
+
+.subtitle-login-esq {
+    font-size: 40px;
+    color: #737373;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+
+.login-dir {
+    background: #E5E5E5;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle-login-dir {
+    color: #737373;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.email-password-form {
+    color: #737373;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.inputs-container {
+    width: 50%;
+}
+
+.btns-login {
+    color: #F9F7F7;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 2%;
+    background-color: #737373;
+}
+
+.btn-forgot-password {
+    width: 100%;
+    font-size: 12px;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.img-oon {
+    width: 50%;
+}

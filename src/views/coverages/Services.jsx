@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 
+import UrlDomain, { configCookies } from './../../config'
+
 import {
     CButton, CCard, CCardBody, CContainer,
     CForm, CFormInput, CNavbar, CNavbarBrand, CTable,
@@ -22,21 +24,28 @@ import ServiceRender from './render/Service'
 import StatusRender from './render/Status'
 import './service.css'
 import Cookies from 'js-cookie'
-  
+
+var CryptoJS = require("crypto-js");
 
 const Services = () =>{
 
+    // descriptando 
+    var usT = Cookies.get('userType')
+    var msg  = CryptoJS.AES.decrypt(usT, 'OnnSeguros');
+    var msgOri = msg.toString(CryptoJS.enc.Utf8);
 
     const [services, setServices] = useState([])
-    const token = Cookies.get('TokenID')
-    const userType = Cookies.get('userType')
-    let config = {
-        headers: {
-        'Authorization': token, 
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-        }
-    };
+    // const token = Cookies.get('TokenID')
+    const userType = msgOri
+
+    // let config = {
+    //     headers: {
+    //     'Authorization': `Bearer ${token}`, 
+    //     'Content-Type': 'application/json;charset=UTF-8',
+    //     "Access-Control-Allow-Origin": "*",
+    //     }
+    // };
+    
     const [dados, setDados] = useState(services)
     const [busca2, setBusca] = useState('')
     let busca
@@ -64,8 +73,9 @@ const Services = () =>{
 
     const atualizar = () =>{
         setDados([])
+        
         axios 
-            .get("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", config)
+            .get(`${UrlDomain}/coverages`, configCookies)
             .then((response) => {
                 setServices(response.data)
                 setDados(response.data)
@@ -76,10 +86,10 @@ const Services = () =>{
     }
 
     useEffect(() => {
-        
         axios 
-            .get("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", config)
+            .get(`${UrlDomain}/coverages`, configCookies)
             .then((response) => {
+                console.log(response.data)
                 setServices(response.data)
                 setDados(response.data)
             })

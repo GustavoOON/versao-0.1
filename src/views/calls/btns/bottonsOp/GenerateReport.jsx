@@ -9,7 +9,7 @@ const GerarRelatorio = () =>{
 
     return (
         <>
-            <CButton color="secondary" size="sm" variant="ghost">Gerar Relatório</CButton>
+            <CButton color="secondary" size="sm" variant="ghost">Gerar relatório</CButton>
         </>
     )
 }

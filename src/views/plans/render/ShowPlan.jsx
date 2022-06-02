@@ -1,3 +1,5 @@
+import React, {useEffect, useState} from 'react'
+
 import { cilChevronLeft } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {
@@ -5,15 +7,23 @@ import {
     CCardBody,
     CCardFooter
 } from '@coreui/react'
-import React from 'react'
+
 import ButtonOp from './ButtonOpPlan'
 
 
 const Plano  = (props)=>{
     
+    const [coverages, setCoverages] = useState([])
+
     const upadtePlans = () =>{
         props.attPage()
     }
+    
+    useEffect(()=>{
+        if(props.dados.coverages != null){
+            setCoverages(props.dados.coverages)
+        }
+    }, [])
 
     return (
     
@@ -27,17 +37,22 @@ const Plano  = (props)=>{
                     
                     <hr />
 
-                    {props.dados.coverages.map((item, index) =>(
-                        // <Cobertura cobertura={item} />
-                        <div key={index} className='container-itens-plans'>
-                            <CIcon className='bodyIcon' size='lg' icon={cilChevronLeft}  /> 
-                            <label className='bodyTexto' > {item.description} </label>
-                            <br />
-                            <label className='bodyTextoPrice' >R${item.valuePerKm} </label>
-                            <br />
-                        </div>
+                    {
+
+                        coverages.map((item, index) =>(
+                            // <Cobertura cobertura={item} />
+                            <div key={index.toString()} className='container-itens-plans'>
+                                <CIcon className='bodyIcon' size='lg' icon={cilChevronLeft}  /> 
+                                <label className='bodyTexto' > {item.description} </label>
+                                <br />
+                                <label className='bodyTextoPrice' >R${item.valuePerKm} </label>
+                                <br />
+                            </div>
+                            
+                        ))
                         
-                    ))} 
+                        
+                    } 
                     
                     
                 </CCardBody>

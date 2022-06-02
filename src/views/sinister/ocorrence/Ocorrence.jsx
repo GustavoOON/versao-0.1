@@ -1,49 +1,43 @@
 import React from 'react'
-import {
-    CCard, 
-    CCardBody,
-    CButton ,
-    CRow,
-    CCol,
-    CNavItem,
-    CFormInput,
-    CProgress,
-    CProgressBar
-  } from '@coreui/react'
-import './ocorrence.css'
+import { CCard, CCardBody, CButton } from '@coreui/react'
+import { FiExternalLink } from 'react-icons/fi';
 
-import HeaderFollow from '../acompanhamento/render/FollowHeader'
-import HeaderContract from '../insured/render/HeaderContract'
-import OcorrenceData from './render/OccurrenceData'
+import HeaderOccurrence from '../headers/HeaderOccurrence'
+import HeaderContract from '../headers/HeaderContract'
+import OcorrenciaInfos from './render/OcorrenciaInfos'
 import VehicleData from './render/VehicleData'
 
-const Ocorrence =  (props) =>{
-
-    return(
-        <> 
-            <CCard className="cardOcorrence">
-                <CCardBody>
-                    <HeaderFollow protocolo={props.protocolo} />
-
-                    <HeaderContract protocolo={props.protocolo} />
-
-                    <OcorrenceData protocolo={props.protocolo} /> 
-                    
-                    <VehicleData protocolo={props.protocolo} />
-
-                    {/*  Ver oq vai ser aqui dps */}
-                    <div className='container-dados-ocorrencia'>
-                        <div className='container-conteudo' >
-                            <CButton className='titulo-container-card2' variant='ghost' color='dark' >  Avarias </CButton>
-                            {/* <label className='titulo-container-card2'> Dados do veículo</label> */}
-                        </div>
+const Ocorrence = (props) => {
+    return (
+        <CCard className="card-radius">
+            <CCardBody>
+                <HeaderOccurrence protocolo={props.protocolo} />
+                <HeaderContract protocolo={props.protocolo} />
+                <OcorrenciaInfos protocolo={props.protocolo} />
+                <br />
+                <VehicleData protocolo={props.protocolo} />
+                <br />
+                {/*  Ver oq vai ser aqui dps */}
+                {/* <div className='container-occurrence-data'> */}
+                {/* <div className='container-conteudo' > */}
+                <div className='title-container-card'>
+                    <div style={{width: '12%'}}>
+                        <CButton
+                            style={{ color: '#14142B' }}
+                            className='text-start p-0 title-container-card'
+                            color='link'
+                        >
+                            Avarias
+                            <FiExternalLink className='mx-2' />
+                        </CButton>
                     </div>
-                </CCardBody>
-            </CCard>
-
-        </>
-
+                </div>
+                {/* <label className='title-container-card2'> Dados do veículo</label> */}
+                {/* </div> */}
+                {/* </div> */}
+            </CCardBody>
+        </CCard>
     )
 }
 
-export default Ocorrence
+export default Ocorrence;

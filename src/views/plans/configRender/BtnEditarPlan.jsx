@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import Cookies  from 'js-cookie'
 
+import UrlDomain, { configCookies } from './../../../config'
+
 import {
     CButton, CCol, CFormCheck, CFormInput,
     CFormLabel, CRow
@@ -28,11 +30,11 @@ const BtnEditPlan = (props) =>{
     const userType = Cookies.get('userType')
     let config = {
         headers: {
-          'Authorization': token, 
-          "Accept": "*/*",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "PATCH"
+            'Authorization': `Bearer ${token}`,
+            "Accept": "*/*",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "PATCH"
         }
       };
 
@@ -66,9 +68,8 @@ const BtnEditPlan = (props) =>{
             custom:personalizavel,
         }
         
-        console.log(save)
         axios 
-            .patch("http://dashboardbff.oonpayperuse.com.br/plansService/plans", save, config)
+            .patch(`${UrlDomain}/plans`, save, configCookies)
             .then((response) => { 
                 setShow(false);
                 props.att()
@@ -79,7 +80,7 @@ const BtnEditPlan = (props) =>{
 
     useEffect( async () =>{
         await axios 
-            .get("http://dashboardbff.oonpayperuse.com.br/plansService/coverages", config)
+            .get(`${UrlDomain}/coverages`, configCookies)
             .then((response) => { 
                 if(response.data != null){
                     setOptions(response.data)

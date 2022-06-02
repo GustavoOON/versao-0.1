@@ -1,129 +1,156 @@
-import React, { useState,  useEffect } from 'react'
-// import './report.css'
-
-// import bibliotecas
-import Resumo from './../reports/Resume'
-import Viagens from './../reports/Travel'
-import Rotas from './../reports/Routes'
-
+import React, { useState, useEffect } from 'react'
 import {
-    CButton,
     CCard,
     CCardBody,
     CCardTitle,
-    CRow, 
+    CRow,
     CCol,
     CContainer,
     CCardText,
     CInputGroup,
     CFormSelect,
-    CFormInput, 
-  } from '@coreui/react'
+    CFormInput,
+} from '@coreui/react'
+
+// import './report.css'
+
+// import bibliotecas
+import Resumo from '../reports/Resume'
+import Viagens from '../reports/Travel'
+import Rotas from '../reports/Routes'
 
 
 const Report = () => {
     var data = new Date();
-    const [visible, setVisible] = useState(false)
-    const [day, setDay] = useState()
-    const [mounth, setMouth] = useState()
-    const [year, setYear] = useState()
+    // const [day, setDay] = useState()
+    // const [mounth, setMouth] = useState()
+    // const [year, setYear] = useState()
 
-    const [hourPass, setHourPass] = useState()
-    const [hourActually, setHourActually] = useState()
+    // const [hourPass, setHourPass] = useState()
+    // const [hourActually, setHourActually] = useState()
 
     const [dateInicio, setDateInicio] = useState()
-    const [dateFinal, setDateFinal] = useState()
-    const [dateMax, setDateMax] = useState() // data maxima 
+    // const [dateFinal, setDateFinal] = useState()
+    // const [dateMax, setDateMax] = useState() // data maxima 
     // Pega data e hora
-    useEffect(()=>{
-        setDay(data.getDate())
-        setMouth(data.getMonth()+1)
-        setYear(data.getFullYear())
+    // useEffect(()=>{
+    // setDay(data.getDate())
+    // setMouth(data.getMonth()+1)
+    // setYear(data.getFullYear())
 
-        // Pegando hora
-        let aux = data.getHours() - 1
-        if(aux < 10){
-            aux = '0'+aux
-        }
-        console.log('aux', aux)
-        setHourPass( aux +':'+'00')
-        setHourActually(data.getHours()+':'+'00')
+    // Pegando hora
+    // let aux = data.getHours() - 1
+    // if(aux < 10){
+    //     aux = '0'+aux
+    // }
+    // console.log('aux', aux)
+    // setHourPass( aux +':'+'00')
+    // setHourActually(data.getHours()+':'+'00')
 
-        // setando a data
-        setDateInicio(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()) // data que será pega no filtro
-        setDateFinal(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate())
-        setDateMax(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()) // limita a data maxima de hoje
-    },[])
+    // // setando a data
+    // setDateInicio(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()) // data que será pega no filtro
+    // setDateFinal(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate())
+    // setDateMax(data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()) // limita a data maxima de hoje
+    // },[])
 
-    const selectDateInicio = (e) =>{
-        setDateInicio(e.target.value)
-    }
-    const selectDateFinal = (e) =>{
-        setDateFinal(e.target.value)
-    }
-    const selectHourPass = (e) =>{
-        setHourPass(e.target.value)
-    }
-    const selectHourActually = (e) =>{
-        setHourActually(e.target.value)
-    }
-    return (
-        <>  
-            <h5>Filtrar Relatórios</h5>
+    // const selectDateInicio = (e) =>{
+    //     setDateInicio(e.target.value)
+    // }
+    // const selectDateFinal = (e) =>{
+    //     setDateFinal(e.target.value)
+    // }
+    // const selectHourPass = (e) =>{
+    //     setHourPass(e.target.value)
+    // }
+    // const selectHourActually = (e) =>{
+    //     setHourActually(e.target.value)
+    // }
+
+    if (dateInicio == '') {
+        return (
+            <h3> Carregando... </h3>
+        )
+    } else {
+        return (
             <CContainer fluid className='menu-report'>
+                <h5>Filtrar Relatórios</h5>
+                <br />
+                <h6>Escolha um filtro</h6>
                 <CRow className="align-items-start">
                     <CCol>
-                        <CFormSelect 
-                            disabled
-                            aria-label="Selecione o Local"
+                        <CFormSelect
+                            className=''
+                            aria-label="Cidade"
                             options={[
-                                'Selecione o Local',
+                                'Cidade',
                                 { label: 'BH', value: '1' },
                                 { label: 'SP', value: '2' },
                                 { label: 'RJ', value: '3' }
-                        ]}
+                            ]}
                         />
                     </CCol>
                     <CCol>
-                        <CFormSelect 
-                            aria-label="Selecione o Grupo"
+                        <CFormSelect
+                            className=''
+                            aria-label="Status"
                             options={[
-                                'Selecione o Grupo',
+                                'Status',
                                 { label: 'A', value: '1' },
                                 { label: 'B', value: '2' },
                                 { label: 'C', value: '3' }
-                        ]}
+                            ]}
                         />
                     </CCol>
                     <CCol>
                         <CInputGroup className="mb-3">
-                            <CFormInput aria-label="Sizing example input" placeholder='Digite a placa' aria-describedby="inputGroup-sizing-default"/>
+                            <CFormInput
+                                className=''
+                                placeholder='Pesquise placa veículo'
+                            />
                         </CInputGroup>
                     </CCol>
                 </CRow>
+                <br />
                 <CRow className="align-items-start">
-                    
-                    {/* data atual - uma hr atras */}
-                    <CCol>
-                        <h6> Início </h6>
-                        <input id="date" type="date" onChange={selectDateInicio} value={dateInicio} max={dateMax} min='2018-01-01' ></input>
-                        <input type="time" id="inicio" onChange={selectHourPass} value={hourPass} ></input>
+                    <CCol xs={3}>
+                        <h6>Data de início</h6>
+                        <div className="d-flex">
+                            <CFormInput className=" me-2" type="date" />
+                            <CFormInput className="" style={{ width: '70%' }} type="time" />
+                        </div>
                     </CCol>
-                    {/* data atual e hora atual */}
-                    <CCol>
-                        <h6> Fim </h6>
-                        <input id="date" type="date"  onChange={selectDateFinal} value={dateFinal} max={dateMax} min='2018-01-01'></input>
-                        <input type="time" id="fim" onChange={selectHourActually} value={hourActually} ></input>
+                    <CCol xs={3}>
+                        <h6>Data de fim</h6>
+                        <div className="d-flex">
+                            <CFormInput className=" me-2" type="date" />
+                            <CFormInput className="" style={{ width: '70%' }} type="time" />
+                        </div>
                     </CCol>
                 </CRow>
-            </CContainer>           
-                        
+                <br />
 
-            <br />
-            <div style={{ alignItems:"center" }}  >
-                <CRow>
-                    <CCol>
-                            <CCard style={{ width: '18rem', height:'100%' }} className="container-card">
+
+
+                {/* ESTA DANDO ERRO DE WARNING    😔  - refazer   */}
+                {/* <CRow className="align-items-start">
+                        <CCol>
+                            <h6> Data de início </h6>
+                            <input  type="date" onChange={selectDateInicio} value={dateInicio} max={dateMax} min='2018-01-01' ></input>
+                            <input type="time" id="inicio" onChange={selectHourPass} value={hourPass} ></input>
+                        </CCol>
+                        <CCol>
+                            <h6> Data de fim </h6>
+                            <input   type="date"  onChange={selectDateFinal} value={dateFinal} max={dateMax} min='2018-01-01'></input>
+                            <input type="time" id="fim" onChange={selectHourActually} value={hourActually} ></input>
+                        </CCol>
+                    </CRow>  */}
+
+
+                <br />
+                <div style={{ alignItems: "center" }}  >
+                    <CRow>
+                        <CCol>
+                            <CCard className='card-report'>
                                 <CCardBody>
                                     <CCardTitle>Resumo</CCardTitle>
                                     <CCardText>
@@ -131,42 +158,44 @@ const Report = () => {
                                     </CCardText>
 
                                     {/* Passar valores do filtro  */}
-                                <Resumo />
+                                    <Resumo />
                                 </CCardBody>
                             </CCard>
-                    </CCol>
+                        </CCol>
 
-                    <CCol>
-                            <CCard style={{ width: '18rem', height:'100%' }} className="container-card">
+                        <CCol>
+                            <CCard className='card-report'>
                                 <CCardBody>
                                     <CCardTitle>Viagens</CCardTitle>
                                     <CCardText>
-                                        Relatórios de viagens do dispositivo.
+                                        Relatórios de viagens do {<br />} dispositivo.
                                     </CCardText>
                                     {/* Passar valores do filtro  */}
                                     <Viagens />
                                 </CCardBody>
                             </CCard>
-                    </CCol>
+                        </CCol>
 
-                    <CCol>
-                            <CCard style={{ width: '18rem', height:'100%' }} className="container-card">
+                        <CCol>
+                            <CCard className='card-report'>
                                 <CCardBody>
                                     <CCardTitle>Rotas</CCardTitle>
                                     <CCardText>
-                                            Relatório de rotas do dispositivo
+                                        Relatório de rotas do {<br />}
+                                        dispositivo.
                                     </CCardText>
                                     {/* Passar valores do filtro  */}
                                     <Rotas />
                                 </CCardBody>
                             </CCard>
-                    </CCol>
-                    
-                </CRow>
-            </div>
-            <br />
-        </>
-    )
+                        </CCol>
+                    </CRow>
+                </div>
+                <br />
+            </CContainer>
+        )
+    }
+
 }
 
-export default Report
+export default Report;

@@ -67,7 +67,7 @@ const Setting = () =>{
                             <CButton 
                                 color="dark" 
                                 className='btn-help-sideBar' 
-                                active={op1} size='md' 
+                                active={op1} size='sm' 
                                 variant='ghost' 
                                 onClick={() => escolhaMenu('conta')} 
                             >
@@ -78,7 +78,7 @@ const Setting = () =>{
                             <CButton 
                                 color="dark" 
                                 className='btn-help-sideBar' 
-                                active={op3} size='md' 
+                                active={op3} size='sm' 
                                 variant='ghost' 
                                 onClick={() => escolhaMenu('privacidade')}
                             > 
@@ -90,7 +90,7 @@ const Setting = () =>{
                                 color="dark" 
                                 className='btn-help-sideBar'
                                 active={op4} 
-                                size='md' 
+                                size='sm' 
                                 variant='ghost' 
                                 onClick={() => escolhaMenu('ajuda')}
                             >

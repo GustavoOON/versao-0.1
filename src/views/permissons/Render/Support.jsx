@@ -24,7 +24,7 @@ const Support = (props) => {
         <>
             <div className='container-permissoes'>
                 <div className='container-left-componentes'>
-                    <label className='font-titulo-permission'>Acesso as telas</label>
+                    <label className='font-titulo-permission'>Acesso aos modulos</label>
                     
                     <CFormCheck className='container-checkForm' id="painel" label="Dispositivos" defaultChecked={ativo}/>
                     

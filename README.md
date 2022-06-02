@@ -1,13 +1,6 @@
 # Dashboard - OON PAYPER USE
 
-oon payper use administration template. the V4 version of the CoreUI free react
-## Documentation CoreUI
-The documentation for the CoreUI Admin Template is hosted at our website [CoreUI for React](https://coreui.io/react/)
-Repository: [link](https://github.com/coreui/coreui)
-
-## Documentation React Bootstrap
-The documentation accessible link: [React Bootstrap](https://react-bootstrap.github.io/getting-started/introduction)
-
+oon payper use administration template.
 
 ### Instalation for application
 
@@ -73,7 +66,7 @@ OON-PAYPER-USE-admin-template
 |   |   |-  Pages           #
 |   |   |-  Permissions     #
 |   |   |-  Users           #
-│   ├── _nav.js      # sidebar navigation config
+│   ├── NavBar.jsx      # sidebar navigation config
 │   ├── App.js
 │   ├── ...
 │   ├── index.js

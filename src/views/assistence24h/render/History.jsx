@@ -5,29 +5,32 @@ import CIcon from '@coreui/icons-react'
 import {cilCaretRight, cilCaretLeft } from '@coreui/icons'
 import './css/history.css'
 
+import HistoryUser from './HistoryUser'
+
+
 import img1 from './../../../assets/images/mapOpen.png'
-import MapOff from './MapOff'
+// import MapOff from './MapOff'
 import {
     CRow,
     CCol,
-    CTableRow,
-    CTableHead,
-    CTableDataCell,
-    CTable,
-    CTableBody,
-    CFormInput,
-    CImage,
-    CButton,
-    CFormSelect,
-    CForm,
-    CFormLabel,
-    CFormTextarea,
+    CButton
     
   } from '@coreui/react'
 
 import MapGoogle from './google-map/HistoryMap'
+import MapOff from './MapOff';
 
 const History   = () =>{
+
+    const [flagHeader, setFlagHeader] = useState(false)
+
+    function getGeral(){
+        setFlagHeader(false)
+    }
+
+    function getUserHistory(){
+        setFlagHeader(true)
+    }
 
     const [chamados, setChamados] = useState(
         [
@@ -66,39 +69,78 @@ const History   = () =>{
     }else{
         if(flag == false){
             return(
-                <>
-                     <div className='container-history-header'> 
-                        <h3> Histórico de chamados </h3>
+                <>  
+                <div className='container-history-header'>
+                    <div className='container-history-header-left'> 
+                        <label className='font-title-header'> Histórico de chamados </label>
                     </div>
-                    <hr />
-                    {chamados.map(item =>{
-                        return (
-                            <> 
-                                
-                                <CRow> 
+
+                    <div className='container-history-header-right'>
+                        <CButton  
+                            className= {flagHeader == false? "btn-header-historyOn" : "btn-header-historyOff"} 
+                            onClick={getGeral} 
+                            size='sm' 
+                            variant='ghost' 
+                            color="dark" 
+                        > 
+                                Últimos chamados 
+                        </CButton>
+                    </div>
+
+                    <div className='container-history-header-right'>
+                        <CButton  
+                            className= {flagHeader == true? "btn-header-historyOn" : "btn-header-historyOff"} 
+                            onClick={getUserHistory} 
+                            size='sm' 
+                            variant='ghost' 
+                            color="dark" 
+                        > 
+                            Histórico por usuário 
+                        </CButton>
+                    </div>
+                </div>
+                     
+                    
+                    {flagHeader === false ? 
+                        <> 
+                            {chamados.map((item, index ) =>{
+                                return (
+                                    <div key={index.toString()}>
+                                        <CRow > 
+                                            <CCol className='col-id' xs={1}>
+                                                <label> {item.id}</label>
+                                            </CCol>
+                                            <CCol className='col-conteudo' >
+                                                <label> {item.name}</label>
+                                                <div className='container-informacoes'>
+                                                    <label className='container-history-time'  > Tipo </label>
+                                                    <label className='container-history-time' > Iniciado </label> 
+                                                    <label className='container-history-time'> Tempo </label>
+                                                    <label className='container-history-time'> Nome Prestador </label>
+                                                    <label className='container-history-time'> 12/02/2022 </label>
+                                                </div>
+                                            </CCol>
+                                            <CCol className='col-btn'  xs={2}>
+                                                <CButton className='btn-history-rota' onClick={ () =>{setCall(item)}} size='sm' variant='ghost' color="dark">
+                                                    <CIcon icon={cilCaretRight} size="xl"/>
+                                                </CButton>
+                                            </CCol>
+                                        </CRow>
+                                        <hr />
+                                    </div>
                                     
-                                    <CCol className='col-id' xs={1}>
-                                        <label> {item.id}</label>
-                                    </CCol>
-                                    <CCol className='col-conteudo' >
-                                        <label> {item.name}</label>
-                                        <div className='container-informacoes'>
-                                            <label className='container-history-time'  > Tipo </label>
-                                            <label className='container-history-time' > Iniciado </label> 
-                                            <label className='container-history-time'> Tempo </label>
-                                            <label className='container-history-time'> Nome Prestador </label>
-                                        </div>
-                                    </CCol>
-                                    <CCol className='col-btn'  xs={2}>
-                                        <CButton className='btn-history-rota' onClick={ () =>{setCall(item)}} size='md' variant='ghost' color="dark">
-                                            <CIcon icon={cilCaretRight} size="xl"/>
-                                        </CButton>
-                                    </CCol>
-                                </CRow>
-                                <hr />
-                            </>
-                        )
-                    })}
+                                )
+                            })}
+                        </>
+                            :
+                        <> 
+                            
+                            <HistoryUser /> 
+
+                        </>
+                    }
+                    <hr />
+                    
                 </>
             )
         }else{
@@ -109,18 +151,19 @@ const History   = () =>{
                             <div className='container-history-select-header'> 
                                 <CRow>
                                     <CCol>
-                                        <h3> Atendimento #{chamado.id}  </h3>
+                                        <label className='font-tit-history'> Atendimento #{chamado.id}  </label>
+                                        <br /><br />
                                         <label>{chamado.name} </label>
                                         <br />
                                         <label >{chamado.plate} </label>
+                                        <br /> 
                                         <div className='container-informacoes'>
-                                            <label className='label-history-select'  > {chamado.type} </label>
-                                            <label className='label-history-select'  > {chamado.status} </label>
-                                           
+                                            <label className='container-history-time'  > {chamado.type} </label>
+                                            <label className='container-history-time'  > {chamado.status} </label>
                                         </div>
                                     </CCol>
                                     <CCol>
-                                        <CButton className='btn-history-back' onClick={backList} size='md' variant='ghost' color="dark">
+                                        <CButton className='btn-history-back' onClick={backList} size='sm' variant='ghost' color="dark">
                                             <CIcon icon={cilCaretLeft} size="xl"/>
                                         </CButton>
                                     </CCol>
@@ -129,9 +172,9 @@ const History   = () =>{
                             <hr />
                             <div className='container-history-select-body'> 
                                 <p> <b> Local inicial do prestador </b> </p>
-                                <p> <b> Origem: </b> {chamado.type} </p>
-                                <p> <b> Destino: </b>  </p>
-                                <CButton onClick={showMap}>Ver no mapa</CButton>
+                                <p> <b> Origem: </b> Av da moda </p>
+                                <p> <b> Destino: </b> Av Barão homem de Melo  </p>
+                                <CButton variant="outline" color ="dark"   onClick={showMap}>Ver no mapa</CButton>
                             </div>
                             <hr />
                             <div>
@@ -149,11 +192,7 @@ const History   = () =>{
                         <CCol>
                             {mapShow == true ? 
                                 (<MapGoogle history={chamado} />)
-                                :
-                                (
-                                   <MapOff />
-                                )
-                        
+                                : <MapOff/>
                             }
                             
                         </CCol>
