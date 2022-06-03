@@ -69,7 +69,6 @@ const BtnNewService = (props)=>{
 
     function captureValue(e){
         setValuePerKm(e.target.value)
-        console.log(valuePerKm)
     }
 
     function verifica(){
@@ -110,7 +109,6 @@ const BtnNewService = (props)=>{
     }
 
     function escolha (e){
-        console.log('Sua escolha foi ', e)
         setIconeEscolhido(e)
     }
     

@@ -35,7 +35,7 @@ import { Link } from "react-router-dom";
 const AppHeaderDropdown = () => {
     const sairTela = () => {
         // localStorage.removeItem("TokenID") // exclui o token
-        localStorage.removeItem("user");
+        // localStorage.removeItem("user");
         Cookies.remove("TokenID", { path: "" });
         window.location.reload();
     };
@@ -64,8 +64,9 @@ const AppHeaderDropdown = () => {
                     <CIcon icon={cilUser} className="me-2" />
                     <label>Configurações do perfil</label>
                 </CDropdownItem>
-                <CDropdownItem href="/" className="mt-2">
+                <CDropdownItem onClick={sairTela} href="/" className="mt-2">
                     <CIcon
+                        
                         icon={cilAccountLogout}
                         className="me-2 btn-config-screen"
                     />

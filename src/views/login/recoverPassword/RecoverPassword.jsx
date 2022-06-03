@@ -20,7 +20,6 @@ const RecoverPassword = () =>{
         
         let mySubString
         // caso usuario nao envie nada no email, verificar o campo.console.log('teste', mySubString)
-        console.log('teste', email)
         if(email.length > 1){
              mySubString = email.substring(
                 email.lastIndexOf("@") + 1, 

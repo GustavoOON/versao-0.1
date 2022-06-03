@@ -101,7 +101,7 @@ const Assistence24 = () =>{
     return (
 
         <> 
-            <div className='container-assistence'  >
+            <div className='container-assistence mx-2'  >
 
                 <div className='container-assistence-header'> 
                     {/* <label className="font-icon-header"> <BsWrench /> </label> */}

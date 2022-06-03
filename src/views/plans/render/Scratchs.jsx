@@ -12,8 +12,10 @@ function Scratchs() {
     const [dados, setDados] = useState([]);
 
     useEffect(() => {
+        const config = configCookies()
+
         axios
-            .get(`${urlDomain}/risks`, configCookies)
+            .get(`${urlDomain}/risks`, config)
             .then((response) => {
                 setDados(response.data)
             })

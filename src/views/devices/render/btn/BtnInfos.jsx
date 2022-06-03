@@ -16,10 +16,12 @@ const BtnInfos = (props) => {
 
   function openModal() {
     const { idCustomer, infos } = props
+    const config = configCookies()
+
     setInfos(infos);
     setShow(true);
     axios
-      .get(`${urlDomain}/customers/${idCustomer}`, configCookies)
+      .get(`${urlDomain}/customers/${idCustomer}`, config)
       .then((custumer) => setInfoCustomer(custumer.data))
       .catch((r) => {
         console.log('error', r), alert('Login expirado'), window.location.reload()

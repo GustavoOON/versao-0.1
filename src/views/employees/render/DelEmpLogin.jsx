@@ -29,7 +29,7 @@ const DeletaLogin = (props) => {
     const [flag, setFlag] = useState(0)
     function disableEmp(){
         setFlag(1)  // entrou na requisicao , colocar botao de carregar
-        console.log('antes de desabilitar', props.user.email, token)
+
         var email = {email:props.user.email}
         axios 
         .post(`${UrlDomain}/accounts/disable`, email, config)

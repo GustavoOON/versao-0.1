@@ -63,7 +63,6 @@ const EditarService = (props) =>{
     async function salvarEdicoes (){
         setShow(false);
         let save = {id:props.item.id , description:servico , disabled:status, valuePerKm:valueKm}
-        console.log(save)
         
        await  axios 
             .patch(`${UrlDomain}/coverages`, save, config)

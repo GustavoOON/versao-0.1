@@ -1,6 +1,15 @@
 .login-esq {
-    background: #C4C4C4;
+    background: #FFFFFF;
     height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-dir {
+    background: #F9F7F7;
     width: 50vw;
     display: flex;
     flex-direction: column;
@@ -18,35 +27,28 @@
     font-size: 64px;
     font-family: 'Roboto';
     font-weight: 700;
-    color: #737373;
+    color: #216CFF;
     margin: 0;
 }
 
 .subtitle-login-esq {
     font-size: 40px;
-    color: #737373;
+    color: #216CFF;
     font-family: 'Roboto';
     font-weight: 700;
+    margin-top: 1em;
 }
 
-.login-dir {
-    background: #E5E5E5;
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 .subtitle-login-dir {
-    color: #737373;
+    color: #216CFF;
     font-weight: 500;
     font-size: 22px;
+    margin-bottom: 1em;
 }
 
 .email-password-form {
-    color: #737373;
+    color: #6D6D6D;
     font-size: 12px;
     font-weight: 400;
 }
@@ -55,21 +57,54 @@
     width: 50%;
 }
 
+.radius-border {
+    border-radius: 10px;
+}
+
 .btns-login {
     color: #F9F7F7;
     width: 100%;
     border-radius: 10px;
     margin-bottom: 2%;
-    background-color: #737373;
 }
 
 .btn-forgot-password {
     width: 100%;
-    font-size: 12px;
+    font-size: 15px;
     border-radius: 10px;
     margin-bottom: 2%;
+    color: #6D6D6D;
 }
 
 .img-oon {
-    width: 50%;
+    width: 35%;
+    margin-bottom: 10%;
+}
+
+.input-icons .i-absolute {
+    position: absolute;
+}
+
+.icon-login {
+    padding: 6px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.new-account-text {
+    color: #6D6D6D;
+}
+
+.text-new-account {
+    text-align: center;
+    font-size: 14px;
+    width: 30em;
+    padding-bottom: 2em;
+}
+
+.error-text {
+    color: #FF2828;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
 }

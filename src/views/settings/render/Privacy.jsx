@@ -1,52 +1,52 @@
 import React from 'react'
 import {
-    CForm, 
+    CForm,
     CCol,
-    CButton ,
+    CButton,
     CFormLabel,
     CRow,
     CFormSelect,
     CFormCheck,
     CAvatar,
-  } from '@coreui/react'
+} from '@coreui/react'
 
-  import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
-const privacy = () =>{
+const privacy = () => {
 
 
     // const userType = 'SUPPORT'
     const userType = Cookies.get('userType')
 
     return (
-        <> 
-            <h4>Privacidade </h4>
+        <>
+            <h4 className='container-profile-title'>Política de Privacidade</h4>
             <br />
             <CForm className="row g-3 container-notify">
                 <CCol className='privacy-esq' md={10}>
-                    <h6>Termo de Serviço</h6>
-                    <p>Estes termos de Serviço regem o acesso e uso do site, aplicativos, APIs e widgets do OON Pay Per Use.</p>
+                    <h6 className='container-profile-sub-title'>Termo de Serviço</h6>
+                    <p className='container-profile-text'>Estes Termos de Serviço regem o acesso e uso do site, aplicativos, APIs e widgets da OON Seguros.</p>
                 </CCol>
                 <CCol className='privacy-dir' md={2}>
-                    {userType == 'ADMIN'  ? 
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Editar</CButton>  </> )
-                            :
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Visualizar </CButton> </>)
+                    {userType == 'ADMIN' ?
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Editar</CButton>  </>)
+                        :
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Visualizar </CButton> </>)
                     }
-                    
+
                 </CCol>
             </CForm>
             <br />
             <CForm className="row g-3 container-notify">
                 <CCol md={10}>
-                    <h6>Política de Privacidade</h6>
-                    <p>Detalhes sobre os dados que são coletados e como são usados.</p>
+                    <h6 className='container-profile-sub-title'>Política de Privacidade</h6>
+                    <p className='container-profile-text'>Detalhes sobre os dados que são coletados e como são usados.</p>
                 </CCol>
                 <CCol className='privacy-dir' md={2}>
-                    {userType == 'ADMIN'  ? 
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Editar</CButton>  </> )
-                            :
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Visualizar </CButton> </>)
+                    {userType == 'ADMIN' ?
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Editar</CButton>  </>)
+                        :
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Visualizar </CButton> </>)
                     }
                 </CCol>
             </CForm>
@@ -54,14 +54,14 @@ const privacy = () =>{
             <br />
             <CForm className="row g-3 container-notify">
                 <CCol md={10}>
-                    <h6>Política de Segurança da Informação</h6>
-                    <p>Proteger as informações e ativos de tecnologia da informação  contra acesso, modificação, destruição ou divulgação não autorizados</p>
+                    <h6 className='container-profile-sub-title'>Política de Segurança da Informação</h6>
+                    <p className='container-profile-text'>Proteger as informações e ativos de tecnologia da informação contra acesso, modificação, destruição ou divulgação não autorizados</p>
                 </CCol>
                 <CCol className='privacy-dir' md={2}>
-                    {userType == 'ADMIN'  ? 
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Editar</CButton>  </> )
-                            :
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Visualizar </CButton> </>)
+                    {userType == 'ADMIN' ?
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Editar</CButton>  </>)
+                        :
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Visualizar </CButton> </>)
                     }
                 </CCol>
             </CForm>
@@ -69,15 +69,15 @@ const privacy = () =>{
             <br />
             <CForm className="row g-3 container-notify">
                 <CCol md={10}>
-                    <h6>Segurança</h6>
-                    <p>Em caso de fraudes e golpes, quem deve acionar. Política de segurança do aplicativo</p>
+                    <h6 className='container-profile-sub-title'>Segurança</h6>
+                    <p className='container-profile-text'>Em caso de fraudes e golpes, quem deve acionar. Política de segurança do aplicativo.</p>
                 </CCol>
                 <CCol className='privacy-dir' md={2}>
                     <br />
-                    {userType == 'ADMIN'  ? 
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Editar</CButton>  </> )
-                            :
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Visualizar </CButton> </>)
+                    {userType == 'ADMIN' ?
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Editar</CButton>  </>)
+                        :
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Visualizar </CButton> </>)
                     }
                 </CCol>
             </CForm>
@@ -85,18 +85,19 @@ const privacy = () =>{
             <br />
             <CForm className="row g-3 container-notify">
                 <CCol md={10}>
-                    <h6>Canal de Ética</h6>
-                    <p>Este é um canal exclusivo para comunicação segura e, se desejada, anônima, de condutas consideradas antiéticas ou que violem os princípios éticos e padrões de conduta e/ou a legislação vigente.</p>
+                    <h6 className='container-profile-sub-title'>Canal de Ética</h6>
+                    <p className='container-profile-text'>Este é um canal exclusivo para comunicação segura e, se desejada, anônima, de condutas consideradas antiéticas ou que violem os princípios éticos e padrões de conduta e/ou a legislação vigente.</p>
                 </CCol>
                 <CCol className='privacy-dir' md={2}>
                     <br />
-                    {userType == 'ADMIN'  ? 
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Editar</CButton>  </> )
-                            :
-                        (<> <CButton color="dark"  className='btn-salvar-setting'> Visualizar </CButton> </>)
+                    {userType == 'ADMIN' ?
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Editar</CButton>  </>)
+                        :
+                        (<> <CButton color="primary" className='btn-salvar-setting'> Visualizar </CButton> </>)
                     }
                 </CCol>
             </CForm>
+            <br />
         </>
     )
 }

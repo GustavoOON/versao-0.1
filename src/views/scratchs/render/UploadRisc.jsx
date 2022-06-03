@@ -88,9 +88,10 @@ const UploadRiscBtn = (props) => {
     })
 
     console.log('valores atts', array)
+    const config = configCookies()
 
     axios
-      .post(`${UrlDomain}/risks`, array, configCookies)
+      .post(`${UrlDomain}/risks`, array, config)
       .then((response) => {
         console.log('Enviado...', response)
         setCsv()

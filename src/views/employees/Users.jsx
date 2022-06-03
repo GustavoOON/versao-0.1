@@ -77,9 +77,10 @@ const Clients = () => {
   function searchMail(e) {
     if (e.key === "Enter" || e.type === 'click') {
       setFlagSearch('')
+      const config = configCookies()
 
       axios
-        .get(`${UrlDomain}/employees/email/${busca2.toLocaleLowerCase()}`, configCookies)
+        .get(`${UrlDomain}/employees/email/${busca2.toLocaleLowerCase()}`, config)
         .then((response) => {
           setSearchValue(response.data)
           setFlagSearch(true)
@@ -98,8 +99,10 @@ const Clients = () => {
 
   const retiraFiltro = async () => {
     clear()
+    const config = configCookies()
+
     axios
-      .get(`${UrlDomain}/employees?pageSize=12`, configCookies)
+      .get(`${UrlDomain}/employees?pageSize=12`, config)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
@@ -124,8 +127,10 @@ const Clients = () => {
   useEffect(() => {
     setUserType(Decrypt.UserTypeDecryption())
     // setPermissions(Decrypt.userPermissionsDescription())
+    const config = configCookies()
+
     axios
-      .get(`${UrlDomain}/employees?pageSize=12`, configCookies)
+      .get(`${UrlDomain}/employees?pageSize=12`, config)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)
@@ -191,8 +196,10 @@ const Clients = () => {
   // escolha a pagina de acesso 
   function page(e) {
     setDados([])
+    const config = configCookies()
+
     axios
-      .get(`${UrlDomain}/employees?pageSize=12&pageNumber=${e}`, configCookies)
+      .get(`${UrlDomain}/employees?pageSize=12&pageNumber=${e}`, config)
       .then((response) => {
         setArrayUsers(response.data.content)
         setDados(response.data.content)

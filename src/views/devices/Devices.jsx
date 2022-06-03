@@ -21,9 +21,10 @@ import WidgetsFilterDevices from "./render/components/WidgetsFilterDevices";
 import WidgetsDevices from "./render/WidgetsDevices";
 import UrlDomain, { configCookies } from "./../../config";
 import Decrypt from "./../../security/decripty";
-import Pagination from "../components/Pagination";
 
 import "./css/devices.css";
+import Pagination from "../components/Pagination";
+import Cookies from "js-cookie";
 
 const Devices = () => {
     const [op1, setOp1] = useState(false);
@@ -53,13 +54,22 @@ const Devices = () => {
     const [nextPage, setNextPage] = useState("");
     const [search, setSearch] = useState("");
     const qtdPgns = 12;
-
+    
+    // const token = Cookies.get("TokenID");
+    // const configCookies = {
+    //     headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         "Content-Type": "application/json;charset=UTF-8",
+    //         "Access-Control-Allow-Origin": "*",
+    //     },
+    // };
     useEffect(() => {
+        const config = configCookies()
         // setPermissions(Decrypt.userPermissionsDescription())
         setUserType(Decrypt.UserTypeDecryption());
 
         axios
-            .get(`${UrlDomain}/signatures?pageSize=${qtdPgns}`, configCookies)
+            .get(`${UrlDomain}/signatures?pageSize=${qtdPgns}`, config)
             .then((response) => {
                 setDados(response.data.content);
                 setNumberOfPages(response.data.totalPages);
@@ -68,6 +78,7 @@ const Devices = () => {
                 setOp1(true);
             })
             .catch((r) => {
+                console.log(r);
                 console.log("error", r),
                     alert("Login expirado"),
                     window.location.reload();
@@ -82,10 +93,12 @@ const Devices = () => {
 
     function page(e) {
         setDados([]);
+        const config = configCookies()
+
         axios
             .get(
                 `${UrlDomain}/signatures?pageSize=${qtdPgns}&pageNumber=${e}`,
-                configCookies
+                config
             )
             .then((response) => {
                 setDados(response.data.content);
@@ -99,11 +112,13 @@ const Devices = () => {
     }
 
     function searchPlate(e) {
+        const config = configCookies()
+
         if (e.key === "Enter" || e.type === "click") {
             axios
                 .get(
                     `${UrlDomain}/signatures/d36bcc6a-5065-4dda-8630-3e6a77fb6880`,
-                    configCookies
+                    config
                 )
                 .then((response) => {
                     setDados([response.data]);
@@ -117,8 +132,10 @@ const Devices = () => {
 
     function refreshPage() {
         setDados([]);
+        const config = configCookies()
+
         axios
-            .get(`${UrlDomain}/signatures?pageSize=${qtdPgns}`, configCookies)
+            .get(`${UrlDomain}/signatures?pageSize=${qtdPgns}`, config)
             .then((response) => {
                 setDados(response.data.content);
                 setNumberOfPages(response.data.totalPages);

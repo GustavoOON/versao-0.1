@@ -136,9 +136,10 @@ const BtnEditCostumer = (props) => {
     const [flag, setFlag] = useState(0);
     function openModal(d) {
         const handleShow = setShow(true);
+        const config = configCookies()
 
         axios
-            .get(`${UrlDomain}/customers/${d.customer.id}`, configCookies)
+            .get(`${UrlDomain}/customers/${d.customer.id}`, config)
             .then((response) => {
                 setAddress(response.data.addresses);
                 setDataCostumer(response);

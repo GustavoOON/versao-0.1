@@ -67,9 +67,9 @@ const BtnEditPlan = (props) =>{
             //valuePerKm: valorPorKm,
             custom:personalizavel,
         }
-        
+        const config = configCookies()
         axios 
-            .patch(`${UrlDomain}/plans`, save, configCookies)
+            .patch(`${UrlDomain}/plans`, save, config)
             .then((response) => { 
                 setShow(false);
                 props.att()
@@ -79,8 +79,10 @@ const BtnEditPlan = (props) =>{
     }
 
     useEffect( async () =>{
+        const config = configCookies()
+
         await axios 
-            .get(`${UrlDomain}/coverages`, configCookies)
+            .get(`${UrlDomain}/coverages`, config)
             .then((response) => { 
                 if(response.data != null){
                     setOptions(response.data)

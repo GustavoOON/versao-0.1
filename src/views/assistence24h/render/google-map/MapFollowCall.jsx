@@ -46,7 +46,6 @@ const FollowMap = (props) =>{
     const [infosRoute, setInfosRoute] = useState({startAndress:'', timeTravel: null, distance:null, EndAdress:'' })
     
     function CarregaRota(){
-      console.log('mostra oq vem em pros', props.cliente)
       const directionsService = new google.maps.DirectionsService();
 
       let request = {
@@ -86,7 +85,6 @@ const FollowMap = (props) =>{
           setDirecoes(result)
           setPrestadorPos({lat: props.cliente.addressPrestador.lat, lng: props.cliente.addressPrestador.lng})
           setInfosRouteProvider(result.routes[0].legs[0]) // INFORMACAO DA ROTA
-          console.log(result.routes[0].legs)
           props.providerInfos(result.routes[0].legs)
         }
       });

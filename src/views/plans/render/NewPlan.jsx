@@ -70,9 +70,10 @@ const NewPlan = (props) => {
             baseValue: parseFloat(valorBase),
             custom:planPerson,
         }
+        const config = configCookies()
 
         await axios 
-            .post(`${UrlDomain}/plans`, save, configCookies)
+            .post(`${UrlDomain}/plans`, save, config)
             .then((response) => { 
                 setShow(false);
                 props.attPage()
@@ -92,8 +93,10 @@ const NewPlan = (props) => {
 
     const openModal =  () => {
         const handleShow =  setShow(true);
+        const config = configCookies()
+
         axios 
-            .get(`${UrlDomain}/coverages`, configCookies)
+            .get(`${UrlDomain}/coverages`, config)
             .then((response) => { 
                 setCoverages(response.data)
             })

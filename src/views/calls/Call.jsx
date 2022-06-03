@@ -12,7 +12,7 @@ import './css/call.css'
 
 const Call = () => {
     return (
-        <>
+        <div className='mx-2'>
             <CRow>
                 <CCol xs={8}>
                     <Calls />
@@ -39,7 +39,7 @@ const Call = () => {
                     <CalendarAtts />
                 </CCol>
             </CRow>
-        </>
+        </div>
     )
 }
 

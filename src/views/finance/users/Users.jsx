@@ -59,10 +59,12 @@ const Users = () => {
 
     function page(e) {
         //     setDados([]);
+        // const config = configCookies()
+
         //     axios
         //         .get(
         //             `${UrlDomain}/signatures?pageSize=${qtdPgns}&pageNumber=${e}`,
-        //             configCookies
+        //             config
         //         )
         //         .then((response) => {
         //             setDados(response.data.content);

@@ -39,9 +39,11 @@ const Status = (props) => {
 
     const salvarEdicoes = () => {
         let upStatus = { status: choice }
+        const config = configCookies()
+
         const urlDomain = 'http://dashboardbff.oonpayperuse.com.br' //'http://localhost:8080'
         axios
-            .patch(`${urlDomain}/signatures/${status.id}`, upStatus, configCookies)
+            .patch(`${urlDomain}/signatures/${status.id}`, upStatus, config)
             .then(() => {
                 setShow(false)
                 callBack()

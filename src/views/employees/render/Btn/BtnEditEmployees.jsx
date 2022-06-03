@@ -32,9 +32,10 @@ export default function BtnEditEmployees({ item, retiraFiltro, dadosOri }) {
 
     function openModal(data) {
         const handleShow = setShow(true);
+        const config = configCookies()
 
         axios
-            .get(`${urlDomain}/employees/${item.id}`, configCookies)
+            .get(`${urlDomain}/employees/${item.id}`, config)
             .then((response) => {
                 console.log(response);
             })

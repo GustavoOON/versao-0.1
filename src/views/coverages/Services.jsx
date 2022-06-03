@@ -73,9 +73,9 @@ const Services = () =>{
 
     const atualizar = () =>{
         setDados([])
-        
+        const config = configCookies()
         axios 
-            .get(`${UrlDomain}/coverages`, configCookies)
+            .get(`${UrlDomain}/coverages`, config)
             .then((response) => {
                 setServices(response.data)
                 setDados(response.data)
@@ -87,9 +87,8 @@ const Services = () =>{
 
     useEffect(() => {
         axios 
-            .get(`${UrlDomain}/coverages`, configCookies)
+            .get(`${UrlDomain}/coverages`, config)
             .then((response) => {
-                console.log(response.data)
                 setServices(response.data)
                 setDados(response.data)
             })

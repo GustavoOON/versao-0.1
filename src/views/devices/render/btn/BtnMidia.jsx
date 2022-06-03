@@ -19,8 +19,10 @@ const BtnMidia = (props) => {
     const [data, setData] = useState()
 
     function verifica() {
+        const config = configCookies()
+
         axios
-            .get(`${UrlDomain}/images/vehicle/${midia}`, configCookies)
+            .get(`${UrlDomain}/images/vehicle/${midia}`, config)
             .then((response) => {
                 setData(response.data)
                 setShow(true);

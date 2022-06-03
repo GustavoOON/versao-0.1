@@ -61,7 +61,6 @@ const FollowMap = (props) =>{
      }
 
       useEffect(()=>{
-        console.log(props)
         if(isLoaded){
           if(props.history.adressOcorrency.lat != null ){
             CarregaRotaPrestador()

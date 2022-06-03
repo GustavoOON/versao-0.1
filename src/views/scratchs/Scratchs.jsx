@@ -54,8 +54,10 @@ const Riscos = () => {
    function attPage(){
     
     setDados([])
+    const config = configCookies()
+
     axios 
-      .get(`${UrlDomain}/risks`, configCookies)
+      .get(`${UrlDomain}/risks`, config)
       .then((response) => {
           setDados(response.data)
       })
@@ -69,8 +71,10 @@ const Riscos = () => {
   useEffect( ()=>{
     setPermissions(Decrypt.userPermissionsDescription())
     setUserType(Decrypt.UserTypeDecryption)
+    const config = configCookies()
+
      axios 
-      .get(`${UrlDomain}/risks`, configCookies)
+      .get(`${UrlDomain}/risks`, config)
       .then((response) => {
           setDados(response.data)
       })
