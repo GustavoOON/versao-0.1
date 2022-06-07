@@ -42,7 +42,7 @@ const AppSidebar = () => {
                 </CSidebarBrand>
                 <CSidebarNav>
                     <SimpleBar className="fontItemNav">
-                        <AppSidebarNav items={navigation} />
+                        <AppSidebarNav items={navigation()} />
                         <CSidebarToggler
                             className="d-none d-lg-flex controlerSideBar"
                             onClick={() =>
