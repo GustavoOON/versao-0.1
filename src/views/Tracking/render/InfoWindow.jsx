@@ -88,4 +88,4 @@ const InfoWindowPop = (props) => {
     )
 }
 
-export default InfoWindowPop
+export default  InfoWindowPop

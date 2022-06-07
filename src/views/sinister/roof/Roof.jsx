@@ -27,4 +27,4 @@ const Roof = (props) => {
 }
 
 
-export default Roof;
+export default  Roof;

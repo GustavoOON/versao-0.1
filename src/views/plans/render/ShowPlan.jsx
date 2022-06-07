@@ -76,4 +76,4 @@ const Plano  = (props)=>{
     )
 }
 
-export default Plano
+export default  Plano

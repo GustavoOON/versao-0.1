@@ -10,7 +10,7 @@ import DelEmployeeLogin from '../DelEmpLogin';
 
 import '../../css/btnEdit.css'
 
-export default function BtnEditEmployees({ item, retiraFiltro, dadosOri }) {
+export default  function BtnEditEmployees({ item, retiraFiltro, dadosOri }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
 

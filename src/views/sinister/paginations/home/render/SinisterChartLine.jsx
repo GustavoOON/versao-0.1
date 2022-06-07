@@ -58,4 +58,4 @@ function SinisterChartLine() {
     )
 }
 
-export default SinisterChartLine;
+export default  SinisterChartLine;

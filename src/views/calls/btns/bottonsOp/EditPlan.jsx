@@ -14,4 +14,4 @@ const BtnEditPlan = () =>{
     )
 }
 
-export default BtnEditPlan
+export default  BtnEditPlan

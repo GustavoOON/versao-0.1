@@ -96,4 +96,4 @@ function UsersFilter({ filter, setFilter, name, saveFilter }) {
     )
 }
 
-export default UsersFilter
+export default  UsersFilter

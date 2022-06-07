@@ -22,4 +22,4 @@ export const configCookies = () => {
     return authorization;
 };
 
-export default urlDomain;
+export default  urlDomain;

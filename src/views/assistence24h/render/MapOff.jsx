@@ -17,4 +17,4 @@ const MapOff = () =>{
     )
 }
 
-export default MapOff
+export default  MapOff

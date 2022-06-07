@@ -45,4 +45,4 @@ const sinisterChart = () => {
     )
 }
 
-export default sinisterChart;
+export default  sinisterChart;

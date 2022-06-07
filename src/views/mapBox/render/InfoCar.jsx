@@ -82,4 +82,4 @@ const Editar = (props) => {
     )
 }
 
-export default Editar 
+export default  Editar 

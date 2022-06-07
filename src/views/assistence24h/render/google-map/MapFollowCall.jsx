@@ -144,4 +144,4 @@ const FollowMap = (props) =>{
  
 
 
-export default FollowMap
+export default  FollowMap

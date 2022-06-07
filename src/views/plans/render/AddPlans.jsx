@@ -27,4 +27,4 @@ function AddPlans() {
     )
 }
 
-export default AddPlans
+export default  AddPlans

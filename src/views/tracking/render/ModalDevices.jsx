@@ -50,4 +50,4 @@ function ModalDevices({ show2, closeModal2 }) {
     )
 }
 
-export default ModalDevices;
+export default  ModalDevices;

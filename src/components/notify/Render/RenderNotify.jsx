@@ -17,4 +17,4 @@ const Render = (props) =>{
     )
 }
 
-export default Render;
+export default  Render;

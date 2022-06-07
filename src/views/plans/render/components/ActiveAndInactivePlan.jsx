@@ -130,4 +130,4 @@ function ActiveAndInactivePlan() {
     )
 }
 
-export default ActiveAndInactivePlan
+export default  ActiveAndInactivePlan

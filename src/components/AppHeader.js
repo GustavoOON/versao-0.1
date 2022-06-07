@@ -12,7 +12,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilMenu } from "@coreui/icons";
-import "./AppHeader.css";
+import "./appHeader.css";
 import NotifySino from "./notify/Notify";
 
 import { AppHeaderDropdown } from "./header/index";
@@ -54,61 +54,55 @@ const AppHeader = () => {
     // Mes ano, dia e diaNum
     const diaAtual = data.getDate();
     return (
-            <CHeader position="sticky" className="headerContainer mb-3 pb-3">
-                <CContainer fluid>
-                    <CHeaderToggler
-                        className="ps-1"
-                        onClick={() =>
-                            dispatch({ type: "set", sidebarShow: !sidebarShow })
-                        }
-                    >
-                        <CIcon icon={cilMenu} size="lg" />
-                    </CHeaderToggler>
-                    {/* LOGO QUANDO A TELA FICA MENOR */}
-                    <CHeaderBrand className="mx-auto d-md-none" to="/">
-                        <CImage fluid src={logoOON} width={180} height={180} />
-                    </CHeaderBrand>
-                    <CHeaderNav className="d-none d-md-flex me-auto">
-                        <CNavItem className="container-data">
-                            <label className="text-ano-mes">
-                                {" "}
-                                {mesAno} {anoAtual}
-                            </label>
-                            <label className="text-dia">
-                                {" "}
-                                {space} {diaSemana}, {diaAtual}{" "}
-                            </label>
-                        </CNavItem>
-                    </CHeaderNav>
+        <CHeader position="sticky" className="headerContainer pb-3" style={{
+            // borderRadius: '0px 0px 20px 20px'
+        }}>
+            <CContainer fluid>
+                <CHeaderToggler
+                    className="ps-1"
+                    onClick={() =>
+                        dispatch({ type: "set", sidebarShow: !sidebarShow })
+                    }
+                >
+                    <CIcon icon={cilMenu} size="lg" />
+                </CHeaderToggler>
+                {/* LOGO QUANDO A TELA FICA MENOR */}
+                <CHeaderBrand className="mx-auto d-md-none" to="/">
+                    <CImage fluid src={logoOON} width={180} height={180} />
+                </CHeaderBrand>
+                <CHeaderNav className="d-none d-md-flex me-auto">
+                    <CNavItem className="container-data">
+                        <label className="text-ano-mes">
+                            {mesAno} {anoAtual}
+                        </label>
+                        <label className="text-dia">
+                            {space} {diaSemana}, {diaAtual}
+                        </label>
+                    </CNavItem>
+                </CHeaderNav>
 
-                    <CHeaderNav>
-                        <CNavItem>
-                            <NotifySino />
-                        </CNavItem>
-                    </CHeaderNav>
-                    <CHeaderNav className="ms-3">
-                        <AppHeaderDropdown />
-                    </CHeaderNav>
-                    <CHeaderNav className="ms-3">
-                        <div className="container-header-name">
-                            <label className="name-header">
-                                {" "}
-                                Gustavo Alcantara
-                            </label>
-                            <br />
-                            <label className="funcao-header">
-                                {" "}
-                                Administrador{" "}
-                            </label>
-                        </div>
-                    </CHeaderNav>
-                </CContainer>
+                <CHeaderNav>
+                    <CNavItem>
+                        <NotifySino />
+                    </CNavItem>
+                </CHeaderNav>
+                <CHeaderNav className="ms-3">
+                    <AppHeaderDropdown />
+                </CHeaderNav>
+                <CHeaderNav className="ms-3">
+                    <div className="container-header-name">
+                        <label className="name-header">Gustavo Alcantara</label>
+                        <br />
+                        <label className="funcao-header">Administrador</label>
+                    </div>
+                </CHeaderNav>
+            </CContainer>
 
-                {/* <CContainer fluid>
+            {/* <CContainer fluid>
         <AppBreadcrumb />
       </CContainer> */}
-            </CHeader>
+        </CHeader>
     );
 };
 
-export default AppHeader;
+export default  AppHeader;

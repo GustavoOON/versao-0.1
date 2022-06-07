@@ -87,4 +87,4 @@ const WidgetsDevices = (props) => {
   )
 }
 
-export default WidgetsDevices;
+export default  WidgetsDevices;

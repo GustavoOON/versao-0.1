@@ -1,18 +1,20 @@
-import { CCard, CCardBody, CCol, CRow } from '@coreui/react';
-import { GoogleMap, Marker, Polyline, useJsApiLoader } from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
+import { GoogleMap, Marker, Polyline, useJsApiLoader } from '@react-google-maps/api';
 import { Spinner } from 'react-bootstrap';
-import carNoSignal3d from "../../assets/images/car-no-signal-3d.png";
-import carNoSignal7d from "../../assets/images/car-no-signal-7d.png";
-import carSynced from "../../assets/images/car-synced.png";
-import tokenMap from '../../configMap';
-import './css/tracking.css';
-import InfoWindowPopup from './render/InfoWindow';
+import { CRow, CCol, CCard, CCardBody } from '@coreui/react';
+
+import carSynced from "../../assets/images/car-synced.png"
+import carNoSignal3d from "../../assets/images/car-no-signal-3d.png"
+import carNoSignal7d from "../../assets/images/car-no-signal-7d.png"
+
+import InfoWindowPopup from './render/InfoWindow'
+
+import tokenMap from '../../configMap'
 import WidgetsTracking from './render/WidgetsTracking';
+import ModalDevices from './render/ModalDevices';
+import ModalReports from './render/ModalReports';
 
-
-
-
+import './css/tracking.css'
 // import "../devices/css/devices.css";
 
 const Tracking = () => {
@@ -217,8 +219,10 @@ const Tracking = () => {
 
     if (isLoaded) {
         return (
-           
-                <CCard>
+            <>
+                <ModalReports show={show} closeModal={closeModal} />
+                <ModalDevices show2={show2} closeModal2={closeModal2} />
+                <CCard className='behind'>
                     <CCardBody>
                         <CRow>
                             <CCol>
@@ -332,6 +336,7 @@ const Tracking = () => {
                         </GoogleMap>
                     </CCardBody>
                 </CCard>
+            </>
         )
     } else {
         return (
@@ -344,4 +349,4 @@ const Tracking = () => {
 
 }
 
-export default Tracking;
+export default  Tracking;

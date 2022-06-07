@@ -75,4 +75,4 @@ function WidgetsTracking(props) {
   )
 }
 
-export default WidgetsTracking;
+export default  WidgetsTracking;

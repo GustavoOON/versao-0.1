@@ -48,4 +48,4 @@ const Concluded = (props) =>{
 
 }
 
-export default Concluded;
+export default  Concluded;

@@ -73,4 +73,4 @@ const InfoCall = (props) => {
     )
 }
 
-export default InfoCall
+export default  InfoCall

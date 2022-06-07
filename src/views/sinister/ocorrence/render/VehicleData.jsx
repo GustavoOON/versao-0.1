@@ -75,4 +75,4 @@ const VehicleData = (props) => {
     )
 }
 
-export default VehicleData;
+export default  VehicleData;

@@ -36,4 +36,4 @@ const Finance = () => {
     )
 }
 
-export default Finance;
+export default  Finance;

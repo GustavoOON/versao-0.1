@@ -123,4 +123,4 @@ const Support = (props) => {
 }
 
 
-export default Support
+export default  Support

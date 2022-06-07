@@ -31,4 +31,4 @@ const Depart = (propsDepart) => {
     )
 }
 
-export default Depart   
+export default  Depart   

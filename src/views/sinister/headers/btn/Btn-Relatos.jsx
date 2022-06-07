@@ -22,4 +22,4 @@ const ButtonRelatos = () => {
     )
 }
 
-export default ButtonRelatos;
+export default  ButtonRelatos;

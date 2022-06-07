@@ -35,16 +35,16 @@ const Services = () =>{
     var msgOri = msg.toString(CryptoJS.enc.Utf8);
 
     const [services, setServices] = useState([])
-    const token = Cookies.get('TokenID')
+    // const token = Cookies.get('TokenID')
     const userType = msgOri
 
-    let config = {
-        headers: {
-        'Authorization': `Bearer ${token}`, 
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-        }
-    };
+    // let config = {
+    //     headers: {
+    //     'Authorization': `Bearer ${token}`, 
+    //     'Content-Type': 'application/json;charset=UTF-8',
+    //     "Access-Control-Allow-Origin": "*",
+    //     }
+    // };
     
     const [dados, setDados] = useState(services)
     const [busca2, setBusca] = useState('')
@@ -176,4 +176,4 @@ const Services = () =>{
     
 }
 
-export default Services
+export default  Services

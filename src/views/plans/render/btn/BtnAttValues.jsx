@@ -9,4 +9,4 @@ function BtnAttValues() {
   )
 }
 
-export default BtnAttValues
+export default  BtnAttValues

@@ -82,4 +82,4 @@ const InfoProfile = () => {
     )
 }
 
-export default InfoProfile;
+export default  InfoProfile;

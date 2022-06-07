@@ -268,4 +268,4 @@ const Sinister = () => {
     )
 }
 
-export default Sinister;
+export default  Sinister;

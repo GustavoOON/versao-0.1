@@ -95,4 +95,4 @@ const InfoCars = () =>{
     )
 }
 
-export default InfoCars
+export default  InfoCars

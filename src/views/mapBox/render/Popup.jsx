@@ -171,4 +171,4 @@ const PopupRen = ( props) => {
     
 }
 
-export default PopupRen
+export default  PopupRen

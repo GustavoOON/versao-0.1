@@ -25,4 +25,4 @@ function ModalReports({show, closeModal}) {
   )
 }
 
-export default ModalReports;
+export default  ModalReports;

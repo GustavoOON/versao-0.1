@@ -12,4 +12,4 @@ const Config = () =>{
     )
 }
 
-export default Config
+export default  Config

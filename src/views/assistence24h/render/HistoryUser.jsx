@@ -11,4 +11,4 @@ const HistoryUser = () =>{
     )
 }
 
-export default HistoryUser
+export default  HistoryUser

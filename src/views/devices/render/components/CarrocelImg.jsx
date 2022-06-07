@@ -45,4 +45,4 @@ const Carrocel = (props) => {
 }
 
 
-export default Carrocel;
+export default  Carrocel;

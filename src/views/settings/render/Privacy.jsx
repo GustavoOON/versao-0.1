@@ -103,4 +103,4 @@ const privacy = () => {
 }
 
 
-export default privacy
+export default  privacy

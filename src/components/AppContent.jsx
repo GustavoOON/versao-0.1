@@ -4,9 +4,10 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 
+
 const AppContent = () => {
   return (
-    <CContainer fluid className='teste'>
+    <CContainer fluid>
       <Suspense fallback={<CSpinner color="primary" />}>
         <Switch>
           {routes.map((route, idx) => {
@@ -33,4 +34,4 @@ const AppContent = () => {
   )
 }
 
-export default React.memo(AppContent)
+export default  React.memo(AppContent)

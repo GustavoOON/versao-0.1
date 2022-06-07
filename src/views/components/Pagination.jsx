@@ -203,4 +203,4 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
     )
 }
 
-export default Pagination;
+export default  Pagination;

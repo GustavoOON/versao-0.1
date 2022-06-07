@@ -10,7 +10,7 @@ const navAll = [
         component: CNavItem,
         name: 'Home',
         to: '/home',
-        icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+        icon: cilHome,
     },
 
     // GRUPO SETORES 
@@ -22,43 +22,43 @@ const navAll = [
         component: CNavItem,
         name: 'Veículos',
         to: '/devices',
-        icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+        icon: cilCarAlt,
     },
     {
         component: CNavItem,
         name: 'Rastreamento',
         to: '/rastreamento',
-        icon: <CIcon icon={cilMap} customClassName="nav-icon" />,
+        icon: cilMap,
     },
     {
         component: CNavItem,
         name: 'Sinistro',
         to: '/sinistro',
-        icon: <CIcon icon={cilWarning} customClassName="nav-icon" />,
+        icon: cilWarning,
     },
     {
         component: CNavItem,
         name: 'Assistência',
         to: '/assistencia',
-        icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
+        icon: cilCog,
     },
     {
         component: CNavItem,
         name: 'Chamados',
         to: '/chamados',
-        icon: <CIcon icon={cilPhone} customClassName="nav-icon" />,
+        icon: cilPhone,
     },
     {
         component: CNavItem,
         name: 'Financeiro',
         to: '/financeiro',
-        icon: <CIcon icon={cilCreditCard} customClassName="nav-icon" />,
+        icon: cilCreditCard,
     },
     {
         component: CNavItem,
         name: 'Painel',
         to: '/panel',
-        icon: <CIcon icon={cilBarChart} customClassName="nav-icon" />,
+        icon: cilBarChart,
     },
 
     // GRUPO SERVICÇOS
@@ -70,14 +70,14 @@ const navAll = [
         component: CNavItem,
         name: 'Planos',
         to: '/planos',
-        icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+        icon: cilDescription,
     },
 
     {
         component: CNavItem,
         name: 'Coberturas',
         to: '/coberturas',
-        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+        icon: cilList,
     },
 
     //GRUPO OUTROS 
@@ -89,13 +89,13 @@ const navAll = [
         component: CNavItem,
         name: 'Funcionários',
         to: '/Users',
-        icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+        icon: cilPeople,
     },
     {
         component: CNavItem,
         name: 'Configurações',
         to: '/configuracoes',
-        icon: <CIcon icon={cilCog} customClassName="nav-icon" />,
+        icon: cilCog,
     },
 
 
@@ -103,7 +103,7 @@ const navAll = [
     //   component: CNavItem,
     //   name: 'Riscos',
     //   to: '/riscos',
-    //   icon: <CIcon icon={cilFlagAlt} disabled customClassName="nav-icon" />,
+    //   icon: cilFlagAlt,
     // },
 ]
 
@@ -381,4 +381,4 @@ function NavBar() {
 }
 
 
-export default NavBar;
+export default  NavBar;

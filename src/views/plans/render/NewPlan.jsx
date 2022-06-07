@@ -193,4 +193,4 @@ const NewPlan = (props) => {
     )
 }
 
-export default NewPlan
+export default  NewPlan

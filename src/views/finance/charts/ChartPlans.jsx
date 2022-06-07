@@ -53,4 +53,4 @@ const ChartPlan = () => {
     )
 }
 
-export default ChartPlan
+export default  ChartPlan

@@ -14,4 +14,4 @@ const GenerateChart = () =>{
     )
 }
 
-export default GenerateChart
+export default  GenerateChart

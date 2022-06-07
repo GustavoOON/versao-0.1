@@ -120,4 +120,4 @@ const OcorrenciaInfos = (props) => {
     )
 }
 
-export default OcorrenciaInfos;
+export default  OcorrenciaInfos;

@@ -208,6 +208,6 @@ const mapBox = () =>{
     )
 }
 
-export default mapBox 
+export default  mapBox 
 
 

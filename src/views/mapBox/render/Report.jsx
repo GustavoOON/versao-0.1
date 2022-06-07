@@ -162,4 +162,4 @@ const Report = () => {
     )
 }
 
-export default Report
+export default  Report

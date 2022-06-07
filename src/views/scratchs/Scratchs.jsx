@@ -169,4 +169,4 @@ const Riscos = () => {
   
 }
 
-export default Riscos
+export default  Riscos

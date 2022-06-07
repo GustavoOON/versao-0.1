@@ -22,4 +22,4 @@ const ButtonSentEmail = () => {
     )
 }
 
-export default ButtonSentEmail;
+export default  ButtonSentEmail;

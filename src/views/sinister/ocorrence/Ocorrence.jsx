@@ -40,4 +40,4 @@ const Ocorrence = (props) => {
     )
 }
 
-export default Ocorrence;
+export default  Ocorrence;

@@ -65,4 +65,4 @@ const Follow = (props) => {
     )
 }
 
-export default Follow
+export default  Follow

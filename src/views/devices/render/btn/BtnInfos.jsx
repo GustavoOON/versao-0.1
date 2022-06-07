@@ -48,4 +48,4 @@ const BtnInfos = (props) => {
 }
 
 
-export default BtnInfos;
+export default  BtnInfos;

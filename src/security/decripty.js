@@ -28,4 +28,4 @@ function UserTypeDecryption(){
 }
  
 
-export default {UserTypeDecryption, userPermissionsDescription }
+export default  {UserTypeDecryption, userPermissionsDescription }

@@ -11,4 +11,4 @@ const Phone = (propsDepart) => {
     )
 }
 
-export default Phone   
+export default  Phone   

@@ -27,4 +27,4 @@ const Calendar2 = () => {
     }
 }
 
-export default Calendar2
+export default  Calendar2

@@ -14,4 +14,4 @@ const GerarRelatorio = () =>{
     )
 }
 
-export default GerarRelatorio
+export default  GerarRelatorio

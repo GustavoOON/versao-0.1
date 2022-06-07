@@ -254,4 +254,4 @@ const EditarService = (props) =>{
 }
 
 
-export default EditarService
+export default  EditarService

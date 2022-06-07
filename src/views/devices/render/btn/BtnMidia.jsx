@@ -66,4 +66,4 @@ const BtnMidia = (props) => {
     )
 }
 
-export default BtnMidia;
+export default  BtnMidia;

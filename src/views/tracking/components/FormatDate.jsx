@@ -38,4 +38,4 @@ function FormatDate({ date }) {
   )
 }
 
-export default FormatDate;
+export default  FormatDate;

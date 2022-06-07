@@ -32,4 +32,4 @@ const DescriptionImg = (props) => {
     }
 }
 
-export default DescriptionImg;
+export default  DescriptionImg;

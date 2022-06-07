@@ -82,4 +82,4 @@ function Scratchs() {
     )
 }
 
-export default Scratchs
+export default  Scratchs

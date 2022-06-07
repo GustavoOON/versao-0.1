@@ -134,4 +134,4 @@ const ContaConfiguracoes = () =>{
     )
 }
 
-export default ContaConfiguracoes
+export default  ContaConfiguracoes

@@ -46,4 +46,4 @@ const Survey = (props) => {
     }
 }
 
-export default Survey;
+export default  Survey;

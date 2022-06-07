@@ -71,4 +71,4 @@ const WorkshopData = () => {
     )
 }
 
-export default WorkshopData;
+export default  WorkshopData;

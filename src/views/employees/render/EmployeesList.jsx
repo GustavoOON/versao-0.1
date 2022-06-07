@@ -10,7 +10,7 @@ import DelEmployeeLogin from './DelEmpLogin';
 import BtnEdit from './BtnEdit'
 import BtnEditEmployees from './Btn/BtnEditEmployees';
 
-export default function EmployeesList({ dados, userType, retiraFiltro, dadosOri }) {
+export default  function EmployeesList({ dados, userType, retiraFiltro, dadosOri }) {
   return (
     <CTable align="middle" className="mb-0 usersTableContainer" hover striped responsive>
     {/* Cabeca head da tabela do clientes */}

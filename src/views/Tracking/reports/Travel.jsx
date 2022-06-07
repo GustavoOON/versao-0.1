@@ -54,4 +54,4 @@ const Travel = () =>{
     )   
 }
 
-export default Travel;
+export default  Travel;

@@ -53,4 +53,4 @@ const HeaderContract = (props) => {
     )
 }
 
-export default HeaderContract;
+export default  HeaderContract;

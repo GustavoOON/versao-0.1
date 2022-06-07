@@ -1,21 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SimpleBar from "simplebar-react";
-import {
-    CSidebar,
-    CSidebarBrand,
-    CSidebarNav,
-    CSidebarToggler,
-    CImage,
-} from "@coreui/react";
+import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler, CImage } from "@coreui/react";
 
 import { AppSidebarNav } from "./AppSidebarNav";
-import logoOON from "./../assets/images/oon-seguros.svg";
+import logoOON from "./../assets/images/oon-seguros-logo.svg";
 
 import "simplebar/dist/simplebar.min.css";
 
 // sidebar nav config
-import navigation from "../views/navBar/NavBar";
+import NavBar from "../views/navBar/NavBar";
 
 const AppSidebar = () => {
     const dispatch = useDispatch();
@@ -24,38 +18,45 @@ const AppSidebar = () => {
 
     return (
         <CSidebar
-                position="fixed"
-                className="sideBarContainer"
-                unfoldable={unfoldable}
-                visible={sidebarShow}
-                onVisibleChange={(visible) => {
-                    dispatch({ type: "set", sidebarShow: visible });
+            position="fixed"
+            className="sideBarContainer bg-light"
+            unfoldable={unfoldable}
+            visible={sidebarShow}
+            onVisibleChange={(visible) => {
+                dispatch({ type: "set", sidebarShow: visible });
+            }}
+        >
+            <CSidebarBrand
+                className="d-none d-md-flex logoContainer mb-3 radius-border"
+                to="/"
+                style={{
+                    backgroundColor: "#F9F7F7",
+                    borderRadius: '0px 0px 20px 20px'
                 }}
             >
-                <CSidebarBrand
-                    className="d-none d-md-flex logoContainer mb-2"
-                    to="/"
+                <CImage fluid src={logoOON} width={110} className="p-2" />
+            </CSidebarBrand>
+            <CSidebarNav>
+                <SimpleBar
+                    className="fontItemNav"
+                    style={{
+                        backgroundColor: "#F9F7F7",
+                    }}
                 >
-                    {/* <CIcon className="sidebar-brand-full" icon={ciOnnIcon} height={35} /> */}
-                    {/* <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
-                    <CImage fluid src={logoOON} width={160} />
-                </CSidebarBrand>
-                <CSidebarNav>
-                    <SimpleBar className="fontItemNav">
-                        <AppSidebarNav items={navigation()} />
-                        <CSidebarToggler
-                            className="d-none d-lg-flex controlerSideBar"
-                            onClick={() =>
-                                dispatch({
-                                    type: "set",
-                                    sidebarUnfoldable: !unfoldable,
-                                })
-                            }
-                        />
-                    </SimpleBar>
-                </CSidebarNav>
-            </CSidebar>
+                    <AppSidebarNav items={NavBar()} />
+                    <CSidebarToggler
+                        className="d-none d-lg-flex controlerSideBar"
+                        onClick={() =>
+                            dispatch({
+                                type: "set",
+                                sidebarUnfoldable: !unfoldable,
+                            })
+                        }
+                    />
+                </SimpleBar>
+            </CSidebarNav>
+        </CSidebar>
     );
 };
 
-export default React.memo(AppSidebar);
+export default  React.memo(AppSidebar);

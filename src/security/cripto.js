@@ -24,4 +24,4 @@ function Cripta(e){
 
 }
 
-export default Cripta;
+export default  Cripta;

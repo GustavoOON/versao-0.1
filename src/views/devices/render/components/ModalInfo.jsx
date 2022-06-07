@@ -170,4 +170,4 @@ function ModalInfo(props) {
     )
 }
 
-export default ModalInfo;
+export default  ModalInfo;

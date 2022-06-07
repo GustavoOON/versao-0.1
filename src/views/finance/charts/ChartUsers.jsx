@@ -69,4 +69,4 @@ const ChartUsers = () => {
     )
 }
 
-export default ChartUsers;
+export default  ChartUsers;

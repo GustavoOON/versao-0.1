@@ -31,4 +31,4 @@ const ButtonChart = ({ name, saveFilter }) => {
     )
 }
 
-export default ButtonChart;
+export default  ButtonChart;

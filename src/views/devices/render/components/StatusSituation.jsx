@@ -21,4 +21,4 @@ function StatusSituation(props) {
     )
 }
 
-export default StatusSituation;
+export default  StatusSituation;

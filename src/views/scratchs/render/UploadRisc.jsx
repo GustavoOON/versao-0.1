@@ -171,4 +171,4 @@ const UploadRiscBtn = (props) => {
   )
 }
 
-export default UploadRiscBtn;
+export default  UploadRiscBtn;

@@ -38,4 +38,4 @@ const FranchiseBenefit = (props) => {
     )
 }
 
-export default FranchiseBenefit
+export default  FranchiseBenefit

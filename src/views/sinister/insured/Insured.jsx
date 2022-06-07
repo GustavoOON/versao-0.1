@@ -26,4 +26,4 @@ const Insured = (props) => {
     )
 }
 
-export default Insured;
+export default  Insured;

@@ -55,4 +55,4 @@ const DateCreated = (props) => {
     )
 }
 
-export default DateCreated;
+export default  DateCreated;

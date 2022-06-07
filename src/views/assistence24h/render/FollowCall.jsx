@@ -151,4 +151,4 @@ const FollowCall = () =>{
 }
 
 
-export default FollowCall
+export default  FollowCall

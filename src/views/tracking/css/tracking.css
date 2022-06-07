@@ -1,33 +1,33 @@
-.behind{
+.behind {
     width: 100%;
-    height: 200px;
-    border-radius: 10px;
+    height: 100%;
+    border-radius: 20px;
 }
 
-.front{
+.front {
     margin-left: 3%;
     margin-top: 3%;
     position: absolute;
     z-index: 9999;
 }
 
-.modalPorCima{
+.modalPorCima {
     position: absolute;
 }
 
-.porCima2{
+.porCima2 {
     margin-left: 8%;
     margin-top: 3%;
     position: absolute;
     z-index: 9999;
 }
 
-.modalPorCima2{
+.modalPorCima2 {
     position: absolute;
     height: 100vh;
 }
 
-.cars-icon-tracking{
+.cars-icon-tracking {
     width: 13%;
     border-radius: 50%;
     margin: 2% 5% 2% 0;
@@ -36,8 +36,4 @@
 .card-report {
     border-radius: 20px;
     height: 100%;
-}
-
-. {
-    border-radius: 10px;
 }

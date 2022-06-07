@@ -144,4 +144,4 @@ function WidgetsFilterDevices(props) {
     )
 }
 
-export default WidgetsFilterDevices;
+export default  WidgetsFilterDevices;

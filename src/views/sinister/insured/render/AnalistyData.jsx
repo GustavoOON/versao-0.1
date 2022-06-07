@@ -57,4 +57,4 @@ const AnalistyData = (props) => {
     )
 }
 
-export default AnalistyData;
+export default  AnalistyData;

@@ -67,4 +67,4 @@ import {
     )
   }
 
-  export default Ranking
+  export default  Ranking

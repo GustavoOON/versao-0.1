@@ -71,4 +71,4 @@ console.log(status);
     )
 }
 
-export default HeaderOccurrence;
+export default  HeaderOccurrence;

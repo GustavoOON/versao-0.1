@@ -45,4 +45,4 @@ const eventChart = () => {
     )
 }
 
-export default eventChart
+export default  eventChart

@@ -131,4 +131,4 @@ const DeletaLogin = (props) => {
     
 }
 
-export default DeletaLogin
+export default  DeletaLogin

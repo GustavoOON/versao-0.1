@@ -46,4 +46,4 @@ const Opening = (props) => {
     }
 }
 
-export default Opening;
+export default  Opening;

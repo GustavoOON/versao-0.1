@@ -17,11 +17,12 @@
     align-items: center;
 }
 
-.fundo-body {
-    background: blue;
-    /* O fundo não está aderindo ao background */
-    padding-left: 0%;
+.forgot-password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 
 .title-login-esq {
     font-size: 64px;
@@ -58,20 +59,20 @@
 }
 
 .radius-border {
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .btns-login {
     color: #F9F7F7;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 2%;
 }
 
 .btn-forgot-password {
     width: 100%;
     font-size: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 2%;
     color: #6D6D6D;
 }
@@ -96,6 +97,7 @@
 }
 
 .text-new-account {
+    color: #6D6D6D;
     text-align: center;
     font-size: 14px;
     width: 30em;
@@ -107,4 +109,12 @@
     font-size: 14px;
     font-weight: 400;
     margin-top: 10px;
+}
+
+.fundo-body-forgot-password {
+    background-color: #F9F7F7;
+}
+
+.img-oon-forgot-password {
+    margin-bottom: 5%;
 }

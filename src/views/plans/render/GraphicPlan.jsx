@@ -103,4 +103,4 @@ function GraphicPlan() {
     )
 }
 
-export default GraphicPlan;
+export default  GraphicPlan;

@@ -22,4 +22,4 @@ function ImputSearch({ savePlan }) {
     )
 }
 
-export default ImputSearch
+export default  ImputSearch

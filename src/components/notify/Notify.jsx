@@ -127,4 +127,4 @@ const Notify = () =>{
    
 }
 
-export default Notify
+export default  Notify

@@ -16,5 +16,5 @@ const AppFooter = () => {
   )
 }
 
-export default AppFooter;
+export default  AppFooter;
 

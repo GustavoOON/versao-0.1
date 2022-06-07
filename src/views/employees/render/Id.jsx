@@ -11,4 +11,4 @@ const IdRender = (propsId) => {
     )
 }
 
-export default IdRender     
+export default  IdRender     

@@ -10,4 +10,4 @@ const Name = (propsName) => {
     )
 }
 
-export default Name
+export default  Name

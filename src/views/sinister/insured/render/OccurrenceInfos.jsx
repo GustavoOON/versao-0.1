@@ -126,4 +126,4 @@ const OccurrenceInfos = (props) => {
     )
 }
 
-export default OccurrenceInfos;
+export default  OccurrenceInfos;

@@ -245,4 +245,4 @@ const Assistence24 = () =>{
     )
 }
 
-export default Assistence24
+export default  Assistence24;

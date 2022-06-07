@@ -19,4 +19,4 @@ const IconService = (props) =>{
 }
 
 
-export default IconService
+export default  IconService

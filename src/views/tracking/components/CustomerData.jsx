@@ -42,4 +42,4 @@ function CustomerData() {
   )
 }
 
-export default CustomerData;
+export default  CustomerData;

@@ -502,4 +502,4 @@ const Associate = (props) =>{
     )
 }
 
-export default Associate
+export default  Associate

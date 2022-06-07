@@ -11,4 +11,4 @@ const Email = (propsEmail) => {
     )
 }
 
-export default Email   
+export default  Email   

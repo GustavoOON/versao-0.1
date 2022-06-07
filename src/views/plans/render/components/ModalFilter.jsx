@@ -99,4 +99,4 @@ function ModalFilter({ filter, setFilter, saveFilter }) {
     )
 }
 
-export default ModalFilter;
+export default  ModalFilter;
