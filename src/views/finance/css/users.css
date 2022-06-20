@@ -13,12 +13,12 @@
 }
 
 .nav-defaulters:hover {
-    background: #6D6D6D;
+    background: #216CFF;
     color: white;
 }
 
 .nav-defaulters-active {
-    background: #6D6D6D;
+    background: #216CFF;
     cursor: pointer;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -47,12 +47,12 @@
 }
 
 .nav-non-defaulters:hover {
-    background: #6D6D6D;
+    background: #216CFF;
     color: white;
 }
 
 .nav-non-defaulters-active {
-    background: #6D6D6D;
+    background: #216CFF;
     cursor: pointer;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -64,31 +64,4 @@
     align-items: center;
     margin-left: 0.5%;
     margin-right: 0.5%;
-}
-
-
-.container-devices-pagination{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background: #f2f2f3;
-    margin-top: 5%;
-    position: inline-end;
-    border-radius: 20px;
-}
-
-
-.container-pagination-align{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 81%;
-}
-
-
-.btn-user-pagination{
-    margin: 0.5%;
-    border-radius: 8px;
 }

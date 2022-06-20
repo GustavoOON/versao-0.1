@@ -1,6 +1,7 @@
 import React from 'react'
 
-function FormatDate({ date }) {
+function FormatDate() {
+    const date = new Date()
     const dayWeek = {
         0: 'Domingo',
         1: 'Segunda-feira',
@@ -33,9 +34,9 @@ function FormatDate({ date }) {
     const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
     const minute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
 
-  return (
-    <span style={{color: '#C4C4C4', fontSize: '14px'}}>{`${week} - ${day} de ${month} ${year} - ${hours}:${minute}`}</span>
-  )
+    return (
+        <span style={{ color: '#C4C4C4', fontSize: '14px' }}>{`${week} - ${day} de ${month} ${year} - ${hours}:${minute}`}</span>
+    )
 }
 
-export default  FormatDate;
+export default FormatDate;

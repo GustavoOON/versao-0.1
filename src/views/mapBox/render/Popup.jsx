@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import ReactMapGL, {Popup} from 'react-map-gl';
 
-import { CImage, CButton, CContainer, CRow, CCol } from '@coreui/react'
+import { CImage, CButton, CContainer, CRow, CCol, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter } from '@coreui/react'
 import carro from './../../../assets/images/carro01.jpeg'
 import BtnMidia from '../../devices/render/btn/BtnMidia'
 
@@ -121,37 +121,37 @@ const PopupRen = ( props) => {
                         </CCol>
                     </CRow>
     
-                    <Modal 
-                        show={show} 
-                        onHide={handleClose}
+                    <CModal 
+                        visible={show} 
+                        onClose={handleClose}
                         size="xl"
                     >
-                        <Modal.Header  closeButton>
-                            <Modal.Title>Relatórios</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className='container-body'>
+                        <CModalHeader  closeButton>
+                            <CModalTitle className="title-modal">Relatórios</CModalTitle>
+                        </CModalHeader>
+                        <CModalBody className='container-body'>
                             <Report /> 
-                        </Modal.Body>
-                        <Modal.Footer>  
+                        </CModalBody>
+                        <CModalFooter>  
                             <CButton  onClick={handleClose}>
                                 Sair
                             </CButton>
                         
-                        </Modal.Footer>
-                    </Modal>
+                        </CModalFooter>
+                    </CModal>
     
-                    <Modal 
+                    <CModal 
                         show={show2} 
                         onHide={handleClose2}
                         size="xl"
                     >
-                        <Modal.Header  closeButton2>
-                            <Modal.Title>Informações Carro</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className='container-body'>
+                        <CModalHeader  closeButton2>
+                            <CModalTitle className="title-modal">Informações Carro</CModalTitle>
+                        </CModalHeader>
+                        <CModalBody className='container-body'>
                             <InfoCar />
-                        </Modal.Body>
-                        <Modal.Footer>  
+                        </CModalBody>
+                        <CModalFooter>  
                             {/* Passar o props aqui do veículo depois  */}
                             <BtnMidia /> 
                         
@@ -159,8 +159,8 @@ const PopupRen = ( props) => {
                                 Sair
                             </CButton>
                         
-                        </Modal.Footer>
-                    </Modal>
+                        </CModalFooter>
+                    </CModal>
                   
                 </Popup>
                 

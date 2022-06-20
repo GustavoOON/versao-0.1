@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { CButton, CCol, CFormInput, CFormSelect, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CRow } from '@coreui/react';
+import FormatDate from 'src/views/tracking/components/FormatDate';
 
-function Reports({ report, setReport, name, saveFilter }) {
+function Reports({ report, setReport, name, saveReport }) {
     const [valueReportCity, setValueReportCity] = useState('');
     const [valueReportType, setValueReportType] = useState('');
     const [valueReportStartDate, setValueReportStartDate] = useState('');
     const [valueReportFinalDate, setValueReportFinalDate] = useState('');
+    const [modalReport, setModalReport] = useState(false);
+    const [city, setCity] = useState('');
+    const [period, setPeriod] = useState('');
+    const [typeUsers, setTypeUsers] = useState('');
+
 
     useEffect(() => {
         return () => {
@@ -16,7 +22,56 @@ function Reports({ report, setReport, name, saveFilter }) {
         }
     }, [])
 
-    return (
+    const downloadReports = (valueReportCity, valueReportType, valueReportStartDate, valueReportFinalDate) => {
+        const init = valueReportStartDate.split('-').splice(1).reverse().join('/');
+        const final = valueReportFinalDate.split('-').reverse().join('/');
+
+        setCity(valueReportCity);
+        setTypeUsers(valueReportType)
+        setPeriod(`Período: ${init} - ${final}`)
+    }
+
+    return modalReport ? (
+        <CModal
+            visible={report}
+            onClose={() => setModalReport(false)}
+            size="lg"
+            alignment="center"
+        >
+            <CModalHeader
+                className='d-block'
+                closeButton={false}
+            >
+                <CModalTitle className="title-modal">{`Relatório - Gráfico ${name}`}</CModalTitle>
+                <CModalTitle className="title-modal">
+                    <span className='fs-6 color-text me-5'>{period}</span>
+                    <FormatDate />
+                </CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+            <label>{typeUsers}</label>
+            </CModalBody>
+            <CModalFooter>
+                <CButton
+                    className='btn-cancel-global'
+                    variant='outline'
+                    onClick={() => setReport(false)}
+                >
+                    Cancelar
+                </CButton>
+                <CButton
+                    className='btn-save-global'
+                    onClick={() => {
+                        saveReport(valueReportCity, valueReportType, valueReportStartDate, valueReportFinalDate)
+
+                    }
+                    }
+                >
+                    Baixar relatório
+                </CButton>
+            </CModalFooter>
+        </CModal>
+    ) : (
         <CModal
             visible={report}
             onClose={() => setReport(false)}
@@ -24,7 +79,7 @@ function Reports({ report, setReport, name, saveFilter }) {
             alignment="center"
         >
             <CModalHeader>
-                <CModalTitle>{`Relatório - Gráfico ${name}`}</CModalTitle>
+                <CModalTitle className="title-modal">Relatório</CModalTitle>
             </CModalHeader>
             <CModalBody>
                 <CRow className="mb-4">
@@ -37,9 +92,9 @@ function Reports({ report, setReport, name, saveFilter }) {
                             onChange={({ target }) => setValueReportCity(target.value)}
                             options={[
                                 'Cidade',
-                                { label: 'Belo Horizonte', value: '1' },
-                                { label: 'São Paulo', value: '2' },
-                                { label: 'Rio de Janeior', value: '3' }
+                                { label: 'Belo Horizonte', value: 'Belo Horizonte' },
+                                { label: 'São Paulo', value: 'São Paulo' },
+                                { label: 'Rio de Janeiro', value: 'Rio de Janeiro' }
                             ]}
                         />
                     </CCol>
@@ -49,9 +104,9 @@ function Reports({ report, setReport, name, saveFilter }) {
                             onChange={({ target }) => setValueReportType(target.value)}
                             options={[
                                 'Tipos',
-                                { label: 'Todos usuários', value: '1' },
-                                { label: 'Usuários novos', value: '2' },
-                                { label: 'Usuários recorrentes', value: '3' }
+                                { label: 'Todos usuários', value: 'Todos usuários' },
+                                { label: 'Usuários novos', value: 'Usuários novos' },
+                                { label: 'Usuários recorrentes', value: 'Usuários recorrentes' }
                             ]}
                         />
                     </CCol>
@@ -83,12 +138,19 @@ function Reports({ report, setReport, name, saveFilter }) {
                 </CRow>
             </CModalBody>
             <CModalFooter>
-                <CButton color="secondary" onClick={() => setReport(false)}>
+                <CButton
+                    className='btn-cancel-global'
+                    variant='outline'
+                    onClick={() => setReport(false)}
+                >
                     Cancelar
                 </CButton>
                 <CButton
-                    onClick={() => saveFilter(valueReportCity, valueReportType, valueReportStartDate, valueReportFinalDate)}
-                    color="primary"
+                    className='btn-save-global'
+                    onClick={() => {
+                        setModalReport(true)
+                        downloadReports(valueReportCity, valueReportType, valueReportStartDate, valueReportFinalDate)
+                    }}
                 >
                     Salvar
                 </CButton>
@@ -97,4 +159,4 @@ function Reports({ report, setReport, name, saveFilter }) {
     )
 }
 
-export default  Reports
+export default Reports

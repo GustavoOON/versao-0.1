@@ -18,6 +18,7 @@ import MonthAndYear from '../components/MonthAndYear';
 import Pagination from '../../components/Pagination';
 
 import '../css/users.css';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 const Users = () => {
     const [op1, setOp1] = useState(true);
@@ -101,19 +102,31 @@ const Users = () => {
 
                     <CCol className="d-md-flex justify-content-md-end">
                         <CForm className="row g-3">
-                            <CCol xs="auto">
-                                <CFormInput size="sm" type="search" placeholder="Pesquisar" />
-                            </CCol>
-                            <CCol xs="auto">
-                                <CButton color='secondary' className='button-css' >
+                            <CCol className="d-flex  justify-content-end">
+                                <div className="d-flex">
+                                    <i
+                                        className='icon-search-global i-absolute-global'
+                                    >
+                                        <BiSearchAlt2 color="#6D6D6D"
+                                        />
+                                    </i>
+                                    <CFormInput
+                                        className="input-search-global"
+                                        type="search"
+                                        placeholder="Pesquisar" />
+                                </div>
+                                <CButton
+                                    variant='outline'
+                                    className="btn-search-global"
+                                >
                                     Buscar
                                 </CButton>
                             </CCol>
-                            <CCol xs="auto">
-                                <CButton className='button-css' >
+                            <div className='text-end'>
+                                <CButton className='btn-save-global px-2'>
                                     Baixar planilha
                                 </CButton>
-                            </CCol>
+                            </div>
                         </CForm>
                     </CCol>
                 </CRow>
@@ -196,9 +209,9 @@ const Users = () => {
                     </CTableBody>
                 </CTable>
             </CCardBody>
-            <Pagination page={page} numberOfPages={numberOfPages} previousPage={previousPage} setPreviousPage={setPreviousPage} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} setNextPage={setNextPage} />
+            <Pagination page={page} numberOfPages={numberOfPages} previousPage={previousPage} setPreviousPage={setPreviousPage} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} setNextPage={setNextPage} name={'funcionários'} />
         </CCard>
     )
 }
 
-export default  Users;
+export default Users;

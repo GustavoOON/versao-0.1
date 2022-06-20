@@ -1,20 +1,20 @@
-.cotainer-widgets-devices {
+.cotainer-widgets-in-process {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.container-device-widget-content-title {
-    font-size: 1.1em;
-    font-weight: 500;
+.container-in-process-widget-content-title {
+    font-size: 1em;
+    font-weight: 700;
 }
 
-.container-device-widget-content {
+.container-in-process-widget-content {
     font-size: 2em;
-    font-weight: 500;
+    font-weight: 700;
 }
 
-.container-device-widget-black {
+.container-in-process-widget-black {
     background: white;
     height: 15vh;
     width: 18%;
@@ -29,14 +29,14 @@
     align-items: center;
 }
 
-.container-device-widget-black:hover {
+.container-in-process-widget-black:hover {
     background: #F2F2F2;
     border-style: solid;
     border-width: 5px;
     border-color: black;
 }
 
-.container-device-widget-black-active {
+.container-in-process-widget-black-active {
     color: black;
     background: #F2F2F2;
     border-style: solid;
@@ -53,7 +53,7 @@
 }
 
 
-.container-device-widget-red {
+.container-in-process-widget-red {
     color: #FF2828;
     background: white;
     height: 15vh;
@@ -70,14 +70,14 @@
     border-color: black;
 }
 
-.container-device-widget-red:hover {
+.container-in-process-widget-red:hover {
     background: #F2F2F2;
     border-style: solid;
     border-width: 4px;
     border-color: black;
 }
 
-.container-device-widget-red-active {
+.container-in-process-widget-red-active {
     color: #FF2828;
     background: #F2F2F2;
     border-style: solid;
@@ -94,7 +94,7 @@
     border-color: black;
 }
 
-.container-device-widget-orange {
+.container-in-process-widget-orange {
     color: #FF6711;
     background: white;
     height: 15vh;
@@ -111,14 +111,14 @@
     border-color: black;
 }
 
-.container-device-widget-orange:hover {
+.container-in-process-widget-orange:hover {
     background: #F2F2F2;
     border-style: solid;
     border-width: 4px;
     border-color: black;
 }
 
-.container-device-widget-orange-active {
+.container-in-process-widget-orange-active {
     color: #FF6711;
     background: #F2F2F2;
     border-style: solid;

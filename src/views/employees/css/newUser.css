@@ -1,16 +1,20 @@
-.newUser-input-IncorrectEmail{
+.newUser-input-IncorrectEmail {
     background: rgb(245, 163, 56);
 }
 
-.modal-newUser{
+.modal-newUser {
     width: 90vw;
 }
 
-.container-newUser-permission{
+.container-newUser-permission {
     border-radius: 20px;
 }
 
-.newUserTil{
+.newUserTil {
     font-size: 16pt;
     font-weight: 700;
+}
+
+.container-body {
+    padding: 2em;
 }

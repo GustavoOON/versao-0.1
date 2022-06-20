@@ -9,19 +9,27 @@ function DropdownFilter() {
     <>
        <CDropdown>
             <CDropdownToggle 
-            color="secondary"
-            className='icon-css filtro'
+            color="link"
+            className='drop-toggle-filter-users'
             >
-                Filtro
+                Filtrar
             </CDropdownToggle>
             <CDropdownMenu >
                 <span className="filter-text">
                     FILTRAR POR
                 </span> 
-                <CDropdownItem onClick={() => console.log('deu')}>Data de filiação: mais recente</CDropdownItem>
-                <CDropdownItem onClick={() => console.log('deu')}>Data de filiação: mais antiga</CDropdownItem>
-                <CDropdownItem onClick={() => console.log('deu')}>Abertura de sinistros: mais recente</CDropdownItem>
-                <CDropdownItem onClick={() => console.log('deu')}>Abertura de sinistros: mais antiga</CDropdownItem>
+                <CDropdownItem 
+                onClick={() => console.log('deu')}
+                className="drop-item-filter-users"
+                >
+                    Data de filiação: mais recente
+                    </CDropdownItem>
+                <CDropdownItem 
+                onClick={() => console.log('deu')}
+                className="drop-item-filter-users"
+                >
+                    Data de filiação: mais antiga
+                    </CDropdownItem>
             </CDropdownMenu>
         </CDropdown>
     </>

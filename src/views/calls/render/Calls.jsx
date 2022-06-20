@@ -2,7 +2,8 @@ import React from 'react';
 import { CChart } from '@coreui/react-chartjs';
 import { CCol, CCard, CCardBody, CRow } from '@coreui/react';
 
-import ButtonRelatory from '../btns/ButtonCall'
+import ButtonGraph from '../btns/ButtonGraph'
+import MonthYear from 'src/views/components/MonthYear';
 
 const Calls = () => {
     const random = (min, max) => {
@@ -16,10 +17,10 @@ const Calls = () => {
                     <CCol>
                         <label className="call-title">Comparativo</label >
                         <br />
-                        <label className="call-sub">Dezembro 2022</label>
+                        <MonthYear />
                     </CCol>
                     <CCol className='btn-filter'>
-                        <ButtonRelatory />
+                        <ButtonGraph />
                     </CCol>
                 </CRow>
                 <CChart

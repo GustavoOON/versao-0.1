@@ -7,7 +7,6 @@ import CIcon from "@coreui/icons-react";
 
 export const AppSidebarNav = ({ items }) => {
     const [activeKey, setActiveKey] = useState(0);
-    console.log(activeKey);
 
     const location = useLocation();
     const navLink = (name, icon, badge, colorIcon) => {
@@ -26,10 +25,14 @@ export const AppSidebarNav = ({ items }) => {
 
     const navItem = (item, index) => {
         const { component, name, badge, icon, ...rest } = item;
+
         const Component = component;
+
         let colorIcon = "#6D6D6D";
+
         activeKey !== index ? colorIcon : (colorIcon = "#216CFF");
-        return component.render.displayName === 'CNavTitle' ? (
+
+        return component.render.displayName === "CNavTitle" ? (
             <Component
                 style={{ color: "#6D6D6D" }}
                 {...(rest.to &&

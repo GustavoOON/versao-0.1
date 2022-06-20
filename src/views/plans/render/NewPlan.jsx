@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Button, Modal,  Form, Container, Row, Col    }  from 'react-bootstrap';
+import { Button, Modal,  Form, Container, Row, Col }  from 'react-bootstrap';
 import axios from 'axios'
 import Multiselect from 'multiselect-react-dropdown';
 import Cookies  from 'js-cookie'
@@ -12,7 +12,12 @@ import {
     CButton,
     CCol,
     CFormLabel,
-    CFormInput
+    CFormInput,
+    CModal,
+    CModalHeader,
+    CModalTitle,
+    CModalBody,
+    CModalFooter
   } from '@coreui/react'
 
 const NewPlan = (props) => {
@@ -123,16 +128,16 @@ const NewPlan = (props) => {
         <>
             <CButton className='btn-newPlan' color='dark'   size='sm' onClick={openModal} > Novo </CButton>
 
-            <Modal 
-                show={show} 
-                onHide={handleClose}
+            <CModal 
+                visible={show} 
+                onClose={handleClose}
                 size="xl"
             >
                     
-                <Modal.Header  closeButton>
-                    <Modal.Title> Novo Plano </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className='container-body'>
+                <CModalHeader  closeButton>
+                    <CModalTitle className="title-modal"> Novo Plano </CModalTitle>
+                </CModalHeader>
+                <CModalBody className='container-body'>
                     <CRow className="align-items-start">
                         <CCol>
                             <div className='Container-ColLeft-newPlan'>
@@ -175,20 +180,20 @@ const NewPlan = (props) => {
                             </div>
                         </CCol>
                     </CRow>
-                </Modal.Body>
+                </CModalBody>
 
                     
                 
-                <Modal.Footer>  
+                <CModalFooter>  
                     <Button variant="secondary" onClick={handleClose}>
                         Sair
                     </Button>
                     <Button  onClick={salvarEdicoes} variant="primary" >
                         Salvar Alterações
                     </Button>
-                </Modal.Footer>
+                </CModalFooter>
                     
-            </Modal>
+            </CModal>
         </>
     )
 }

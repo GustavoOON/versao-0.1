@@ -11,6 +11,7 @@ import {
     CFormSelect,
     CFormInput,
 } from '@coreui/react'
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 // import './report.css'
 
@@ -103,10 +104,15 @@ const Report = () => {
                     </CCol>
                     <CCol>
                         <CInputGroup className="mb-3">
-                            <CFormInput
-                                className=''
-                                placeholder='Pesquise placa veículo'
-                            />
+                            <div className="  container-icon-input">
+                                <i className='icon-search-global  i-absolute-global'>
+                                    <BiSearchAlt2 color="#6D6D6D" />
+                                </i>
+                                <CFormInput
+                                    className="input-search-global"
+                                    placeholder='Pesquisar placa do veículo'
+                                />
+                            </div>
                         </CInputGroup>
                     </CCol>
                 </CRow>
@@ -198,4 +204,4 @@ const Report = () => {
 
 }
 
-export default  Report;
+export default Report;

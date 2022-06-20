@@ -2,7 +2,9 @@ import React from 'react'
 import { CButton, CPagination } from '@coreui/react';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 
-function Pagination({ numberOfPages, page, previousPage, setPreviousPage, currentPage, setCurrentPage, nextPage, setNextPage, qtdElements }) {
+import './pagination.css'
+
+function Pagination({ numberOfPages, page, previousPage, setPreviousPage, currentPage, setCurrentPage, nextPage, setNextPage, qtdElements, name }) {
 
     function capturePreviousPage(e, nPage) {
         if (currentPage == 1) {
@@ -48,19 +50,17 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
     return (
         <CPagination
             className="container-devices-pagination"
-            color="dark"
             aria-label="Page navigation example"
         >
-           { qtdElements ? 
-            <label className="container-qtd-employeer">
-                Há {qtdElements} dispositivos
-            </label>: null}
+            {qtdElements ?
+                <label className="container-qtd-employeer w-100">
+                    Há {qtdElements} {name}
+                </label> : null}
             <div className="container-pagination-align justify-content-end">
                 {previousPage != "" ? (
                     <>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() => {
                                 capturePreviousPage(
                                     previousPage,
@@ -75,7 +75,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                             <>
                                 <CButton
                                     className="btn-user-pagination"
-                                    color="dark"
                                     onClick={() =>
                                         capturePreviousPage(
                                             1,
@@ -91,7 +90,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         ) : null}
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() => {
                                 capturePreviousPage(
                                     previousPage,
@@ -108,7 +106,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                     <CButton
                         className="btn-user-pagination"
                         defaultChecked
-                        color="dark"
                         active={true}
                     >
                         {currentPage + 1}
@@ -117,7 +114,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                     <CButton
                         className="btn-user-pagination"
                         defaultChecked
-                        color="dark"
                         active={true}
                     >
                         {currentPage}
@@ -127,7 +123,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                     <>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() =>
                                 captureNextPage(
                                     nextPage,
@@ -140,7 +135,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         </CButton>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() =>
                                 captureNextPage(
                                     nextPage,
@@ -158,7 +152,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                     <>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() =>
                                 captureNextPage(
                                     nextPage,
@@ -172,7 +165,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         <span>...</span>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() =>
                                 captureNextPage(
                                     numberOfPages,
@@ -185,7 +177,6 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         </CButton>
                         <CButton
                             className="btn-user-pagination"
-                            color="dark"
                             onClick={() =>
                                 captureNextPage(
                                     nextPage,
@@ -203,4 +194,4 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
     )
 }
 
-export default  Pagination;
+export default Pagination;

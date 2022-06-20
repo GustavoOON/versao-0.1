@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     CContainer,
@@ -10,13 +9,14 @@ import {
     CImage,
     CNavItem,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
 import { cilMenu } from "@coreui/icons";
-import "./appHeader.css";
-import NotifySino from "./notify/Notify";
+import CIcon from "@coreui/icons-react";
 
+import NotifySino from "./notify/Notify";
 import { AppHeaderDropdown } from "./header/index";
 import logoOON from "./../assets/images/oon.svg";
+
+import "./appHeader.css";
 
 const AppHeader = () => {
     const dispatch = useDispatch();
@@ -54,9 +54,15 @@ const AppHeader = () => {
     // Mes ano, dia e diaNum
     const diaAtual = data.getDate();
     return (
-        <CHeader position="sticky" className="headerContainer pb-3" style={{
-            // borderRadius: '0px 0px 20px 20px'
-        }}>
+        <CHeader
+            position="sticky"
+            className="headerContainer pb-3"
+            style={
+                {
+                    // borderRadius: '0px 0px 20px 20px'
+                }
+            }
+        >
             <CContainer fluid>
                 <CHeaderToggler
                     className="ps-1"
@@ -105,4 +111,4 @@ const AppHeader = () => {
     );
 };
 
-export default  AppHeader;
+export default AppHeader;

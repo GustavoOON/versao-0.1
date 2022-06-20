@@ -1,8 +1,31 @@
-.text{
+.text {
     font-size: 15pt;
-    color: white;
-    font-weight:700;
-    background: rgba(110, 110, 110, 0.7);
-    border-radius: 5px;
+    font-weight: 700;
     width: 100%;
+}
+
+.btn-photo {
+    position: absolute;
+    margin-top: 50%;
+    margin-left: 15%;
+}
+
+.btn-radius {
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: white;
+}
+
+.btn-selected-ok {
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid #009846;
+    background-color: #E1E1E1;
+}
+
+.btn-selected-x {
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid #FE3F61;
+    background-color: #E1E1E1;
 }

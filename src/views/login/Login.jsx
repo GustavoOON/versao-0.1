@@ -70,7 +70,6 @@ const Login = () => {
 		axios
 			.post(`${UrlDomain}/accounts/login`, postData, axiosConfig)
 			.then((res) => {
-				console.log(res)
 				verificaLogin(res)
 			})
 			.catch(r => {
@@ -80,18 +79,15 @@ const Login = () => {
 
 	function verificaLogin(response) {
 		// var usT = Cookies.get('userType')
-		console.log(response, 'response verif')
 		// resposta 200 permiti o login
 		if (response.status == 200) {
 			var ini = Criptacao(response)
 			criptar(response)
-
 		}
 	}
 
 	function criptar(response) {
 		// var aux = response.data.tokenType + ' ' + response.data.token
-		console.log('token');
 		Cookies.set('typeToken', response.data.tokenType)
 		Cookies.set('TokenID', response.data.token)
 		//Cookies.set('userType', response.data.role)
@@ -122,4 +118,4 @@ const Login = () => {
 	}
 }
 
-export default  Login;
+export default Login;

@@ -13,7 +13,13 @@ function StatusSituation(props) {
                 </div>
             </CCol>
             <CCol>
-                <CButton variant='ghost' className='button-status-select' size='sm' onClick={openModal} color="dark" >
+                <CButton
+                    variant='ghost'
+                    className='ms-1'
+                    size='sm'
+                    onClick={openModal}
+                    color="link"
+                >
                     <MdOutlineSync size={23} color="black" />
                 </CButton>
             </CCol>
@@ -21,4 +27,4 @@ function StatusSituation(props) {
     )
 }
 
-export default  StatusSituation;
+export default StatusSituation;

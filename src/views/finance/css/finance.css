@@ -6,6 +6,7 @@
     border-radius: 20px;
     height: 100%;
 }
+
 .cards-toppings-and-devices {
     border-radius: 20px;
     height: 50%;
@@ -39,4 +40,8 @@
 
 .text-container-users {
     font-size: 10pt
+}
+
+.color-text {
+    color: #216CFF;
 }

@@ -22,7 +22,7 @@
     background-color: #ebedef;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    height: 99%;
+    height: 100%;
 }
 
 .fontItemNav {
@@ -43,9 +43,9 @@
 
 .fontItemNav .controlerSideBar {
     border-radius: 45px;
-    float: right;
-    /* background-color: #F9F7F7; */
+    float: left;
     border: #9c9898;
+    color: blue;
 }
 
 .container-height {

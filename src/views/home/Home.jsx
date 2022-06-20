@@ -1,3 +1,4 @@
+import { CCard, CCardBody, CCardHeader, CCardTitle } from '@coreui/react'
 import React from 'react'
 import logoOonSeguros from '../../assets/images/oon-seguros-logo.svg'
 
@@ -5,18 +6,18 @@ import './home.css'
 
 const Home = () => {
     return (
-        <div className='container-home min-vh-100'>
-            <label className='font-home-titulo'>OON Seguros</label>
+        <CCard className='container-home min-vh-100'>
+            <CCardTitle className="font-home-titulo" component="h1">OON Seguros</CCardTitle>
             <hr />
-            <div className='d-flex justify-content-center'>
+            <CCardBody className='d-flex justify-content-center'>
                 <img
                     src={logoOonSeguros}
                     alt="logo-oon-seguros"
                     width={500}
                 />
-            </div>
-        </div>
+            </CCardBody>
+        </CCard>
     )
 }
 
-export default  Home;
+export default Home;

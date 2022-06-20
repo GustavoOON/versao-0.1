@@ -9,6 +9,8 @@ import {
     CButton,
     CBadge,
     CPopover,
+    CModal,
+    CModalBody,
   } from '@coreui/react'
 import './notify.css'
 
@@ -77,16 +79,15 @@ const Notify = () =>{
                                             <div key={index.toString()}>
                                                 {/* Abre um modal listando todas notificações. */}
                                                 <CButton onClick={verifica} size="sm" className='btn-notificacao-modal' color='dark' variant='ghost'> Mais {rest} notificações </CButton>
-                                                <Modal 
-                                                    show={show} 
-                                                    onHide={handleClose}
+                                                <CModal 
+                                                    visible={show} 
+                                                    onClose={handleClose}
                                                     size="xl"
                                                 >
-                                                    <Modal.Body className='container-body'>
+                                                    <CModalBody className='container-body'>
                                                         <RenderNotify notificacoes = {notificacao} /> 
-                                                    </Modal.Body>
-                                                    
-                                                </Modal>
+                                                    </CModalBody>
+                                                </CModal>
                                             </div>
                                         )
                                     }

@@ -26,7 +26,7 @@ function ModalFilter({ filter, setFilter, saveFilter }) {
             alignment="center"
         >
             <CModalHeader>
-                <CModalTitle>Filtrar</CModalTitle>
+                <CModalTitle className="title-modal">Filtrar</CModalTitle>
             </CModalHeader>
             <CModalBody>
                 <CRow>
@@ -81,7 +81,11 @@ function ModalFilter({ filter, setFilter, saveFilter }) {
                 </CRow>
             </CModalBody>
             <CModalFooter>
-                <CButton color="secondary" onClick={() => setFilter(false)}>
+                <CButton
+                    className='btn-cancel-global'
+                    variant='outline'
+                    onClick={() => setFilter(false)}
+                >
                     Cancelar
                 </CButton>
                 <CButton
@@ -91,7 +95,8 @@ function ModalFilter({ filter, setFilter, saveFilter }) {
                         valueFilterStartDate2,
                         valueFilterFinalDate2,
                     )}
-                    color="primary" >
+                    className='btn-save-global'
+                >
                     Salvar
                 </CButton>
             </CModalFooter>
@@ -99,4 +104,4 @@ function ModalFilter({ filter, setFilter, saveFilter }) {
     )
 }
 
-export default  ModalFilter;
+export default ModalFilter;

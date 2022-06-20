@@ -1,33 +1,38 @@
 import React, { useState } from 'react'
-import { CButton, CCol, CRow } from '@coreui/react'
+import { CButton, CCol, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CRow } from '@coreui/react'
 import { Modal } from 'react-bootstrap';
 
 import FormatDate from '../components/FormatDate';
 import CustomerData from '../components/CustomerData';
 
-const Resume = () =>{
+const Resume = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    
-    function verifica(){
+
+    function verifica() {
         setShow(true);
     }
-    
+
     return (
-        <> 
-            <CButton onClick={verifica} > Gerar relatório </CButton>
-            <Modal 
-                show={show} 
-                onHide={handleClose}
+        <>
+            <CButton
+                className='btn-save-global'
+                onClick={verifica}
+            >
+                Gerar relatório
+            </CButton>
+            <CModal
+                visible={show}
+                onClose={handleClose}
                 size="xl"
             >
-                <Modal.Header closeButton>
+                <CModalHeader closeButton>
                     <div>
-                    <Modal.Title className="font-info-title">Resumo</Modal.Title>
-                    <FormatDate date={new Date()} />
+                        <CModalTitle className="title-modal">Resumo</CModalTitle>
+                        <FormatDate />
                     </div>
-                </Modal.Header>
-                <Modal.Body>
+                </CModalHeader>
+                <CModalBody>
                     <CRow>
                         <CCol>
                             <CustomerData />
@@ -65,17 +70,25 @@ const Resume = () =>{
                             <label className='font-info-content'></label>
                         </CCol>
                     </CRow>
-                </Modal.Body>
-                <Modal.Footer>  
-                    <CButton onClick={handleClose}>
-                        Sair
+                </CModalBody>
+                <CModalFooter>
+                    <CButton
+                        className='btn-cancel-global'
+                        variant='outline'
+                        onClick={handleClose}
+                    >
+                        Cancelar
                     </CButton>
-                    
-                </Modal.Footer>
-                    
-            </Modal>
+                    <CButton
+                        className='btn-save-global'
+                        onClick={handleClose}
+                    >
+                        Baixar relatório
+                    </CButton>
+                </CModalFooter>
+            </CModal>
         </>
-    )   
+    )
 }
 
-export default  Resume
+export default Resume

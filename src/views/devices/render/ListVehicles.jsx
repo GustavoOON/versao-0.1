@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
+import {
+    CButton,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
+} from '@coreui/react';
 import { MdDescription, MdOutlineFilterList } from 'react-icons/md';
 import { Spinner } from 'react-bootstrap';
 
-import DateCreated from "./components/DateCreated";
-import Status from "./components/Status";
-import BtnEditCostumer from "./btn/BtnEditCostumer";
-import BtnMidia from "./btn/BtnMidia";
-import BtnInfos from "./btn/BtnInfos";
+import DateCreated from './components/DateCreated';
+import Status from './components/Status';
+import BtnEditCostumer from './btn/BtnEditCostumer';
+import BtnMidia from './btn/BtnMidia';
+import BtnInfos from './btn/BtnInfos';
 
-import '../css/listVehicles.css'
+import '../css/listVehicles.css';
 
 const ListVehicles = (props) => {
     const { dados, userType, refreshPage } = props;
@@ -17,7 +25,7 @@ const ListVehicles = (props) => {
     const [dadosVehicle, setDadosVehicle] = useState([]);
 
     useEffect(() => {
-        setDadosVehicle(dados)
+        setDadosVehicle(dados);
     }, [dados]);
 
     if (!dadosVehicle) {
@@ -32,26 +40,30 @@ const ListVehicles = (props) => {
                 <CTableHead>
                     <CTableRow>
                         <CTableHeaderCell>Placa Veículo</CTableHeaderCell>
-                        <CTableHeaderCell>Nome</CTableHeaderCell>
                         <CTableHeaderCell>Cidade</CTableHeaderCell>
-                        <CTableHeaderCell className="staus-pl">Status</CTableHeaderCell>
-                        <CTableHeaderCell className="data-p">
-                            Data
-                            <CButton
-                                onClick={() => console.log("ordenar lista")}
-                                size="sm"
-                                className="icon-listVehicle-css"
-                                color="blue"
-                            >
-                                <MdOutlineFilterList size={24} color="black" />
-                            </CButton>
+                        <CTableHeaderCell>Status</CTableHeaderCell>
+                        <CTableHeaderCell style={{ paddingLeft: '6%' }}>
+                            Sub-status
                         </CTableHeaderCell>
                         <CTableHeaderCell>
-                            <div className="container-device-listVehicles-actions">Fotos</div></CTableHeaderCell>
+                            Data
+                            <CButton
+                                onClick={() => console.log('ordenar lista')}
+                                size="sm"
+                                className="icon-listVehicle-css"
+                                color="link"
+                            >
+                                <MdOutlineFilterList size={22} color="black" />
+                            </CButton>
+                        </CTableHeaderCell>
+                        <CTableHeaderCell className="text-center">
+                            Fotos
+                        </CTableHeaderCell>
                         <CTableHeaderCell>
                             <div className="container-device-listVehicles-actions">
                                 Informações
-                            </div></CTableHeaderCell>
+                            </div>
+                        </CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
 
@@ -59,15 +71,21 @@ const ListVehicles = (props) => {
                     {dadosVehicle.map((item, index) => (
                         <CTableRow key={index}>
                             <CTableDataCell>
-                                <label className='font-table-listVehicles'>{item.vehicle.plateNumber}</label>
-                            </CTableDataCell>
-
-                            <CTableDataCell>
-                                <label className='font-table-listVehicles'>{item.customer.firstName}</label>
+                                <label className="font-table-listVehicles">
+                                    {item.vehicle.plateNumber}
+                                </label>
                             </CTableDataCell>
 
                             <CTableDataCell style={{ paddingRight: 0 }}>
-                                <label className='font-table-listVehicles'>{item.vehicle.city}</label>
+                                <label className="font-table-listVehicles">
+                                    {item.vehicle.city}
+                                </label>
+                            </CTableDataCell>
+
+                            <CTableDataCell>
+                                <label className="font-table-listVehicles">
+                                    Em processo
+                                </label>
                             </CTableDataCell>
 
                             <CTableDataCell>
@@ -75,7 +93,10 @@ const ListVehicles = (props) => {
                             </CTableDataCell>
 
                             <CTableDataCell>
-                                <DateCreated date={item.createdAt} />
+                                <DateCreated
+                                    date={item.createdAt}
+                                    status={item.status}
+                                />
                             </CTableDataCell>
 
                             <CTableDataCell>
@@ -84,7 +105,7 @@ const ListVehicles = (props) => {
 
                             <CTableDataCell className="collun-actions">
                                 <div className="container-device-listVehicles-actions">
-                                    {userType === "ADMIN" ? (
+                                    {userType === 'ADMIN' ? (
                                         <>
                                             <BtnEditCostumer
                                                 data={item}
@@ -92,15 +113,24 @@ const ListVehicles = (props) => {
                                             />
                                         </>
                                     ) : null}
-                                    <BtnInfos infos={item} idCustomer={item.customer.id} icon={<MdDescription size={24} color="black" />} />
+                                    <BtnInfos
+                                        infos={item}
+                                        idCustomer={item.customer.id}
+                                        icon={
+                                            <MdDescription
+                                                size={24}
+                                                color="black"
+                                            />
+                                        }
+                                    />
                                 </div>
                             </CTableDataCell>
                         </CTableRow>
                     ))}
                 </CTableBody>
             </CTable>
-        )
+        );
     }
-}
+};
 
-export default  ListVehicles;
+export default ListVehicles;

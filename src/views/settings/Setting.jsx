@@ -115,7 +115,7 @@ const Setting = () => {
                     <label className='font-btn-setting'>  Ajuda  </label>
                 </CButton>
             </CCol>
-            <CCol className='cardDir' >
+            <CCol className='cardDir h-100' >
                 <CCard className="card-setting p-5">
                     <CCardBody>
 

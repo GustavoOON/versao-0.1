@@ -25,10 +25,10 @@ const Finance = () => {
             </CRow>
             <br />
             <CRow>
-                <CCol xs={9}>
+                <CCol xs={8}>
                     <Users />
                 </CCol>
-                <CCol xs={3}>
+                <CCol xs={4}>
                     <ToppingsAndDevices />
                 </CCol>
             </CRow>

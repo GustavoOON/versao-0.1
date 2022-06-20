@@ -9,30 +9,27 @@ import { MdOutlineHelpOutline, MdCheckCircleOutline } from 'react-icons/md';
 import logoOon from '../../../assets/images/oon-seguros-logo.svg';
 
 import '../css/newAccount.css';
+import { Spinner } from 'react-bootstrap';
 
 const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [msgEmailIncorret, setMsgEmailIncorret] = useState(true)
     const [msgPasswordIncorret, setMsgPasswordIncorret] = useState(true)
+    const [createAcc, setCreateAcc] = useState(false)
 
     const userEmail = (e) => { setEmail(e.target.value) }
     const userPassword = (e) => { setPassword(e.target.value) }
 
 
     const newUser = () => {
+        setCreateAcc(true)
         var postData = {
             email: email,
             password: password
         };
 
-        //const config = configCookies()
-        const config = {
-            headers: {
-                "Content-Type": "application/json;charset=UTF-8",
-                "Access-Control-Allow-Origin": "*",
-            },
-        };
+        const config = configCookies()
 
         // setFlagEmail(true)
         axios
@@ -40,6 +37,10 @@ const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
             .then((res) => {
                 console.log(res)
                 setNewAccountBtn(true)
+                setInterval(() => {
+                    setCreateAcc(false)
+                }, 2000);
+
                 // setFlagEmail(true)
                 // setShow(false)
             })
@@ -47,6 +48,7 @@ const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
                 console.log('error', r)
                 // setFlagEmail(false)
             })
+
     }
 
 
@@ -57,11 +59,24 @@ const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
         password.length >= 6 ? setMsgPasswordIncorret(true) :
             setMsgPasswordIncorret(false)
 
-        newUser()
+        msgEmailIncorret && msgPasswordIncorret ? newUser() : null
 
     }
 
-    return (
+    return createAcc ? (
+        <>
+            <img className="img-oon" src={logoOon} alt="logo oon seguros" />
+            <p className="subtitle-login-dir">Conta criada com sucesso!!</p>
+            <div className='inputs-container w-50'>
+                <CButton
+                    onClick={() => setNewAccountBtn(true)}
+                    className="btn-login-white"
+                >
+                    Faça login
+                </CButton>
+            </div>
+        </>
+    ) : (
         <>
             <img className="img-oon" src={logoOon} alt="logo oon seguros" />
             <p className="subtitle-login-dir">Criar nova conta</p>
@@ -142,24 +157,14 @@ const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
                 <br />
                 <CButton
                     onClick={handleSubmit}
-                    className="btns-login"
-                    style={{
-                        backgroundColor: '#216CFF',
-                        borderColor: '#216CFF'
-                    }}
+                    className="btns-login btn-save-global"
                 >
                     Criar conta
                 </CButton>
                 <p className='pt-5 text-center new-account-text'>Já tem uma contra? Faça login!</p>
                 <CButton
                     onClick={() => setNewAccountBtn(true)}
-                    style={{
-                        color: '#216CFF',
-                        backgroundColor: '#FFFFFF',
-                        border: '1px solid #216CFF',
-                        borderRadius: '12px',
-                        width: '100%'
-                    }}
+                    className="btn-login-white"
                 >
                     Faça login
                 </CButton>
@@ -170,4 +175,4 @@ const NewAccount = ({ showPassword, setShowPassword, setNewAccountBtn }) => {
 }
 
 
-export default  NewAccount;
+export default NewAccount;

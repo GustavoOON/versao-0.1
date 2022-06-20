@@ -1,35 +1,42 @@
 import React from 'react';
-import { CButton, CFormInput, CInputGroup } from '@coreui/react'
+import { CButton, CFormInput, CInputGroup, CModal, CModalBody, CModalHeader, CModalTitle } from '@coreui/react'
 import { Modal } from 'react-bootstrap'
-import { BsSearch } from 'react-icons/bs'
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 import InfoCars from './InfosCars'
 
 function ModalDevices({ show2, closeModal2 }) {
     return (
-        <Modal
-            show={show2}
-            onHide={closeModal2}
+        <CModal
+            visible={show2}
+            onClose={closeModal2}
             size="xl"
         >
-            <Modal.Header closeButton>
-                <Modal.Title className='w-50'>Dispositivos</Modal.Title>
-                    <CInputGroup className='w-25'>
-                        <CFormInput
-                        className=""
-                            placeholder="Pesquise uma placa"
-                            type="text"
-
-                        />
+            <CModalHeader closeButton>
+                <CModalTitle className='w-50 title-modal'>Dispositivos</CModalTitle>
+                <CInputGroup className='w-50'>
+                    <div className="d-flex">
+                        <div className="  container-icon-input">
+                            <i className='icon-dispositivos i-absolute-global'>
+                                <BiSearchAlt2 color="#6D6D6D" />
+                            </i>
+                            <CFormInput
+                                className="input-search-global" placeholder="Pesquisar placa"
+                                size="sm"
+                                type="text"
+                            />
+                        </div>
                         <CButton
-                        className=""
+                            className="btn-search-global"
                             type="button"
-                            color="secondary"
+                            color="primary"
                             variant="outline"
+                            size="sm"
                         >
-                            <BsSearch className='user-icons' />
+                            Buscar
                         </CButton>
-                    </CInputGroup>
+                    </div>
+                </CInputGroup>
                 {/* <div className="d-flex">
                     <CFormInput
                         type="text"
@@ -42,12 +49,12 @@ function ModalDevices({ show2, closeModal2 }) {
                     >
                     </CButton>
                 </div> */}
-            </Modal.Header>
-            <Modal.Body>
+            </CModalHeader>
+            <CModalBody>
                 <InfoCars />
-            </Modal.Body>
-        </Modal>
+            </CModalBody>
+        </CModal>
     )
 }
 
-export default  ModalDevices;
+export default ModalDevices;

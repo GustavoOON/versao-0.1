@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CCard, CCardBody, CRow, CCol } from '@coreui/react'
+import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CCard, CCardBody, CRow, CCol, CButton } from '@coreui/react'
 import axios from 'axios'
 import { Spinner } from 'react-bootstrap'
 
-import BtnAttValues from './btn/BtnAttValues'
 import urlDomain, { configCookies } from 'src/config'
 
 import '../css/scratchs.css'
@@ -24,6 +23,19 @@ function Scratchs() {
             })
     }, [])
 
+    const attScratchs = () => {
+        const config = configCookies()
+        axios
+            .get(`${urlDomain}/risks`, config)
+            .then((response) => {
+                setDados(response.data)
+            })
+            .catch(r => {
+                //console.log('error', r), alert('Login expirados'),window.location.reload()
+            })
+    }
+
+
     return (
         <CCard className='card'>
             <CCardBody>
@@ -32,7 +44,12 @@ function Scratchs() {
                         <label className="plan-title">Riscos</label >
                     </CCol>
                     <CCol className='btn-filter'>
-                        <BtnAttValues />
+                        <CButton
+                            className='btn-save-global'
+                            onClick={() => attScratchs()}
+                        >
+                            Atualizar
+                        </CButton>
                     </CCol>
                 </CRow>
                 <br />
@@ -82,4 +99,4 @@ function Scratchs() {
     )
 }
 
-export default  Scratchs
+export default Scratchs

@@ -1,41 +1,37 @@
-import React,{useStae} from 'react'
+import React from 'react'
 import { CChart } from '@coreui/react-chartjs'
-import {
-    CCol,
-    CButton,
-    CButtonGroup,
-    CCard,
-    CCardBody,
-    CCardTitle,
-    CCardText,
-    
-  } from '@coreui/react'
+import { CCard, CCardBody, CCardTitle } from '@coreui/react'
 
-  import ButtonRelatory from '../btns/ButtonCall'
+import ButtonCall from '../btns/ButtonGraph'
 
+const Users = () => {
+    const year = new Date().getFullYear()
+    const month = new Date().getMonth()
 
-
-const Users = () =>{
+    const monthName = {
+        0: 'Janeiro',
+        1: 'Fevereiro',
+        2: 'Março',
+        3: 'Abril',
+        4: 'MAio',
+        5: 'Junho',
+        6: 'Julho',
+        7: 'Agosto',
+        8: 'Setembro',
+        9: 'Outubro',
+        10: 'Novembro',
+        11: 'Dezembro',
+    };
 
     return (
-        <> 
+        <>
             <CCard className='cardEsquerda'>
                 <CCardBody>
-                    <CCardTitle>  Usuários  </CCardTitle>
-                    <label > Dezembro 2021</label>
-                    <CButtonGroup size="sm" role="group" className='btn1Chamados' aria-label="Basic outlined example">
-                        <CButton color="primary" variant="outline" color="dark">
-                            Dia
-                        </CButton>
-                        <CButton color="primary" variant="outline" color="dark">
-                            Semana
-                        </CButton>
-                        <CButton color="primary"  variant="outline" color="dark">
-                            Mês
-                        </CButton>
-                    </CButtonGroup>
-                    {/* Ver como vai fazer com esse button de relatory */}
-                    <ButtonRelatory   />
+                    <div className='d-flex justify-content-between'>
+                        <CCardTitle>Usuários</CCardTitle>
+                        <ButtonCall />
+                    </div>
+                    <label>{monthName[month]} {year}</label>
                     <CChart
                         type="bar"
                         data={{
@@ -43,7 +39,7 @@ const Users = () =>{
                             datasets: [
                                 {
                                     label: 'Usuários novos',
-                                    backgroundColor:  '#2561FA',
+                                    backgroundColor: '#2561FA',
                                     data: [40, 20, 12, 39, 10, 80],
                                 },
                                 {
@@ -55,11 +51,11 @@ const Users = () =>{
                         }}
                         labels="months"
                     />
-                    
+
                 </CCardBody>
             </CCard>
         </>
     )
 }
 
-export default  Users
+export default Users

@@ -38,7 +38,7 @@ const AppSidebar = () => {
             </CSidebarBrand>
             <CSidebarNav>
                 <SimpleBar
-                    className="fontItemNav"
+                    className="fontItemNav pt-4"
                     style={{
                         backgroundColor: "#F9F7F7",
                     }}

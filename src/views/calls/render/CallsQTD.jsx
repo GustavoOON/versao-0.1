@@ -1,7 +1,7 @@
 import React from 'react';
 import { CCol, CCard, CCallout, CRow } from '@coreui/react';
 
-import ButtonRelatory from '../btns/ButtonCall';
+import ButtonCalls from '../btns/ButtonCalls';
 
 const CallsQTD = () => {
     return (
@@ -10,7 +10,7 @@ const CallsQTD = () => {
                 <CCallout className="callout" color="primary">
                     <CRow>
                         <div className="btn-filter">
-                            <ButtonRelatory />
+                            <ButtonCalls />
                         </div>
                         <CCol className='text-center'>
                             <h2>55</h2>
@@ -24,7 +24,7 @@ const CallsQTD = () => {
                 <CCallout className="callout" color="info">
                     <CRow>
                         <div className="btn-filter">
-                            <ButtonRelatory />
+                            <ButtonCalls />
                         </div>
                         <CCol className='text-center'>
                             <h2>25</h2>

@@ -1,5 +1,5 @@
 import {
-  CButton, CFormInput, CInputGroup
+  CButton, CFormInput, CInputGroup, CModal, CModalBody, CModalFooter
 } from '@coreui/react';
 import axios from "axios";
 import React, { useState } from 'react';
@@ -113,13 +113,13 @@ const UploadRiscBtn = (props) => {
         Atualizar valores
       </CButton>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
+      <CModal
+        visible={show}
+        onClose={handleClose}
         size="xl"
         className='container-btn-risc'
       >
-        <Modal.Body>
+        <CModalBody>
           <h3>Atualizar planilha </h3>
           <br />
           <p>Atualizar valores de risco por meio de uma planilha .CSV.</p>
@@ -157,16 +157,16 @@ const UploadRiscBtn = (props) => {
                       Salvar
                   </Button> */}
 
-        </Modal.Body>
+        </CModalBody>
 
-        <Modal.Footer>
+        <CModalFooter>
           <Button variant="secondary" onClick={handleClose}>
             Sair
           </Button>
 
-        </Modal.Footer>
+        </CModalFooter>
 
-      </Modal>
+      </CModal>
     </>
   )
 }

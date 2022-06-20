@@ -146,20 +146,20 @@ const Tracking = () => {
     const [op4, setOp4] = useState(false);
 
     function open1() {
-        setOp1(true), setOp2(false), setOp3(false), setOp4(false),
-            allVehicles()
+        setOp1(true), setOp2(false), setOp3(false), setOp4(false), allVehicles()
     }
 
     function open2() {
         setOp1(false), setOp2(true), setOp3(false), setOp4(false), openModal2()
     }
+
     function open3() {
         setOp1(false), setOp2(false), setOp3(true), setOp4(false), openModal()
     }
+    
     function open4() {
         setOp1(false), setOp2(false), setOp3(false), setOp4(true), syncedDevices()
     }
-
 
     const [show, setShow] = useState(false);
     const [flagBTN, setFlagBTN] = useState(true);
@@ -268,7 +268,7 @@ const Tracking = () => {
                                                     origin: new window.google.maps.Point(0, 0),
                                                     anchor: new window.google.maps.Point(15, 15),
                                                 }}
-
+                                                
                                                 onClick={() => { selected(item) }}
                                             />
                                             {selecionado != '' ?
@@ -299,7 +299,11 @@ const Tracking = () => {
 
                                             {selecionado != '' ?
                                                 (
-                                                    <InfoWindowPopup openModal={openModal} closePop={closePopup} device={selecionado} />
+                                                    <InfoWindowPopup
+                                                        openModal={openModal}
+                                                        closePop={closePopup}
+                                                        device={selecionado}
+                                                    />
                                                 )
                                                 : null
                                             }
@@ -349,4 +353,4 @@ const Tracking = () => {
 
 }
 
-export default  Tracking;
+export default Tracking;

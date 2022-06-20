@@ -11,6 +11,18 @@ import NewAccount from './NewAccount';
 function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, login }) {
     const [newAccountBtn, setNewAccountBtn] = useState(true)
     const [showPassword, setShowPassword] = useState(false)
+    const [msgEmailIncorret, setMsgEmailIncorret] = useState(true)
+    const [msgPasswordIncorret, setMsgPasswordIncorret] = useState(true)
+
+    const handleSubmit = () => {
+
+        user.includes('@') ? setMsgEmailIncorret(true) : setMsgEmailIncorret(false)
+
+        password.length >= 6 ? setMsgPasswordIncorret(true) :
+            setMsgPasswordIncorret(false)
+
+        msgEmailIncorret && msgPasswordIncorret ? login() : null
+    }
 
     const lembra = ({ target }) => {
         // console.log(
@@ -47,16 +59,19 @@ function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, l
                                         E-mail
                                     </CFormLabel>
                                     <CInputGroup
-                                        className="mb-3"
+                                        className="mb-3 d-flex-wrap"
                                     >
-                                        <CFormInput
-                                            className='radius-border'
-                                            id="email"
-                                            type="email"
-                                            onChange={userLogin}
-                                            value={user}
-                                            placeholder="Digite seu e-mail"
-                                        />
+                                        <div className='w-100'>
+                                            <CFormInput
+                                                className='radius-border'
+                                                id="email"
+                                                type="email"
+                                                onChange={userLogin}
+                                                value={user}
+                                                placeholder="Digite seu e-mail"
+                                            />
+                                        </div>
+                                        <label className='error-text' hidden={msgEmailIncorret}>Não foi possível encontrar esse e-mail no sistema</label>
                                     </CInputGroup>
                                     <CFormLabel
                                         htmlFor="senha"
@@ -85,6 +100,7 @@ function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, l
                                                 {!showPassword ? <FaEye /> : <FaEyeSlash />}
                                             </i>
                                         </div>
+                                        <label className='error-text' hidden={msgPasswordIncorret}>A senha deve conter pelo menos 6 caracteres.</label>
                                     </CInputGroup>
                                     <CFormCheck
                                         className="email-password-form"
@@ -96,18 +112,13 @@ function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, l
                                 </CForm>
                                 <br />
                                 <CButton
-                                    onClick={() => login()}
-                                    className="btns-login"
-                                    style={{
-                                        backgroundColor: '#216CFF',
-                                        borderColor: '#216CFF'
-                                    }}
+                                    onClick={handleSubmit}
+                                    className="btns-login btn-save-global"
                                 >
                                     Entrar na minha conta
                                 </CButton>
                                 <CButton
                                     color='link'
-                                    style={{ color: '#14142B' }}
                                     variant='ghost'
                                     onClick={() => setForgotMyPass(false)}
                                     className="btn-forgot-password"
@@ -117,13 +128,7 @@ function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, l
                                 <p className='pt-5 text-center new-account-text'>Não tem uma conta ainda? Crie já!</p>
                                 <CButton
                                     onClick={() => setNewAccountBtn(false)}
-                                    style={{
-                                        color: '#216CFF',
-                                        backgroundColor: '#FFFFFF',
-                                        border: '1px solid #216CFF',
-                                        borderRadius: '12px',
-                                        width: '100%'
-                                    }}
+                                    className="btn-login-white"
                                 >
                                     Criar uma nova conta
                                 </CButton>
@@ -139,8 +144,8 @@ function MainLogin({ userLogin, user, userPassword, password, setForgotMyPass, l
                     )
                 }
             </CRow>
-        </div>
+        </div >
     )
 }
 
-export default  MainLogin
+export default MainLogin;

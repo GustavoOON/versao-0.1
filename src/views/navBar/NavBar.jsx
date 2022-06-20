@@ -91,12 +91,15 @@ const navAll = [
         to: '/Users',
         icon: cilPeople,
     },
-    {
-        component: CNavItem,
-        name: 'Configurações',
-        to: '/configuracoes',
-        icon: cilCog,
-    },
+
+
+    
+    // {
+    //     component: CNavItem,
+    //     name: 'Configurações',
+    //     to: '/configuracoes',
+    //     icon: cilCog,
+    // },
 
 
     // {

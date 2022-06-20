@@ -16,7 +16,6 @@ const Notify = () =>{
 
     return (
         <> 
-
             <CForm className="row g-3 container-notify">
                 <CCol md={11}>
                     <h4>Notificação</h4>

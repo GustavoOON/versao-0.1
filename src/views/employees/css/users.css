@@ -1,64 +1,53 @@
-.newUser{
-    margin-right: 10px;
-}
-
-
-.icon-css{
-    cursor: pointer;
-    margin-left: 10px;
-    color: white;
-}
-
-.usersContainer{
+.usersContainer {
     border-radius: 20px;
-
 }
-.menuUser{
+
+.menuUser {
     margin-bottom: 1%;
 }
 
-.container-employees-actions{
+.container-employees-actions {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.btn-employees-action{
-    margin-left:4%;
+.btn-employees-action {
+    margin-left: 4%;
 }
 
-.usersTableContainer{
+.usersTableContainer {
     background: white;
 }
 
-.newUser-input-IncorrectEmail{
+.newUser-input-IncorrectEmail {
     background: rgb(245, 163, 56);
     margin-top: 1%;
     padding: 0.5%;
     border-radius: 5px;
 }
 
-.user-icons{
+.user-icons {
     font-size: 20pt;
 }
 
-.container-users-notFind{
-    background: rgb(228, 228, 228) ;
+.container-users-notFind {
+    background: rgb(228, 228, 228);
     border-radius: 20px;
     padding: 3%;
 }
 
-.btn-user-pagination{
+.btn-user-pagination {
     margin: 0.5%;
 }
 
-.container-users-pagination{
+.container-users-pagination {
     background: #f2f2f3;
     position: inline-end;
     border-radius: 20px;
 }
 
-.container-qtd-employeer{
+.container-qtd-employeer {
     position: initial;
     padding-left: 3%;
     display: flex;
@@ -68,17 +57,12 @@
     font-weight: 600;
 }
 
-.container-pagination-align{
+.container-pagination-align {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 81%;
-}
-
-.filtro {
-    width: 8em;
-    margin: 10px;
 }
 
 .input-filter {
@@ -90,6 +74,7 @@
     margin: 8px;
     padding: 5px;
 }
+
 .icon-filtro {
     padding: 0px 6px 2px 0px;
 }
@@ -98,4 +83,40 @@
     font-size: 9pt;
     color: #C4C4C4;
     padding: 10px;
+}
+
+.drop-toggle-filter-users {
+    color: #216CFF;
+    text-decoration: none;
+}
+
+.drop-toggle-filter-users:active,
+.drop-toggle-filter-users:hover,
+.drop-toggle-filter-users:checked {
+    color: #1B54BD !important;
+    text-decoration: underline;
+}
+
+.drop-item-filter-users {
+    color: #216CFF;
+}
+
+.drop-item-filter-users:active,
+.drop-item-filter-users:hover,
+.drop-item-filter-users:checked {
+    background-color: rgba(231, 231, 231, 0.35) !important;
+    color: #1B54BD;
+    border-left: #216CFF solid 2px;
+}
+
+.subtitle-modal-association {
+    font-size: x-large !important;
+}
+
+.opacity-modal {
+    opacity: 20%;
+}
+
+.text-remove {
+    font-size: x-large;
 }

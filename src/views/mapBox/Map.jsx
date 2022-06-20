@@ -13,7 +13,7 @@ import Report from './render/Report.jsx'
 import PopupRender from './render/Popup.jsx'
 import RouteDraw from './render/RouteDraw'
 // Bibliotecas e imagens
-import { CImage, CButton } from '@coreui/react'
+import { CImage, CButton, CModal, CModalHeader, CModalTitle, CModalFooter } from '@coreui/react'
 import { Modal } from 'react-bootstrap';
 import CIcon from '@coreui/icons-react'
 import {cilAlignCenter} from '@coreui/icons'
@@ -181,24 +181,24 @@ const mapBox = () =>{
                         <CButton className='button-css' onClick={verifica} color="light" >
                             <CIcon  icon={cilAlignCenter}   size="xl" />
                         </CButton>
-                        <Modal 
-                            show={show} 
-                            onHide={handleClose}
+                        <CModal 
+                            visible={show} 
+                            onClose={handleClose}
                             size="xl"
                         >
-                            <Modal.Header  closeButton>
-                                <Modal.Title>Relatórios</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body className='container-body'>
+                            <CModalHeader  closeButton>
+                                <CModalTitle className="title-modal">Relatórios</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody className='container-body'>
                                 <Report /> 
-                            </Modal.Body>
-                            <Modal.Footer>  
+                            </CModalBody>
+                            <CModalFooter>  
                                 <CButton  onClick={handleClose}>
                                     Sair
                                 </CButton>
                             
-                            </Modal.Footer>
-                        </Modal>
+                            </CModalFooter>
+                        </CModal>
                     </div>
                 </ReactMapGL>
                

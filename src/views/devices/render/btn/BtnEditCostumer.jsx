@@ -1,422 +1,344 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { FaUserEdit } from "react-icons/fa";
-import { Button, Modal, Spinner } from "react-bootstrap";
-import { CRow, CButton, CCol, CFormInput } from "@coreui/react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { FaUserEdit } from 'react-icons/fa';
+import { Spinner } from 'react-bootstrap';
+import {
+    CRow,
+    CButton,
+    CCol,
+    CFormInput,
+    CFormTextarea,
+    CModal,
+    CModalBody,
+    CModalHeader,
+    CModalTitle,
+} from '@coreui/react';
+// import { MdCameraAlt } from 'react-icons/md';
+// import { BsFillFileEarmarkTextFill } from 'react-icons/bs';
 
-import UrlDomain, { configCookies } from "../../../../config";
+import UrlDomain, { configCookies } from '../../../../config';
 
-import "../../css/btnEditCostumer.css";
+import '../../css/btnEditCostumer.css';
 
 const BtnEditCostumer = (props) => {
     const { data, callBack } = props;
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const [dataCostumer, setDataCostumer] = useState("");
+    const [dataCostumer, setDataCostumer] = useState('');
+    const [update, setUpdate] = useState(data.updatedAt);
+
     // INFORMAÇOES do cliente
-    const [address, setAddress] = useState();
-    const [firstName, setFirstName] = useState(data.customer.firstName);
-    const [fullName, setFullName] = useState(data.customer.fullName);
-    const [document, setDocument] = useState(data.customer.document);
-    const [email, setEmail] = useState(data.customer.email);
-    const [phone, setPhone] = useState(data.customer.phone);
-    const userFirstName = (e) => {
-        setFirstName(e.target.value);
+    const [fullNameUser, setFullNameUser] = useState();
+    const [birthDateUser, setBirthDateUser] = useState();
+    const [emailUser, setEmailUser] = useState();
+    const [CEPUser, setCEPUser] = useState();
+    const [cityUser, setCityUser] = useState();
+    const [numberUser, setNumberUser] = useState();
+    const [CNHUser, setCNHUser] = useState();
+    const [CPFUser, setCPFUser] = useState();
+    const [RGUser, setRGUser] = useState();
+    const [phoneUser, setPhoneUser] = useState();
+    const [stateUser, setStateUser] = useState();
+    const [addressUser, setAddressUser] = useState();
+    const [complementUser, setComplementUser] = useState();
+    const [documentVehicleUser, setDocumentVehicleUser] = useState();
+
+    const userFullName = ({ target }) => {
+        setFullNameUser(target.value);
     };
-    const userFullName = (e) => {
-        setFullName(e.target.value);
+    const userEmail = ({ target }) => {
+        setEmailUser(target.value);
     };
-    const userDocument = (e) => {
-        setDocument(e.target.value);
+    const userBirthDate = ({ target }) => {
+        setBirthDateUser(target.value);
     };
-    const userEmail = (e) => {
-        setEmail(e.target.value);
+    const userCEP = ({ target }) => {
+        setCEPUser(target.value);
     };
-    const userPhone = (e) => {
-        setPhone(e.target.value);
+    const userCity = ({ target }) => {
+        setCityUser(target.value);
     };
-    // informacoes do cliente
-    const [brand, setBrand] = useState(data.vehicle.brand);
-    const [chassis, setChassis] = useState(data.vehicle.chassis);
-    const [cityVehicle, setCityVehicle] = useState(data.vehicle.city);
-    const [colorVehicle, setColorVehicle] = useState(data.vehicle.color);
-    const [fipeCode, setFipeCode] = useState(data.vehicle.fipeCode);
-    const [fipeValue, setFipeValue] = useState(data.vehicle.fipeValue);
-    const [fuel, setFuel] = useState(data.vehicle.fuel);
-    const [model, setModel] = useState(data.vehicle.model);
-    const [plateNumber, setPlateNumber] = useState(data.vehicle.plateNumber);
-    const [reference, setReference] = useState(data.vehicle.reference);
-    const [state, setState] = useState(data.vehicle.state);
-    const [yearVehicle, setYearVehicle] = useState(data.vehicle.year);
-    const [Status, setStatus] = useState(data.vehicle.vehicleStatus);
-    const setVehicleBrand = (e) => {
-        setBrand(e.target.value);
+    const userNumber = ({ target }) => {
+        setNumberUser(target.value);
     };
-    const setVehicleChassis = (e) => {
-        setChassis(e.target.value);
+    const userCNH = ({ target }) => {
+        setCNHUser(target.value);
     };
-    const setVehicleCity = (e) => {
-        setCityVehicle(e.target.value);
+    const userCPF = ({ target }) => {
+        setCPFUser(target.value);
     };
-    const setVehicleColor = (e) => {
-        setColorVehicle(e.target.value);
+    const userRG = ({ target }) => {
+        setRGUser(target.value);
     };
-    const setVehicleFipeCode = (e) => {
-        setFipeCode(e.target.value);
+    const userPhone = ({ target }) => {
+        setPhoneUser(target.value);
     };
-    const setVehicleFipeValue = (e) => {
-        setFipeValue(e.target.value);
+    const userState = ({ target }) => {
+        setStateUser(target.value);
     };
-    const setVehicleFuel = (e) => {
-        setFuel(e.target.value);
+    const userAddress = ({ target }) => {
+        setAddressUser(target.value);
     };
-    const setVehicleModel = (e) => {
-        setModel(e.target.value);
+    const userComplement = ({ target }) => {
+        setComplementUser(target.value);
     };
-    const setVehiclePlateNumber = (e) => {
-        setPlateNumber(e.target.value);
-    };
-    const setVehicleReference = (e) => {
-        setReference(e.target.value);
-    };
-    const setVehicle = (e) => {
-        setState(e.target.value);
-    };
-    const setVehicleYear = (e) => {
-        setYearVehicle(e.target.value);
-    };
-    const setVehicleStatus = (e) => {
-        setStatus(e.target.value);
+    const userDocumentVehicle = ({ target }) => {
+        setDocumentVehicleUser(target.value);
     };
 
-    // informações
-    const [addressStreet, setAddressStreet] = useState();
-    const [complement, setComplement] = useState();
-    const [district, setDistrict] = useState();
-    const [number, setNumber] = useState();
-    const [zipCode, setZipCode] = useState();
-    const [stateUser, setStateUser] = useState();
-    const [city, setCity] = useState();
-    const [idAddress, setIdAddress] = useState();
-    const AddressAddressStreet = (e) => {
-        setAddressStreet(e.target.value);
+    // informacoes do veículo
+    const [plateNumberVehicle, setPlateNumberVehicle] = useState(
+        data.vehicle.plateNumber
+    );
+    const [brandVehicle, setBrandVehicle] = useState(data.vehicle.brand);
+    const [fipeValueVehicle, setFipeValueVehicle] = useState(
+        data.vehicle.fipeValue
+    );
+    const [chassisVehicle, setChassisVehicle] = useState(data.vehicle.chassis);
+    const [modelVehicle, setModelVehicle] = useState(data.vehicle.model);
+    const [yearVehicle, setYearVehicle] = useState(data.vehicle.year);
+
+    const vehiclePlateNumber = ({ target }) => {
+        setPlateNumberVehicle(target.value);
     };
-    const AddressComplement = (e) => {
-        setComplement(e.target.value);
+    const vehicleBrand = ({ target }) => {
+        setBrandVehicle(target.value);
     };
-    const AddressDistrict = (e) => {
-        setDistrict(e.target.value);
+    const vehicleFipeValue = ({ target }) => {
+        setFipeValueVehicle(target.value);
     };
-    const Addressnumber = (e) => {
-        setNumber(e.target.value);
+    const vehicleChassis = ({ target }) => {
+        setChassisVehicle(target.value);
     };
-    const AddresszipCode = (e) => {
-        setZipCode(e.target.value);
+    const vehicleModel = ({ target }) => {
+        setModelVehicle(target.value);
     };
-    const AddressStateUser = (e) => {
-        setStateUser(e.target.value);
+    const vehicleYear = ({ target }) => {
+        setYearVehicle(target.value);
     };
-    const AddressCity = (e) => {
-        setCity(e.target.value);
+
+    //informacoes do plano
+    const [policyPlan, setPolicyPlan] = useState();
+    const [baseValuePlan, setBaseValuePlan] = useState();
+    const [descriptionPlan, setDescriptionPlan] = useState();
+    const [expirationPlan, setExpirationPlan] = useState();
+    const [valuePerKmPlan, setValuePerKmPlan] = useState();
+
+    const planPolicy = ({ target }) => {
+        setPolicyPlan(target.value);
     };
+    const planBaseValue = ({ target }) => {
+        setBaseValuePlan(target.value);
+    };
+    const planDescription = ({ target }) => {
+        setDescriptionPlan(target.value);
+    };
+    const planExpiration = ({ target }) => {
+        setExpirationPlan(target.value);
+    };
+    const planValuePerKm = ({ target }) => {
+        setValuePerKmPlan(target.value);
+    };
+
+    useEffect(() => {
+        setFullNameUser(data.customer.fullName);
+        setBirthDateUser();
+        setEmailUser(data.customer.email);
+        setCEPUser();
+        setCityUser();
+        setNumberUser();
+        setCNHUser();
+        setCPFUser();
+        setRGUser();
+        setPhoneUser(data.customer.phone);
+        setStateUser();
+        setAddressUser();
+        setComplementUser();
+        setDocumentVehicleUser();
+        setPolicyPlan();
+        setBaseValuePlan(data.plan.baseValue);
+        setDescriptionPlan(data.plan.description);
+        setExpirationPlan(data.plan.expiration);
+        setValuePerKmPlan(data.plan.valuePerKm);
+    }, [show]);
 
     const [op1, setOp1] = useState(true);
     const [op2, setOp2] = useState(false);
     const [op3, setOp3] = useState(false);
-    const choiceUser = () => {
+    const choicePlans = () => {
         setOp1(true), setOp2(false), setOp3(false);
     };
-    const choiceAddress = () => {
+    const choiceVehicle = () => {
         setOp1(false), setOp2(true), setOp3(false);
     };
-    const choiceVehicle = () => {
+    const choiceUser = () => {
         setOp1(false), setOp2(false), setOp3(true);
     };
 
     const [flag, setFlag] = useState(0);
     function openModal(d) {
-        const handleShow = setShow(true);
-        const config = configCookies()
+        setShow(true);
+        const config = configCookies();
 
         axios
             .get(`${UrlDomain}/customers/${d.customer.id}`, config)
             .then((response) => {
-                setAddress(response.data.addresses);
+                setAddressUser(response.data.addresses[0].address);
                 setDataCostumer(response);
             })
             .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
+                console.log('error', r),
+                    alert('Login expirado'),
                     window.location.reload();
             });
     }
 
-    function verify() {
-        // verificacoes no telefone
-        setFlag(0);
-        if (phone.length == 11 && phone[2] === "9") {
-            saveCustomer();
-        } else {
-            setFlag(1);
-        }
-    }
+    // function verify() {
+    //     setFlag(0);
+    //     if (phoneUser.length == 11 && phoneUser[2] === '9') {
+    //         saveCustomer();
+    //     } else {
+    //         setFlag(1);
+    //     }
+    // }
 
     function saveCustomer() {
-        let upStatus = {
-            firstName: firstName,
-            fullName: fullName,
-            document: document,
-            email: email,
-            phone: phone,
-        };
-        axios
-            .patch(
-                `${UrlDomain}/customers/${dataCostumer.customer.id}`,
-                upStatus,
-                config
-            )
-            .then(() => {
-                callBack();
-                setShow(false);
-            })
-            .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
-                    window.location.reload();
-            });
+        // let upStatus = {
+        //     firstNameUser,
+        //     fullNameUser,
+        //     document,
+        //     emailUser,
+        //     phoneUser,
+        // };
+        // axios
+        //     .patch(
+        //         `${UrlDomain}/customers/${dataCostumer.customer.id}`,
+        //         upStatus,
+        //         config
+        //     )
+        //     .then(() => {
+        //         callBack();
+        //         setShow(false);
+        //     })
+        //     .catch((r) => {
+        //         console.log('error', r),
+        //             alert('Login expirado'),
+        //             window.location.reload();
+        //     });
+        handleClose();
     }
 
     function saveVehicle() {
-        let upStatus = {
-            brand: brand,
-            chassis: chassis,
-            city: cityVehicle,
-            color: colorVehicle,
-            fipeCode: fipeCode,
-            fipeValue: fipeValue,
-            fuel: fuel,
-            model: model,
-            plateNumber: plateNumber,
-            reference: reference,
-            state: state,
-            vehicleStatus: status,
-            year: yearVehicle,
-        };
-
-        axios
-            .patch(
-                `${UrlDomain}/customers/${data.customer.id}`,
-                upStatus,
-                config
-            )
-            .then((response) => {
-                callBack();
-                setShow(false);
-            })
-            .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
-                    window.location.reload();
-            });
-    }
-    const [flagChoiceAddres, setFlagChoiceAddres] = useState(false);
-    const [addressChoice, setAddressChoice] = useState({ address: "" });
-    function getValueAddress(e) {
-        setFlagChoiceAddres(true);
-        setAddressChoice(e);
-        setIdAddress(e.id);
-        setAddressStreet(e.address);
-        setComplement(e.complement);
-        setDistrict(e.district);
-        setNumber(e.number);
-        setZipCode(e.zipCode);
-        setStateUser(e.state);
-        setCity(e.city);
+        // let upStatus = {
+        //     brand: brand,
+        //     chassis: chassis,
+        //     city: cityVehicle,
+        //     color: colorVehicle,
+        //     fipeCode: fipeCode,
+        //     fipeValue: fipeValue,
+        //     fuel: fuel,
+        //     model: model,
+        //     plateNumber: plateNumber,
+        //     reference: reference,
+        //     state: state,
+        //     vehicleStatus: status,
+        //     year: yearVehicle,
+        // };
+        // axios
+        //     .patch(
+        //         `${UrlDomain}/customers/${data.customer.id}`,
+        //         upStatus,
+        //         config
+        //     )
+        //     .then((response) => {
+        //         callBack();
+        //         setShow(false);
+        //     })
+        //     .catch((r) => {
+        //         console.log('error', r),
+        //             alert('Login expirado'),
+        //             window.location.reload();
+        //     });
+        handleClose();
     }
 
-    function backAddress() {
-        setFlagChoiceAddres(false);
-    }
-
-    function saveAddress() {
-        let save = {
-            address: addressStreet,
-            complement: complement,
-            district: district,
-            number: number,
-            zipCode: zipCode,
-            state: state,
-            city: city,
-        };
-        axios
-            .patch(`${UrlDomain}/addresses/${idAddress}`, save, config)
-            .then(() => {
-                callBack();
-                setShow(false);
-            })
-            .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
-                    window.location.reload();
-            });
+    function savePlan() {
+        // const save = {
+        //     policyPlan,
+        //     baseValuePlan,
+        //     descriptionPlan,
+        //     expirationPlan,
+        //     valuePerKmPlan,
+        // };
+        //     axios
+        //         .patch(`${UrlDomain}/addresses/${idAddress}`, save, config)
+        //         .then(() => {
+        //             callBack();
+        //             setShow(false);
+        //         })
+        //         .catch((r) => {
+        //             console.log('error', r),
+        //                 alert('Login expirado'),
+        //                 window.location.reload();
+        //         });
+        handleClose();
     }
 
     return (
         <div>
-            <CButton
-                size="sm"
-                onClick={() => openModal(data)}
-                color="white"
-            >
-                <FaUserEdit
-                    name="user-edit"
-                    size={24}
-                    color="black"
-                />
+            <CButton size="sm" onClick={() => openModal(data)} color="white">
+                <FaUserEdit name="user-edit" size={24} color="black" />
             </CButton>
 
-            <Modal
-                show={show}
-                onHide={handleClose}
-                size="xl"
-            >
-                <div className="container-costumer-header">
-                    <h3> Editar informações do cliente </h3>
-                </div>
-                <hr />
-                {data !== "" ? (
-                    <Modal.Body>
+            <CModal visible={show} onClose={handleClose} size="xl">
+                <CModalHeader>
+                    <CModalTitle className="title-modal">
+                        Editar informações do cliente
+                    </CModalTitle>
+                </CModalHeader>
+                {data !== '' ? (
+                    <CModalBody>
                         <CRow>
                             <CCol
                                 className={
                                     op1 === true
-                                        ? "nav-costumer-active"
-                                        : "nav-costumer"
+                                        ? 'nav-address-active'
+                                        : 'nav-address'
                                 }
-                                onClick={choiceUser}
+                                onClick={choicePlans}
                             >
-                                <label> Dados do cliente </label>
+                                <label> Dados do plano </label>
                             </CCol>
                             <CCol
                                 className={
                                     op2 === true
-                                        ? "nav-address-active"
-                                        : "nav-address"
-                                }
-                                onClick={choiceAddress}
-                            >
-                                <label> Dados do endereço </label>
-                            </CCol>
-                            <CCol
-                                className={
-                                    op3 === true
-                                        ? "nav-vehicle-active"
-                                        : "nav-vehicle"
+                                        ? 'nav-vehicle-active'
+                                        : 'nav-vehicle'
                                 }
                                 onClick={choiceVehicle}
                             >
                                 <label> Dados do veículo </label>
                             </CCol>
+                            <CCol
+                                className={
+                                    op3 === true
+                                        ? 'nav-costumer-active'
+                                        : 'nav-costumer'
+                                }
+                                onClick={choiceUser}
+                            >
+                                <label> Dados do cliente </label>
+                            </CCol>
+                            <CCol></CCol>
                         </CRow>
                         <br />
                         <CRow>
                             {op1 === true ? (
-                                <CRow>
-                                    <CCol>
-                                        <label className="label-customer-input">
-                                            {" "}
-                                            Primeiro nome
-                                        </label>
-                                        <CFormInput
-                                            className=""
-                                            type="text"
-                                            placeholder={firstName}
-                                            value={firstName}
-                                            onChange={userFirstName}
-                                        />
-                                        <br />
-
-                                        <label className="label-customer-input">
-                                            {" "}
-                                            Nome completo{" "}
-                                        </label>
-                                        <CFormInput
-                                            className=""
-                                            type="text"
-                                            placeholder={fullName}
-                                            value={fullName}
-                                            onChange={userFullName}
-                                        />
-                                        <br />
-
-                                        <label className="label-customer-input">
-                                            {" "}
-                                            Documento{" "}
-                                        </label>
-                                        <CFormInput
-                                            className=""
-                                            type="text"
-                                            placeholder={document}
-                                            value={document}
-                                            onChange={userDocument}
-                                        />
-                                        <br />
-                                    </CCol>
-                                    <CCol>
-                                        <label className="label-customer-input">
-                                            {" "}
-                                            E-mail{" "}
-                                        </label>
-                                        <CFormInput
-                                            className=""
-                                            type="text"
-                                            placeholder={email}
-                                            value={email}
-                                            onChange={userEmail}
-                                        />
-                                        <br />
-
-                                        <label className="label-customer-input">
-                                            {" "}
-                                            Telefone{" "}
-                                        </label>
-                                        <CFormInput
-                                            className=""
-                                            type="text"
-                                            placeholder={phone}
-                                            value={phone}
-                                            onChange={userPhone}
-                                        />
-                                        <br />
-                                    </CCol>
-
-                                    <hr />
-                                    <div className="container-customer-footer">
-                                        <Button
-                                            className="btn-customer-exit"
-                                            variant="secondary"
-                                            onClick={handleClose}
-                                        >
-                                            Sair
-                                        </Button>
-                                        <Button
-                                            onClick={verify}
-                                            className="btn-customer-save"
-                                            variant="dark"
-                                        >
-                                            Salvar Alterações
-                                        </Button>
-                                    </div>
-                                </CRow>
-                            ) : null}
-
-                            {op2 === true ? (
-                                <div>
-                                    {flagChoiceAddres === false ? (
+                                <>
+                                    {/* {flagChoiceAddres === false ? (
                                         <div className="container-choice-address">
                                             <h5>
-                                                {" "}
-                                                Escolha um endereço para edição{" "}
+                                                Escolha um endereço para edição
                                             </h5>
                                             <hr />
 
@@ -426,16 +348,14 @@ const BtnEditCostumer = (props) => {
                                                         <CRow>
                                                             <CCol>
                                                                 <label className="label-customer-input">
-                                                                    {" "}
                                                                     Endereço
                                                                 </label>
                                                                 <br />
                                                                 <label>
-                                                                    {" "}
-                                                                    -{" "}
+                                                                    -
                                                                     {
                                                                         item.address
-                                                                    }{" "}
+                                                                    }
                                                                 </label>
                                                             </CCol>
                                                             <CCol>
@@ -448,8 +368,7 @@ const BtnEditCostumer = (props) => {
                                                                         );
                                                                     }}
                                                                 >
-                                                                    {" "}
-                                                                    Selecionar{" "}
+                                                                    Selecionar
                                                                 </CButton>
                                                             </CCol>
                                                         </CRow>
@@ -458,7 +377,7 @@ const BtnEditCostumer = (props) => {
                                                         <hr />
                                                         <div className="container-customer-footer">
                                                             <Button
-                                                                className="btn-customer-exit"
+                                                                className="btn-cancel-global float-right me-2"
                                                                 variant="secondary"
                                                                 onClick={
                                                                     handleClose
@@ -471,335 +390,461 @@ const BtnEditCostumer = (props) => {
                                                 );
                                             })}
                                         </div>
-                                    ) : (
-                                        <CRow>
-                                            <CCol>
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Endereço
-                                                </label>
-                                                <CFormInput
-                                                    className=""
-                                                    type="text"
-                                                    placeholder={
-                                                        addressChoice.address
-                                                    }
-                                                    value={addressStreet}
-                                                    onChange={
-                                                        AddressAddressStreet
-                                                    }
-                                                />
-                                                <br />
+                                    ) : ( */}
+                                    <CRow>
+                                        <CCol md={6}>
+                                            <label className="label-customer-input">
+                                                Apólice
+                                            </label>
 
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Complemento{" "}
+                                            <CFormInput
+                                                className=""
+                                                type="text"
+                                                placeholder="Não disponivel"
+                                                defaultValue={policyPlan}
+                                                onChange={planPolicy}
+                                            />
+                                            <br />
+                                        </CCol>
+                                        <CCol md={6}>
+                                            <label className="label-customer-input">
+                                                Expiração do plano
+                                            </label>
+                                            <CFormInput
+                                                className=""
+                                                type="text"
+                                                placeholder="Não disponivel"
+                                                defaultValue={expirationPlan}
+                                                onChange={planExpiration}
+                                            />
+                                            <br />
+                                        </CCol>
+                                        <CCol md={6}>
+                                            <label className="label-customer-input">
+                                                Valor base do usuário
+                                            </label>
+                                            <div className="container-icon-input">
+                                                <label className="icon-input-right i-absolute-global">
+                                                    R$
                                                 </label>
                                                 <CFormInput
-                                                    className=""
+                                                    style={{
+                                                        paddingLeft: '2.5em',
+                                                    }}
                                                     type="text"
-                                                    placeholder={
-                                                        addressChoice.complement
-                                                    }
-                                                    value={complement}
-                                                    onChange={AddressComplement}
+                                                    placeholder="Não disponivel"
+                                                    defaultValue={baseValuePlan}
+                                                    onChange={planBaseValue}
                                                 />
-                                                <br />
-
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Bairro{" "}
+                                            </div>
+                                            <br />
+                                        </CCol>
+                                        <CCol md={6}>
+                                            {/* <CButton
+                                                className="btn-back-address"
+                                                color="dark"
+                                                onClick={backAddress}
+                                            >
+                                                Voltar aos endereços
+                                            </CButton> */}
+                                            <label className="label-customer-input">
+                                                Valor por km do plano
+                                            </label>
+                                            <div className="container-icon-input">
+                                                <label className="icon-input-right i-absolute-global">
+                                                    R$
                                                 </label>
                                                 <CFormInput
-                                                    className=""
+                                                    style={{
+                                                        paddingLeft: '2.5em',
+                                                    }}
                                                     type="text"
-                                                    placeholder={
-                                                        addressChoice.district
+                                                    placeholder="Não disponivel"
+                                                    defaultValue={
+                                                        valuePerKmPlan
                                                     }
-                                                    value={district}
-                                                    onChange={AddressDistrict}
+                                                    onChange={planValuePerKm}
                                                 />
-                                                <br />
-
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Número{" "}
-                                                </label>
-                                                <CFormInput
-                                                    className=""
-                                                    type="text"
-                                                    placeholder={
-                                                        addressChoice.number
-                                                    }
-                                                    value={number}
-                                                    onChange={Addressnumber}
-                                                />
-                                                <br />
-                                            </CCol>
-                                            <CCol>
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    CEP{" "}
-                                                </label>
-                                                <CFormInput
-                                                    className=""
-                                                    type="text"
-                                                    placeholder={
-                                                        addressChoice.zipCode
-                                                    }
-                                                    value={zipCode}
-                                                    onChange={AddresszipCode}
-                                                />
-                                                <br />
-
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Estado{" "}
-                                                </label>
-                                                <CFormInput
-                                                    className=""
-                                                    type="text"
-                                                    placeholder={
-                                                        addressChoice.state
-                                                    }
-                                                    value={stateUser}
-                                                    onChange={AddressStateUser}
-                                                />
-                                                <br />
-
-                                                <label className="label-customer-input">
-                                                    {" "}
-                                                    Cidade{" "}
-                                                </label>
-                                                <CFormInput
-                                                    className=""
-                                                    type="text"
-                                                    placeholder={
-                                                        addressChoice.city
-                                                    }
-                                                    value={city}
-                                                    onChange={AddressCity}
-                                                />
-                                                <br />
-                                                <br />
-
+                                            </div>
+                                            <br />
+                                        </CCol>
+                                        <CCol md={12}>
+                                            <label className="label-customer-input">
+                                                Descrição do plano
+                                            </label>
+                                            <CFormTextarea
+                                                className="w-100"
+                                                type="text"
+                                                rows="5"
+                                                placeholder="Não disponivel"
+                                                defaultValue={descriptionPlan}
+                                                onChange={planDescription}
+                                            />
+                                            <br />
+                                        </CCol>
+                                        <div className="d-flex align-items-end justify-content-between">
+                                            <label>
+                                                <span className="footer-text">
+                                                    Última edição:
+                                                </span>
+                                                <span>{update}; </span>
+                                                <span className="footer-text">
+                                                    funcionário:
+                                                </span>
+                                                <span>{fullNameUser}</span>
+                                            </label>
+                                            <div>
                                                 <CButton
-                                                    className="btn-back-address"
-                                                    color="dark"
-                                                    onClick={backAddress}
+                                                    onClick={savePlan}
+                                                    className="btn-save-global float-right"
                                                 >
-                                                    {" "}
-                                                    Voltar aos endereços{" "}
+                                                    Salvar
                                                 </CButton>
-                                            </CCol>
-
-                                            <hr />
-                                            <div className="container-customer-footer">
-                                                <Button
-                                                    className="btn-customer-exit"
-                                                    variant="secondary"
+                                                <CButton
+                                                    className="btn-cancel-global float-right me-2"
+                                                    variant="outline"
                                                     onClick={handleClose}
                                                 >
-                                                    Sair
-                                                </Button>
-                                                <Button
-                                                    onClick={saveAddress}
-                                                    className="btn-customer-save"
-                                                    variant="dark"
-                                                >
-                                                    Salvar Alterações
-                                                </Button>
+                                                    Cancelar
+                                                </CButton>
                                             </div>
-                                        </CRow>
-                                    )}
-                                </div>
+                                        </div>
+                                    </CRow>
+                                </>
                             ) : null}
 
+                            {op2 === true ? (
+                                <CRow>
+                                    <CCol>
+                                        <label className="label-customer-input">
+                                            Placa do veículo
+                                        </label>
+                                        {/* <div className="d-flex flex-row-reverse w-100"> */}
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            defaultValue={plateNumberVehicle}
+                                            disabled
+                                            onChange={vehiclePlateNumber}
+                                        />
+                                        {/* <i
+                                                className="icon-input-right i-absolute-global"
+                                                // onClick={() => }
+                                            >
+                                                <MdCameraAlt />
+                                            </i> */}
+                                        {/* </div> */}
+                                        <br />
+                                        <label className="label-customer-input">
+                                            Marca do veículo
+                                        </label>
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            disabled
+                                            defaultValue={brandVehicle}
+                                            onChange={vehicleBrand}
+                                        />
+                                        <br />
+                                        <label className="label-customer-input">
+                                            Valor da FIPE
+                                        </label>
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            defaultValue={fipeValueVehicle}
+                                            disabled
+                                            onChange={vehicleFipeValue}
+                                        />
+                                        <br />
+                                    </CCol>
+                                    <CCol>
+                                        <label className="label-customer-input">
+                                            Chassi do veículo
+                                        </label>
+                                        {/* <div className="d-flex flex-row-reverse w-100"> */}
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            disabled
+                                            defaultValue={chassisVehicle}
+                                            onChange={vehicleChassis}
+                                        />
+                                        {/* <i
+                                                className="icon-input-right i-absolute-global"
+                                                // onClick={() => }
+                                            >
+                                                <MdCameraAlt />
+                                            </i> */}
+                                        {/* </div> */}
+                                        <br />
+                                        <label className="label-customer-input">
+                                            Modelo do veículo
+                                        </label>
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            disabled
+                                            defaultValue={modelVehicle}
+                                            onChange={vehicleModel}
+                                        />
+                                        <br />
+
+                                        <label className="label-customer-input">
+                                            Ano do veículo
+                                        </label>
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            defaultValue={yearVehicle}
+                                            disabled
+                                            onChange={vehicleYear}
+                                        />
+                                        <br />
+                                    </CCol>
+                                    <div className="d-flex align-items-end justify-content-between">
+                                        <label>
+                                            <span className="footer-text">
+                                                Última edição:
+                                            </span>
+                                            <span>{update}; </span>
+                                            <span className="footer-text">
+                                                Funcionário:
+                                            </span>
+                                            <span>{fullNameUser}</span>
+                                        </label>
+                                        <div>
+                                            <CButton
+                                                onClick={saveVehicle}
+                                                className="btn-save-global float-right"
+                                            >
+                                                Salvar
+                                            </CButton>
+                                            <CButton
+                                                className="btn-cancel-global float-right me-2"
+                                                variant="outline"
+                                                onClick={handleClose}
+                                            >
+                                                Cancelar
+                                            </CButton>
+                                        </div>
+                                    </div>
+                                </CRow>
+                            ) : null}
                             {op3 === true ? (
                                 <CRow>
                                     <CCol>
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Marca
+                                            Nome
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={brand}
-                                            disabled
-                                            value={brand}
-                                            onChange={setVehicleBrand}
+                                            placeholder="Não disponivel"
+                                            defaultValue={fullNameUser}
+                                            onChange={userFullName}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Chassis{" "}
+                                            Data de nascimento
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={chassis}
-                                            disabled
-                                            value={chassis}
-                                            onChange={setVehicleChassis}
+                                            placeholder="Não disponivel"
+                                            defaultValue={birthDateUser}
+                                            onChange={userBirthDate}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Cidade do veículo{" "}
+                                            E-mail
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={cityVehicle}
-                                            disabled
-                                            value={cityVehicle}
-                                            onChange={setCityVehicle}
+                                            placeholder="Não disponivel"
+                                            defaultValue={emailUser}
+                                            onChange={userEmail}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Cor do veículo{" "}
+                                            CEP
+                                        </label>
+                                        {/* <div className="d-flex flex-row-reverse w-100"> */}
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            defaultValue={CEPUser}
+                                            onChange={userCEP}
+                                        />
+                                        {/* <i
+                                                className="icon-input-right i-absolute-global"
+                                                // onClick={() => }
+                                            >
+                                                <MdCameraAlt />
+                                            </i> */}
+                                        {/* </div> */}
+                                        <br />
+                                        <label className="label-customer-input">
+                                            Cidade
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={colorVehicle}
-                                            disabled
-                                            value={colorVehicle}
-                                            onChange={setVehicleColor}
+                                            placeholder="Não disponivel"
+                                            defaultValue={cityUser}
+                                            onChange={userCity}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Modelo{" "}
+                                            Número
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={model}
-                                            disabled
-                                            value={model}
-                                            onChange={setModel}
+                                            placeholder="Não disponivel"
+                                            defaultValue={numberUser}
+                                            onChange={userNumber}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Status{" "}
+                                            CNH
                                         </label>
+                                        {/* <div className="d-flex flex-row-reverse w-100"> */}
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={status}
-                                            disabled
-                                            value={status}
-                                            onChange={setStatus}
+                                            placeholder="Não disponivel"
+                                            defaultValue={CNHUser}
+                                            onChange={userCNH}
                                         />
+                                        {/* <i
+                                                className="icon-input-right i-absolute-global"
+                                                // onClick={() => }
+                                            >
+                                                <MdCameraAlt />
+                                            </i> */}
+                                        {/* </div> */}
                                         <br />
                                     </CCol>
                                     <CCol>
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Código Fipe{" "}
+                                            CPF
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={fipeCode}
-                                            value={fipeCode}
-                                            disabled
-                                            onChange={setVehicleFipeCode}
+                                            placeholder="Não disponivel"
+                                            defaultValue={CPFUser}
+                                            onChange={userCPF}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Valor Fipe{" "}
+                                            RG
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={fipeValue}
-                                            value={fipeValue}
-                                            disabled
-                                            onChange={setFipeValue}
+                                            placeholder="Não disponivel"
+                                            defaultValue={RGUser}
+                                            onChange={userRG}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Tipo de Combustível{" "}
+                                            Telefone para contato
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={fuel}
-                                            value={fuel}
-                                            disabled
-                                            onChange={setFuel}
+                                            placeholder="Não disponivel"
+                                            defaultValue={phoneUser}
+                                            onChange={userPhone}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Placa{" "}
+                                            Estado
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={plateNumber}
-                                            value={plateNumber}
-                                            disabled
-                                            onChange={setPlateNumber}
+                                            placeholder="Não disponivel"
+                                            defaultValue={stateUser}
+                                            onChange={userState}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Referência{" "}
+                                            Endereço
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={reference}
-                                            value={reference}
-                                            disabled
-                                            onChange={setReference}
+                                            placeholder="Não disponivel"
+                                            defaultValue={addressUser}
+                                            onChange={userAddress}
                                         />
                                         <br />
-
                                         <label className="label-customer-input">
-                                            {" "}
-                                            Ano do veículo{" "}
+                                            Complemento
                                         </label>
                                         <CFormInput
                                             className=""
                                             type="text"
-                                            placeholder={yearVehicle}
-                                            value={yearVehicle}
-                                            disabled
-                                            onChange={setYearVehicle}
+                                            placeholder="Não disponivel"
+                                            defaultValue={complementUser}
+                                            onChange={userComplement}
+                                        />
+                                        <br />
+                                        <label className="label-customer-input">
+                                            Documento do veículo
+                                        </label>
+                                        <CFormInput
+                                            className=""
+                                            type="text"
+                                            placeholder="Não disponivel"
+                                            defaultValue={documentVehicleUser}
+                                            onChange={userDocumentVehicle}
                                         />
                                         <br />
                                     </CCol>
-                                    <hr />
-                                    {/* <div className='container-customer-footer'>
-                                                <Button className="btn-customer-exit" variant="secondary" onClick={handleClose}>
-                                                    Sair
-                                                </Button>
-                                                <Button  className="btn-customer-save" variant="dark" >
-                                                    Salvar Alterações
-                                                </Button>
-                                            </div> */}
+
+                                    <div className="d-flex align-items-end justify-content-between">
+                                        <label>
+                                            <span className="footer-text">
+                                                Última edição:
+                                            </span>
+                                            <span>{update}; </span>
+                                            <span className="footer-text">
+                                                Funcionário:
+                                            </span>
+                                            <span>{fullNameUser}</span>
+                                        </label>
+                                        <div>
+                                            <CButton
+                                                onClick={saveCustomer}
+                                                className="btn-save-global float-right"
+                                            >
+                                                Salvar
+                                            </CButton>
+                                            <CButton
+                                                className="btn-cancel-global float-right me-2"
+                                                variant="outline"
+                                                onClick={handleClose}
+                                            >
+                                                Cancelar
+                                            </CButton>
+                                        </div>
+                                    </div>
                                 </CRow>
                             ) : null}
                         </CRow>
-                    </Modal.Body>
+                    </CModalBody>
                 ) : (
                     <>
                         <br />
@@ -809,9 +854,9 @@ const BtnEditCostumer = (props) => {
                         <br />
                     </>
                 )}
-            </Modal>
+            </CModal>
         </div>
     );
 };
 
-export default  BtnEditCostumer;
+export default BtnEditCostumer;

@@ -1,257 +1,207 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-import Cookies  from 'js-cookie'
+import React, { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+// import UrlDomain, { configCookies } from './../../config'
 
-import UrlDomain from './../../../config'
-var CryptoJS = require("crypto-js");
+var CryptoJS = require('crypto-js');
 
-import { Button, Modal,  Form, Container, Row, Col    }  from 'react-bootstrap';
 import {
-    CButton ,
+    CButton,
     CFormInput,
     CFormLabel,
     CRow,
-    CFormCheck,
     CCol,
-    
-  } from '@coreui/react'
-  import CIcon from '@coreui/icons-react'
+    CModal,
+    CModalHeader,
+    CModalBody,
+    CForm,
+    CFormSelect,
+    CFormTextarea,
+    CModalFooter,
+    CModalTitle,
+} from '@coreui/react';
 
-  const icons = [cilAccountLogout, cilActionRedo, cilActionUndo, cilAddressBook, cilAirplaneModeOff, cilAirplaneMode, cilAirplay, cilAlarm]
-  import {cilAccountLogout, cilActionRedo, cilActionUndo, cilAddressBook, cilAirplaneModeOff, cilAirplaneMode, cilAirplay, cilAlarm } from '@coreui/icons'
+const BtnEdit = (props) => {
+    const [nameService, setNameService] = useState([
+        'Roubo e furto',
+        'Chaveiro',
+        'Capotamento',
+    ]);
+    var usT = Cookies.get('userType');
+    var msg = CryptoJS.AES.decrypt(usT, 'OnnSeguros');
 
-const EditarService = (props) =>{
-    const token = Cookies.get('TokenID')
-    
-    var usT = Cookies.get('userType')
-    var msg  = CryptoJS.AES.decrypt(usT, 'OnnSeguros');
-    var msgOri = msg.toString(CryptoJS.enc.Utf8);
+    // const config = configCookies()
 
-    const userType = msgOri
+    const [visible, setVisible] = useState(false);
+    const [deleteCoverage, setDeleteCoverage] = useState(false);
 
-    let config = {
-        headers: {
-          'Authorization': `Bearer ${token}`, 
-          "Accept": "*/*",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "PATCH"
-        }
+    const [servico, setServico] = useState(props.item.description);
+    const servicoNome = (e) => {
+        setServico(e.target.value);
     };
-    const [visible, setVisible] = useState(false)  
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
 
-    const [servico, setServico ] = useState(props.item.description)
-    const servicoNome = (e) =>{setServico(e.target.value)}
+    const [descricao, setDescricao] = useState('Campo ainda não aplicado....');
+    const serviceDescricao = (e) => {
+        setDescricao(e.target.value);
+    };
 
-    const [descricao, setDescricao] = useState('Campo ainda não aplicado....')
-    const serviceDescricao = (e) =>{setDescricao(e.target.value)}  
+    const [valueKm, setValueKm] = useState(parseFloat(props.item.valuePerKm));
+    const newValueKm = (e) => {
+        setValueKm(e.target.value);
+    };
 
-    const [valueKm, setValueKm] = useState(parseFloat(props.item.valuePerKm))
-    const newValueKm = e =>{setValueKm(e.target.value)}
-    
-    const [status, setStatus] = useState(false)
-    const getStatus = (e) =>{setStatus(e)}
+    const [status, setStatus] = useState(false);
+    const getStatus = (e) => {
+        setStatus(e);
+    };
 
-  
-   
-    function verifica(){
-        const handleShow =  setShow(true);
+    async function salvarEdicoes() {
+        // setVisible(false);
+        // let save = { id: props.item.id, description: servico, disabled: status, valuePerKm: valueKm }
+        // await axios
+        //     .patch(`${UrlDomain}/coverages`, save, config)
+        //     .then((response) => {
+        //         setVisible(false);
+        //         props.parentCallback()
+        //     })
+        //     .catch(r => {
+        //         console.log('error', r), alert('Login expirado') //,window.location.reload()
+        //     }) // window.location.reload();
     }
 
-    async function salvarEdicoes (){
-        setShow(false);
-        let save = {id:props.item.id , description:servico , disabled:status, valuePerKm:valueKm}
-        
-       await  axios 
-            .patch(`${UrlDomain}/coverages`, save, config)
-            .then((response) => { 
-                setShow(false);
-                props.parentCallback()
-            })
-            .catch(r =>{ 
-                console.log('error', r), alert('Login expirado') //,window.location.reload()
-            }) // window.location.reload();
-    }
-
-
-
-    return (
+    return deleteCoverage ? (
+        <CModal alignment="center" visible={deleteCoverage}>
+            <CModalBody>
+                <p className="text-center m-5 text-delete">
+                    Você tem certeza que deseja deletar esse serviço?
+                </p>
+                <div className="mb-3 d-flex justify-content-around">
+                    <CButton className="btn-save-global" size="lg">
+                        Sim, deletar
+                    </CButton>
+                    <CButton
+                        size="lg"
+                        className="btn-cancel-global"
+                        variant="outline"
+                        onClick={() => setDeleteCoverage(false)}
+                    >
+                        Cancelar
+                    </CButton>
+                </div>
+            </CModalBody>
+        </CModal>
+    ) : (
         <>
-            <CButton disabled onClick={verifica} color="light">Editar</CButton>
+            <CButton
+                className="btn-cancel-global"
+                variant="outline"
+                onClick={() => setVisible(true)}
+            >
+                Editar
+            </CButton>
 
-            <Modal 
-                show={show} 
-                onHide={handleClose}
+            <CModal
+                visible={visible}
+                onClose={() => setVisible(false)}
                 size="xl"
             >
-                    
-                <Modal.Header  closeButton>
-                    <Modal.Title>Editar  serviço </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className='container-body'>
-                    
+                <CModalHeader>
+                    <CModalTitle className="title-modal">Editar</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
                     <CRow>
                         <CCol>
-                            <Form>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <div className='containers-inputs-coverages'>
-                                        <CFormLabel >Nome do Serviço</CFormLabel>
-                                        <CFormInput type="text" id="namePlan" value = {servico} onChange={servicoNome} />
-                                    </div>
-                                   
-                                    <div className='containers-inputs-coverages'>
-                                        <CFormLabel >Valor por Km</CFormLabel>
-                                        <CFormInput type="number" id="namePlan" value = {valueKm} required  min="0.00"  step=".01" onChange={newValueKm} />
-                                    </div>
-
-                                    <div className='containers-inputs-coverages'>
-                                        <Form.Label> Desativar cobertura ? </Form.Label>
-                                        <CFormCheck type="radio" onChange={() =>{getStatus(true)}} name="statusUser" id="statusUser1" label="Sim"/>
-                                        <CFormCheck type="radio" onChange={() =>{getStatus(false)}} name="statusUser" id="statusUser2" label="Não" defaultChecked/>
-                                    </div>
-                                    <br />
-                                    {/*
-                                    <CContainer className='container-select'>
-                                        <CButton onClick={()=> escolha('cilAccountLogout')} className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAccountLogout}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilActionRedo')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilActionRedo}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilActionUndo')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilActionUndo}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAddressBook')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAddressBook}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplaneModeOff')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplaneModeOff}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplaneMode')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplaneMode}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                        
-
-
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton> 
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                        <CButton onClick={()=> escolha('cilAirplay')}  className='iconContainer' variant='ghost' color='dark'>
-                                            <CIcon icon={cilAirplay}  size="xl" />
-                                        </CButton>
-                                    </CContainer> 
-                                    */}
-                                  
-
-                                </Form.Group>
-                            </Form>
+                            <CForm>
+                                <CFormLabel>Nome do Serviço</CFormLabel>
+                                <CFormSelect
+                                    value={servico}
+                                    onChange={servicoNome}
+                                    options={nameService.map(
+                                        (label, value) => ({ label, value })
+                                    )}
+                                />
+                                <br />
+                                <CFormLabel>Descrição</CFormLabel>
+                                <CFormTextarea rows="5"></CFormTextarea>
+                            </CForm>
                         </CCol>
-                        <CCol >
-                            <div className='containers-inputs-coverages'>
-                                <Form.Label>Descrição do serviço </Form.Label>
-                                <Form.Control as="textarea" value = {descricao} onChange={serviceDescricao} rows={8} />
-                            </div>
-                      
-                            
-                            
-                                
-                                
+                        <CCol>
+                            <CForm>
+                                <CFormLabel>Tipo de serviço</CFormLabel>
+                                <CFormSelect
+                                    // onChange={}
+                                    options={[
+                                        {
+                                            label: 'Sinistro',
+                                            value: 0,
+                                        },
+                                        {
+                                            label: 'Assistência',
+                                            value: 0,
+                                        },
+                                    ]}
+                                />
+                                <br />
+                                <CFormLabel>Valor por km (R$)</CFormLabel>
+                                <div className="container-icon-input">
+                                    <label className="icon-search-global  i-absolute-global">
+                                        R$
+                                    </label>
+                                    <CFormInput
+                                        className="input-km"
+                                        value={valueKm}
+                                        type="number"
+                                        required
+                                        min="0.00"
+                                        step=".01"
+                                        onChange={newValueKm}
+                                    />
+                                </div>
+                                <br />
+                                <CFormLabel>Fluxo de assistência</CFormLabel>
+                                <CFormSelect
+                                    // onChange={}
+                                    options={[
+                                        {
+                                            label: 'Fluxo de Alagamentos',
+                                            value: 0,
+                                        },
+                                    ]}
+                                />
+                            </CForm>
+                            <br />
                         </CCol>
                     </CRow>
+                </CModalBody>
 
+                <CModalFooter>
+                    <div className="flex-grow-1">
+                        <CButton
+                            className="btn-cancel-global"
+                            variant="outline"
+                            onClick={() => setDeleteCoverage(true)}
+                        >
+                            Deletar serviço
+                        </CButton>
+                    </div>
 
-
-
-
-                </Modal.Body>
-                
-                <Modal.Footer>  
-                    <Button variant="secondary" onClick={handleClose}>
-                        Sair
-                    </Button>
-                    <Button onClick = {salvarEdicoes} variant="primary" >
-                        Salvar Alterações
-                    </Button>
-                </Modal.Footer>
-                    
-            </Modal>
+                    <CButton
+                        className="btn-cancel-global"
+                        variant="outline"
+                        onClick={() => setVisible(false)}
+                    >
+                        Cancelar
+                    </CButton>
+                    <CButton
+                        className="btn-save-global"
+                        onClick={salvarEdicoes}
+                    >
+                        Salvar
+                    </CButton>
+                </CModalFooter>
+            </CModal>
         </>
-    )
-}
+    );
+};
 
-
-export default  EditarService
+export default BtnEdit;

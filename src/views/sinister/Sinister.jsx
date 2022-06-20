@@ -107,7 +107,18 @@ const Sinister = () => {
                 {protocolo == null ? (
                     <div className='container-sider-bar-sinister'>
                         <CButton
-                            color="dark"
+                        style={op1 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op1}
                             variant='ghost'
@@ -118,7 +129,18 @@ const Sinister = () => {
                         </CButton>
                         <hr />
                         <CButton
-                            color="dark"
+                         style={op2 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op2}
                             variant='ghost'
@@ -128,7 +150,18 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                         style={op3 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op3}
                             variant='ghost'
@@ -138,7 +171,18 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                         style={op4 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op4}
                             variant='ghost'
@@ -148,7 +192,18 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                         style={op5 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op5}
                             variant='ghost'
@@ -158,7 +213,18 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                         style={op6 ? {
+                            borderColor: '#216CFF',
+                            borderWidth: '2px',
+                            borderStyle: 'none none none solid',
+                            backgroundColor: 'rgba(231, 231, 231, 0.35)',
+                            borderRadius: 0,
+                            color: '#216CFF'
+                        } : {
+                            borderStyle: 'none',
+                            color: '#6D6D6D'
+                        }}
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op6}
                             variant='ghost'
@@ -170,7 +236,7 @@ const Sinister = () => {
                 ) : (
                     <div className='container-sider-bar-sinister'>
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op1}
                             variant='ghost'
@@ -180,7 +246,7 @@ const Sinister = () => {
                         </CButton>
                         <hr />
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op2}
                             variant='ghost'
@@ -190,7 +256,7 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op3}
                             variant='ghost'
@@ -200,7 +266,7 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op4}
                             variant='ghost'
@@ -211,7 +277,7 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op5}
                             variant='ghost'
@@ -222,7 +288,7 @@ const Sinister = () => {
                         </CButton>
                         <br />
                         <CButton
-                            color="dark"
+                            color="link"
                             className='btn-sidebar-sinistro'
                             active={op6}
                             variant='ghost'

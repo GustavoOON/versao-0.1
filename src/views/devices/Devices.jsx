@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { BiSearchAlt } from "react-icons/bi";
-import { Spinner } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BiSearchAlt2 } from 'react-icons/bi';
+import { Spinner } from 'react-bootstrap';
 import {
     CButton,
     CContainer,
@@ -12,19 +12,21 @@ import {
     CNavbarToggler,
     CCardBody,
     CFormInput,
-    CForm,
     CInputGroup,
-} from "@coreui/react";
+    CRow,
+    CCol,
+} from '@coreui/react';
 
-import ListVehicles from "./render/ListVehicles";
-import WidgetsFilterDevices from "./render/components/WidgetsFilterDevices";
-import WidgetsDevices from "./render/WidgetsDevices";
-import UrlDomain, { configCookies } from "./../../config";
-import Decrypt from "./../../security/decripty";
+import ListVehicles from './render/ListVehicles';
+import WidgetsImprocess from './render/WidgetsImprocess';
+import WidgetsRegistered from './render/WidgetsRegistered';
+import UrlDomain, { configCookies } from './../../config';
+import Decrypt from './../../security/decripty';
 
-import "./css/devices.css";
-import Pagination from "../components/Pagination";
-import Cookies from "js-cookie";
+import Pagination from '../components/Pagination';
+import FilterCitySubStatus from './render/btn/FilterCitySubStatus';
+
+import './css/devices.css';
 
 const Devices = () => {
     const [op1, setOp1] = useState(false);
@@ -32,16 +34,8 @@ const Devices = () => {
     const [op3, setOp3] = useState(false);
     const [op4, setOp4] = useState(false);
     const [op5, setOp5] = useState(false);
-    const [filterOp1, setFilterOp1] = useState(false);
-    const [filterOp2, setFilterOp2] = useState(false);
-    const [filterOp3, setFilterOp3] = useState(false);
-    const [filterOp4, setFilterOp4] = useState(false);
-    const [filterOp5, setFilterOp5] = useState(false);
-    const [filterOp6, setFilterOp6] = useState(false);
-    const [filterOp7, setFilterOp7] = useState(false);
-    const [filterOp8, setFilterOp8] = useState(false);
-    const [otherFilters, setOtherFilters] = useState(false);
-    const [filterWidgets, setFilterWidgets] = useState("");
+
+    const [filterWidgets, setFilterWidgets] = useState('');
     const [openSearch, setOpenSearch] = useState(false);
     // descriptando
     const [userType, setUserType] = useState();
@@ -49,12 +43,23 @@ const Devices = () => {
     const [visible, setVisible] = useState(false);
     const [numberOfPages, setNumberOfPages] = useState(0);
     const [qtdElements, setQtdElements] = useState();
-    const [previousPage, setPreviousPage] = useState("");
+    const [previousPage, setPreviousPage] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [nextPage, setNextPage] = useState("");
-    const [search, setSearch] = useState("");
+    const [nextPage, setNextPage] = useState('');
+    const [search, setSearch] = useState('');
     const qtdPgns = 12;
-    
+
+    const [inProcess, setInProcess] = useState(true);
+    const [complete, setComplete] = useState(false);
+
+    const choiceInProcess = () => {
+        setInProcess(true), setComplete(false);
+    };
+
+    const choiceComplete = () => {
+        setInProcess(false), setComplete(true);
+    };
+
     // const token = Cookies.get("TokenID");
     // const configCookies = {
     //     headers: {
@@ -64,7 +69,7 @@ const Devices = () => {
     //     },
     // };
     useEffect(() => {
-        const config = configCookies()
+        const config = configCookies();
         // setPermissions(Decrypt.userPermissionsDescription())
         setUserType(Decrypt.UserTypeDecryption());
 
@@ -79,8 +84,8 @@ const Devices = () => {
             })
             .catch((r) => {
                 console.log(r);
-                console.log("error", r),
-                    alert("Login expirado"),
+                console.log('error', r),
+                    alert('Login expirado'),
                     window.location.reload();
             });
     }, []);
@@ -88,12 +93,12 @@ const Devices = () => {
     function initPages() {
         setCurrentPage(1);
         setNextPage(2);
-        setPreviousPage("");
+        setPreviousPage('');
     }
 
     function page(e) {
         setDados([]);
-        const config = configCookies()
+        const config = configCookies();
 
         axios
             .get(
@@ -105,16 +110,16 @@ const Devices = () => {
                 setNumberOfPages(response.data.totalPages);
             })
             .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
+                console.log('error', r),
+                    alert('Login expirado'),
                     window.location.reload();
             });
     }
 
     function searchPlate(e) {
-        const config = configCookies()
+        const config = configCookies();
 
-        if (e.key === "Enter" || e.type === "click") {
+        if (e.key === 'Enter' || e.type === 'click') {
             axios
                 .get(
                     `${UrlDomain}/signatures/d36bcc6a-5065-4dda-8630-3e6a77fb6880`,
@@ -125,14 +130,14 @@ const Devices = () => {
                     setOpenSearch(true);
                 })
                 .catch((r) => {
-                    console.log("Não encontrado", alert("Não encontrado!"), r);
+                    console.log('Não encontrado', alert('Não encontrado!'), r);
                 });
         }
     }
 
     function refreshPage() {
         setDados([]);
-        const config = configCookies()
+        const config = configCookies();
 
         axios
             .get(`${UrlDomain}/signatures?pageSize=${qtdPgns}`, config)
@@ -143,16 +148,14 @@ const Devices = () => {
                 setQtdElements(response.data.totalElements);
             })
             .catch((r) => {
-                console.log("error", r),
-                    alert("Login expirado"),
+                console.log('error', r),
+                    alert('Login expirado'),
                     window.location.reload();
             });
         setOpenSearch(false);
-        setOtherFilters(false);
-        setFilterWidgets("");
     }
 
-    function open1() {
+    function open1({ target }) {
         setOp1(true);
         setOp2(false);
         setOp3(false);
@@ -161,137 +164,48 @@ const Devices = () => {
         refreshPage();
     }
 
-    function open2() {
+    function open2({ target }) {
         setOp1(false);
         setOp2(true);
         setOp3(false);
         setOp4(false);
         setOp5(false);
+        target === 'Pré registro' ? true : false;
+        // aqui vai fazer o get para os filtros, em preocesso ou cadastrados
     }
-    function open3() {
+    function open3({ target }) {
         setOp1(false);
         setOp2(false);
         setOp3(true);
         setOp4(false);
         setOp5(false);
+        target === 'Aguardando fotos' ? true : false;
+        // aqui vai fazer o get para os filtros, em preocesso ou cadastrados
     }
-    function open4() {
+    function open4({ target }) {
         setOp1(false);
         setOp2(false);
         setOp3(false);
         setOp4(true);
         setOp5(false);
+        target === 'Em análise' ? true : false;
+        // aqui vai fazer o get para os filtros, em preocesso ou cadastrados
     }
-    function open5() {
+    function open5({ target }) {
         setOp1(false);
         setOp2(false);
         setOp3(false);
         setOp4(false);
         setOp5(true);
-        setOtherFilters(true);
-    }
-
-    function openFilterOp1() {
-        setFilterOp1(true);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("sync");
-    }
-
-    function openFilterOp2() {
-        setFilterOp1(false);
-        setFilterOp2(true);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("obd");
-    }
-
-    function openFilterOp3() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(true);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("photoVehicle");
-    }
-
-    function openFilterOp4() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(true);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("photoDocument");
-    }
-
-    function openFilterOp5() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(true);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("notApproved");
-    }
-
-    function openFilterOp6() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(true);
-        setFilterOp7(false);
-        setFilterOp8(false);
-        setFilterWidgets("calledOff");
-    }
-
-    function openFilterOp7() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(true);
-        setFilterOp8(false);
-        setFilterWidgets("blocked");
-    }
-
-    function openFilterOp8() {
-        setFilterOp1(false);
-        setFilterOp2(false);
-        setFilterOp3(false);
-        setFilterOp4(false);
-        setFilterOp5(false);
-        setFilterOp6(false);
-        setFilterOp7(false);
-        setFilterOp8(true);
-        setFilterWidgets("paymentFailure");
+        target === 'Reprovado' ? true : false;
+        // aqui vai fazer o get para os filtros, em preocesso ou cadastrados
     }
 
     const ChangeSearch = (e) => {
         setSearch(e.target.value);
     };
 
-    if (dados == "") {
+    if (dados == '') {
         return (
             <>
                 <Spinner animation="grow" variant="info" />
@@ -314,30 +228,6 @@ const Devices = () => {
                                     visible={visible}
                                 >
                                     <CNavbarNav className="me-auto mb-2 mb-lg-0"></CNavbarNav>
-                                    {/* <CForm className="d-flex">
-                                        <CFormInput
-                                            type="search"
-                                            onChange={ChangeSearch}
-                                            color="dark"
-                                            className=" me-2"
-                                            size="lg"
-                                            placeholder="Pesquise pela placa"
-                                            onKeyPress={searchPlate}
-                                        />
-                                        <CButton
-                                            className="radius"
-                                            onClick={searchPlate}
-                                            variant="ghost"
-                                            color="secondary"
-                                        >
-                                            <BiSearchAlt
-                                                style={{
-                                                    padding: 0,
-                                                    fontSize: "2em",
-                                                }}
-                                            />
-                                        </CButton>
-                                    </CForm> */}
                                 </CCollapse>
                             </CContainer>
                         </CNavbar>
@@ -379,94 +269,176 @@ const Devices = () => {
                                     className="navbar-collapse"
                                     visible={visible}
                                 >
-                                    <CNavbarNav className="me-auto mb-2 mb-lg-0"></CNavbarNav>
-                                    <CInputGroup className="mb-3 w-25">
-                                        <CFormInput
-                                            placeholder="Pesquise pela placa"
-                                            onChange={ChangeSearch}
-                                            color="dark"
-                                            className=""
-                                        />
-                                        <CButton
-                                            type="button"
-                                            color="secondary"
-                                            variant="outline"
-                                            className=""
-                                            onClick={searchPlate}
-                                        >
-                                            <BiSearchAlt
-                                            />
-                                        </CButton>
+                                    {/* <CNavbarNav className="me-auto mb-2 mb-lg-0"></CNavbarNav> */}
+                                    <CInputGroup className="mb-3 justify-content-end">
+                                        <FilterCitySubStatus />
+
+                                        <div className="d-flex">
+                                            <div className="container-icon-input">
+                                                <i className="icon-search-global  i-absolute-global">
+                                                    <BiSearchAlt2 color="#6D6D6D" />
+                                                </i>
+                                                <CFormInput
+                                                    className="input-search-global"
+                                                    placeholder="Pesquise"
+                                                    onChange={ChangeSearch}
+                                                />
+                                            </div>
+                                            <CButton
+                                                className="btn-search-global"
+                                                onClick={searchPlate}
+                                                variant="outline"
+                                                color="primary"
+                                            >
+                                                Buscar
+                                            </CButton>
+                                        </div>
                                     </CInputGroup>
-                                    {/* <CForm className="d-flex">
-                                        <CFormInput
-                                            type="search"
-                                            onChange={ChangeSearch}
-                                            color="dark"
-                                            className="me-2 "
-                                            placeholder="Pesquise pela placa"
-                                        />
-                                        <CButton
-                                            className=""
-                                            onClick={searchPlate}
-                                            variant="ghost"
-                                            color="secondary"
-                                        >
-                                            <BiSearchAlt
-                                                style={{
-                                                    padding: 0,
-                                                    fontSize: "2em",
-                                                }}
-                                            />
-                                        </CButton>
-                                    </CForm> */}
                                 </CCollapse>
                             </CContainer>
                         </CNavbar>
-                        <WidgetsDevices
-                            open1={open1}
-                            open2={open2}
-                            open3={open3}
-                            open4={open4}
-                            open5={open5}
-                            op1={op1}
-                            op2={op2}
-                            op3={op3}
-                            op4={op4}
-                            op5={op5}
-                            qtdElements={qtdElements}
-                        />
+                        <CRow>
+                            <CCol
+                                className={
+                                    inProcess
+                                        ? 'nav-in-process-active'
+                                        : 'nav-in-process'
+                                }
+                                onClick={choiceInProcess}
+                            >
+                                <label>Em processo de cadastro</label>
+                            </CCol>
+                            <CCol
+                                className={
+                                    complete
+                                        ? 'nav-complete-active'
+                                        : 'nav-complete'
+                                }
+                                onClick={choiceComplete}
+                            >
+                                <label>Clientes cadastrados</label>
+                            </CCol>
+                            <CCol></CCol>
+                            <CCol></CCol>
+                            <hr />
+                        </CRow>
                         <br />
-                        {otherFilters ? (
-                            <WidgetsFilterDevices
-                                filterOp1={filterOp1}
-                                filterOp2={filterOp2}
-                                filterOp3={filterOp3}
-                                filterOp4={filterOp4}
-                                filterOp5={filterOp5}
-                                filterOp6={filterOp6}
-                                filterOp7={filterOp7}
-                                filterOp8={filterOp8}
-                                openFilterOp1={openFilterOp1}
-                                openFilterOp2={openFilterOp2}
-                                openFilterOp3={openFilterOp3}
-                                openFilterOp4={openFilterOp4}
-                                openFilterOp5={openFilterOp5}
-                                openFilterOp6={openFilterOp6}
-                                openFilterOp7={openFilterOp7}
-                                openFilterOp8={openFilterOp8}
-                            />
-                        ) : (
+                        {inProcess ? (
                             <>
+                                <WidgetsImprocess
+                                    open1={open1}
+                                    open2={open2}
+                                    open3={open3}
+                                    open4={open4}
+                                    open5={open5}
+                                    op1={op1}
+                                    op2={op2}
+                                    op3={op3}
+                                    op4={op4}
+                                    op5={op5}
+                                    qtdElements={qtdElements}
+                                />
+                                <br />
+                                {/* {
+                        //     otherFilters ? (
+                        //         <WidgetsFilterDevices
+                        //             filterOp1={filterOp1}
+                        //             filterOp2={filterOp2}
+                        //             filterOp3={filterOp3}
+                        //             filterOp4={filterOp4}
+                        //             filterOp5={filterOp5}
+                        //             filterOp6={filterOp6}
+                        //             filterOp7={filterOp7}
+                        //             filterOp8={filterOp8}
+                        //             openFilterOp1={openFilterOp1}
+                        //             openFilterOp2={openFilterOp2}
+                        //             openFilterOp3={openFilterOp3}
+                        //             openFilterOp4={openFilterOp4}
+                        //             openFilterOp5={openFilterOp5}
+                        //             openFilterOp6={openFilterOp6}
+                        //             openFilterOp7={openFilterOp7}
+                        //             openFilterOp8={openFilterOp8}
+                        //         />
+                        //     ) : (
+                        //         <> */}
                                 <ListVehicles
                                     dados={dados}
                                     refreshPage={refreshPage}
                                     userType={userType}
                                 />
 
-                                <Pagination page={page} numberOfPages={numberOfPages} previousPage={previousPage} setPreviousPage={setPreviousPage} currentPage={currentPage} setCurrentPage={setCurrentPage} nextPage={nextPage} setNextPage={setNextPage} qtdElements={qtdElements} />
+                                <Pagination
+                                    page={page}
+                                    numberOfPages={numberOfPages}
+                                    previousPage={previousPage}
+                                    setPreviousPage={setPreviousPage}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    nextPage={nextPage}
+                                    setNextPage={setNextPage}
+                                    qtdElements={qtdElements}
+                                    name={'veículos em processo de cadastro'}
+                                />
                             </>
-                        )}
+                        ) : null}
+                        {complete ? (
+                            <>
+                                <WidgetsRegistered
+                                    open1={open1}
+                                    open2={open2}
+                                    open3={open3}
+                                    open4={open4}
+                                    open5={open5}
+                                    op1={op1}
+                                    op2={op2}
+                                    op3={op3}
+                                    op4={op4}
+                                    op5={op5}
+                                    qtdElements={qtdElements}
+                                />
+                                <br />
+                                {/* {
+                        //     otherFilters ? (
+                        //         <WidgetsFilterDevices
+                        //             filterOp1={filterOp1}
+                        //             filterOp2={filterOp2}
+                        //             filterOp3={filterOp3}
+                        //             filterOp4={filterOp4}
+                        //             filterOp5={filterOp5}
+                        //             filterOp6={filterOp6}
+                        //             filterOp7={filterOp7}
+                        //             filterOp8={filterOp8}
+                        //             openFilterOp1={openFilterOp1}
+                        //             openFilterOp2={openFilterOp2}
+                        //             openFilterOp3={openFilterOp3}
+                        //             openFilterOp4={openFilterOp4}
+                        //             openFilterOp5={openFilterOp5}
+                        //             openFilterOp6={openFilterOp6}
+                        //             openFilterOp7={openFilterOp7}
+                        //             openFilterOp8={openFilterOp8}
+                        //         />
+                        //     ) : (
+                        //         <> */}
+                                <ListVehicles
+                                    dados={dados}
+                                    refreshPage={refreshPage}
+                                    userType={userType}
+                                />
+
+                                <Pagination
+                                    page={page}
+                                    numberOfPages={numberOfPages}
+                                    previousPage={previousPage}
+                                    setPreviousPage={setPreviousPage}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    nextPage={nextPage}
+                                    setNextPage={setNextPage}
+                                    qtdElements={qtdElements}
+                                    name={'clientes cadastrados'}
+                                />
+                            </>
+                        ) : null}
                     </CCardBody>
                 </CCard>
             </>
@@ -474,4 +446,4 @@ const Devices = () => {
     }
 };
 
-export default  Devices;
+export default Devices;

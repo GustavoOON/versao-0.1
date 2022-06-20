@@ -85,11 +85,7 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                     <br />
                     <CButton
                         onClick={recoverPassword}
-                        className="btns-login"
-                        style={{
-                            backgroundColor: '#216CFF',
-                            borderColor: '#216CFF'
-                        }}
+                        className="btns-login btn-save-global"
                         >
                         Recuperar senha
                     </CButton>
@@ -115,11 +111,11 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                     height={120}
                 />
                 <p className="subtitle-login-dir">Confira sua caixa de e-mail!</p>
-                <p className="text-new-account">Nós enviamos o link de recuperação da sua senha para o {<br/>}{email}</p>
+                <p className="text-new-account">Nós enviamos o link de recuperação da sua senha para o e-mail {<br/>}<b>{email}</b></p>
                 <div>
                     <CButton
                         onClick={() => setForgotMyPass(true)}
-                        className="btns-login"
+                        className="btns-login btn-save-global"
                         style={{
                             backgroundColor: '#216CFF',
                             borderColor: '#216CFF'

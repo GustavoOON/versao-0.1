@@ -1,4 +1,4 @@
-.container-menu{
+.container-menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -9,8 +9,8 @@
 .container-carrocel {
     position: relative;
     text-align: center;
-    width:256px;
-    height:192px;
+    width: 256px;
+    height: 192px;
     margin: .6%;
     cursor: pointer;
 }
@@ -21,4 +21,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-  }
+}
+
+.text-not-image {
+    text-align: center;
+    color: #C4C4C4;
+    padding: 5em;
+    font-weight: 900;
+}

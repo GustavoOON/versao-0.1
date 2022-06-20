@@ -1,0 +1,32 @@
+.btn1Chamados {
+    float: right;
+}
+
+.cardEsquerda {
+    border-radius: 20px;
+    height: 100%;
+}
+
+.cardUser {
+    border-radius: 20px;
+}
+
+.cardDirRanking {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.background-card {
+    background-color: #F9F7F7;
+}
+
+.border-card {
+    border-right: 0.5px solid #C4C4C4;
+}
+
+.calendario-css-panel {
+    border-color: white;
+    align-items: center;
+    font-size: x-small;
+    border-radius: 20px;
+}

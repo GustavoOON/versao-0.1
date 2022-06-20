@@ -1,18 +1,15 @@
-.staus-pl{
-    padding-left: 9%;
-}
-
-.data-p{
+.data-p {
     padding: 0;
 }
 
-.icon-listVehicle-css{
+.icon-listVehicle-css {
     cursor: pointer;
+    padding: 0;
     margin-left: 10px;
     color: white;
 }
 
-.container-device-listVehicles-actions{
+.container-device-listVehicles-actions {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -21,4 +18,8 @@
 
 .font-table-listVehicles {
     font-size: 10pt;
+}
+
+.more-than-3 {
+    color: #FF2828;
 }

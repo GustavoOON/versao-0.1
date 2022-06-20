@@ -12,12 +12,12 @@
     margin-right:0.5%;
 }
 .nav-plan-active:hover{
-    background:#6D6D6D;
+    background:#216CFF;
     color:white;
 }
     
 .nav-plan-active-active{
-    background:#6D6D6D;
+    background:#216CFF;
     cursor:pointer; 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -45,12 +45,12 @@
     margin-right:0.5%;
 }
 .nav-plan-inactive:hover{
-    background:#6D6D6D;
+    background:#216CFF;
     color:white;
 }
     
 .nav-plan-inactive-active{
-    background:#6D6D6D;
+    background:#216CFF;
     cursor:pointer; 
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;

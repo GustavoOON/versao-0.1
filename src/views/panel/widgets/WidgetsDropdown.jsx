@@ -1,22 +1,13 @@
 import React, { useState } from "react";
-import {
-    CRow,
-    CCol,
-    CDropdown,
-    CDropdownMenu,
-    CDropdownItem,
-    CDropdownToggle,
-    CWidgetStatsA,
-    CCard,
-    CCardBody,
-    CCallout,
-} from "@coreui/react";
+import { CRow, CCol, CDropdown, CDropdownMenu, CDropdownItem, CDropdownToggle, CWidgetStatsA, CCard, CCardBody, CCallout, CPopover, CButton } from "@coreui/react";
 import { CChartLine } from "@coreui/react-chartjs";
 import { BsCircleFill } from "react-icons/bs";
 import CIcon from "@coreui/icons-react";
-import { cilArrowTop, cilOptions } from "@coreui/icons";
+import { cilOptions } from "@coreui/icons";
 
 import "./css/widget.css";
+import ModalReport from "../render/ModalReport";
+import ModalGraphic from "../render/ModalGraphic";
 
 const WidgetsDropdown = () => {
     // WIDGET 1 (Acumulado Mensal)-- Ainda falta colocar dados, labels ex: mes 1,2,3,4 ...
@@ -24,11 +15,27 @@ const WidgetsDropdown = () => {
         valor: 9999.99,
         porcentagem: -12,
         title: "Acumulado Mensal",
-    }); // valores mes
-    // valor semana
-    // valor dia
-    // vamos ter que setar o mes, mes será usado de inicio, podendo ser dia ou semana, Uma variavel será usada para definir os campos
+    });
+
+
     const [widget1, setWidget1] = useState(acumuladoMensal);
+    const [visibleReport, setVisibleReport] = useState(false);
+    const [visibleGraphic, setVisibleGraphic] = useState(false);
+
+    const month = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'MAio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro',
+    ];
 
     // WIDGET 2 (Abertura de Sinistro)
     const [sinistroMes, setSinistroMes] = useState({
@@ -50,22 +57,14 @@ const WidgetsDropdown = () => {
 
     return (
         <>
-            <CRow>
+            <ModalGraphic visibleGraphic={visibleGraphic} setVisibleGraphic={setVisibleGraphic} />
+            <ModalReport visibleReport={visibleReport} setVisibleReport={setVisibleReport} />
+            <CRow className="mb-3">
                 <CCol xs={4}>
                     <CCallout className="p-0 callout-widget" color="success">
                         <CWidgetStatsA
                             className="widget-container"
-                            value={
-                                <>
-                                    <div className="">
-                                        R$ {widget1.valor}
-                                        {/* <span className="fs-6 fw-normal">
-                                        ( {widget1.porcentagem} %
-                                            <CIcon icon={cilArrowBottom} />)
-                                            {/* </span> */}
-                                    </div>
-                                </>
-                            }
+                            value={`R$ ${widget1.valor}`}
                             title={widget1.title}
                             action={
                                 <CDropdown alignment="end">
@@ -77,11 +76,39 @@ const WidgetsDropdown = () => {
                                         <CIcon icon={cilOptions} />
                                     </CDropdownToggle>
                                     <CDropdownMenu>
-                                        <CDropdownItem>Alterar mês</CDropdownItem>
-                                        <CDropdownItem>
+                                        <CPopover
+                                            content={
+                                                <>
+                                                    {
+                                                        month.map((name, index) => (
+                                                            <div key={index}>
+                                                                <CButton
+                                                                    color="link"
+                                                                    variant="outline"
+                                                                    onClick={() => console.log("Funcionouuuuuuu")}>
+                                                                    {name}
+                                                                </CButton>
+                                                                <br />
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </>
+                                            }
+                                            placement="right"
+                                        >
+                                            <CDropdownItem 
+                                            color="link">
+                                                Alterar mês
+                                            </CDropdownItem>
+                                        </CPopover>
+                                        <CDropdownItem
+                                            onClick={() => setVisibleReport(true)}
+                                        >
                                             Gerar relátorio
                                         </CDropdownItem>
-                                        <CDropdownItem>
+                                        <CDropdownItem
+                                            onClick={() => setVisibleGraphic(true)}
+                                        >
                                             Gerar gráfico
                                         </CDropdownItem>
                                         <CDropdownItem disabled>
@@ -176,15 +203,8 @@ const WidgetsDropdown = () => {
                     <CCallout className="p-0 callout-widget" color="danger">
                         <CWidgetStatsA
                             className="widget-container"
-                            value={
-                                <>
-                                    {widgetSinistro.qtdAbertos}
-                                    <span className="fs-6 fw-normal">
-                                        ({widgetSinistro.porcentagem}%
-                                        <CIcon icon={cilArrowTop} />)
-                                    </span>
-                                </>
-                            }
+                            value={widgetSinistro.qtdAbertos}
+
                             title={widgetSinistro.title}
                             action={
                                 <CDropdown alignment="end">
@@ -196,11 +216,38 @@ const WidgetsDropdown = () => {
                                         <CIcon icon={cilOptions} />
                                     </CDropdownToggle>
                                     <CDropdownMenu>
-                                        <CDropdownItem>Alterar mês</CDropdownItem>
-                                        <CDropdownItem>
+                                        <CPopover
+                                            content={
+                                                <>
+                                                    {
+                                                        month.map((name, index) => (
+                                                            <div key={index}>
+                                                                <CButton
+                                                                    color="link"
+                                                                    variant="outline"
+                                                                    onClick={() => console.log("Funcionouuuuuuu")}>
+                                                                    {name}
+                                                                </CButton>
+                                                                <br />
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </>
+                                            }
+                                            placement="right"
+                                        >
+                                            <CDropdownItem>
+                                                Alterar mês
+                                            </CDropdownItem>
+                                        </CPopover>
+                                        <CDropdownItem
+                                            onClick={() => setVisibleReport(true)}
+                                        >
                                             Gerar relátorio
                                         </CDropdownItem>
-                                        <CDropdownItem>
+                                        <CDropdownItem
+                                            onClick={() => setVisibleGraphic(true)}
+                                        >
                                             Gerar gráfico
                                         </CDropdownItem>
                                         <CDropdownItem disabled>
@@ -296,13 +343,37 @@ const WidgetsDropdown = () => {
                                                 <CIcon icon={cilOptions} />
                                             </CDropdownToggle>
                                             <CDropdownMenu>
-                                                <CDropdownItem>
-                                                    Alterar mês
-                                                </CDropdownItem>
-                                                <CDropdownItem>
+                                                <CPopover
+                                                    content={
+                                                        <>
+                                                            {
+                                                                month.map((name, index) => (
+                                                                    <div key={index}>
+                                                                        <CButton
+                                                                            color="link"
+                                                                            variant="outline"
+                                                                            onClick={() => console.log("Funcionouuuuuuu")}>
+                                                                            {name}
+                                                                        </CButton>
+                                                                        <br />
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </>
+                                                    }
+                                                    placement="left"
+                                                >
+                                                    <CDropdownItem>
+                                                        Alterar mês
+                                                    </CDropdownItem>
+                                                </CPopover>
+                                                <CDropdownItem
+                                                    onClick={() => setVisibleReport(true)}>
                                                     Gerar relátorio
                                                 </CDropdownItem>
-                                                <CDropdownItem>
+                                                <CDropdownItem
+                                                    onClick={() => setVisibleGraphic(true)}
+                                                >
                                                     Gerar gráfico
                                                 </CDropdownItem>
                                                 <CDropdownItem disabled>
@@ -335,8 +406,6 @@ const WidgetsDropdown = () => {
                                             desativados
                                         </p>
                                     </CCol>
-
-
                                 </CRow>
                             </CCardBody>
                         </CCard>
@@ -347,4 +416,4 @@ const WidgetsDropdown = () => {
     );
 };
 
-export default  WidgetsDropdown;
+export default WidgetsDropdown;

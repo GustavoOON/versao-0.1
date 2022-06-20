@@ -1,15 +1,12 @@
 import React from "react";
 
-import {
-    AppContent,
-    AppSidebar,
-    AppFooter,
-    AppHeader,
-} from "../components/index";
+import { AppContent, AppSidebar, AppFooter, AppHeader } from "../components/index";
+
+import './css/defaultLayout.css'
 
 const DefaultLayout = () => {
     return (
-        <div>
+        <>
             <AppSidebar />
             <div className="wrapper d-flex flex-column min-vh-100 bg-light">
                 <AppHeader />
@@ -18,10 +15,10 @@ const DefaultLayout = () => {
                     <AppContent />
                 </div>
                 <br />
-                <AppFooter />
             </div>
-        </div>
+            <AppFooter />
+        </>
     );
 };
 
-export default  DefaultLayout;
+export default DefaultLayout;

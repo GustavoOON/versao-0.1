@@ -78,10 +78,12 @@ const InfoCars = () =>{
                                   <CTableDataCell>{device.placa}</CTableDataCell>
                                   <CTableDataCell>{device.ultimoSincronismo}</CTableDataCell>
                                   <CTableDataCell>{device.distancia} km</CTableDataCell>
-                                  <CTableDataCell>{device. consumoKm}km / L</CTableDataCell>
+                                  <CTableDataCell>{device.consumoKm}km / L</CTableDataCell>
                                   <CTableDataCell>
-                                    <CButton variant="ghost"
-                                    color="dark">
+                                    <CButton 
+                                    color="link"
+                                    variant="outline"
+                                    >
                                       <MdOutlineAlignHorizontalLeft />
                                     </CButton>
                                   </CTableDataCell>

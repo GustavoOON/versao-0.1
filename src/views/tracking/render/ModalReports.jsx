@@ -1,27 +1,27 @@
 import React from 'react'
-import { CButton } from '@coreui/react';
+import { CButton, CModal, CModalBody, CModalHeader, CModalTitle } from '@coreui/react';
 import { Modal }  from 'react-bootstrap';
 import Report from './Report';
 
 function ModalReports({show, closeModal}) {
   return (
-        <Modal
-        show={show} 
-        onHide={closeModal}
+        <CModal
+        visible={show} 
+        onClose={closeModal}
         size="xl"
         >
-            <Modal.Header  closeButton>
-                <Modal.Title>Relatórios</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <CModalHeader  closeButton>
+                <CModalTitle className="title-modal">Relatórios</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
                 <Report /> 
-            </Modal.Body>
-            <Modal.Footer>  
+            </CModalBody>
+            {/* <CModalFooter>  
                 <CButton onClick={closeModal}>
                     Sair
                 </CButton>
-            </Modal.Footer>
-        </Modal>
+            </CModalFooter> */}
+        </CModal>
   )
 }
 

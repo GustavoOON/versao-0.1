@@ -24,7 +24,7 @@ function UsersFilter({ filter, setFilter, name, saveFilter }) {
             alignment="center"
         >
             <CModalHeader>
-                <CModalTitle>{`Filtrar - Gráfico ${name}`}</CModalTitle>
+                <CModalTitle className="title-modal">{`Filtrar - Gráfico ${name}`}</CModalTitle>
             </CModalHeader>
             <CModalBody>
                 <CRow className="mb-4">
@@ -37,9 +37,9 @@ function UsersFilter({ filter, setFilter, name, saveFilter }) {
                             onChange={({ target }) => setValueFilterCity(target.value)}
                             options={[
                                 'Cidade',
-                                { label: 'Belo Horizonte', value: '1' },
-                                { label: 'São Paulo', value: '2' },
-                                { label: 'Rio de Janeior', value: '3' }
+                                { label: 'Belo Horizonte', value: 'Belo Horizonte' },
+                                { label: 'São Paulo', value: 'São Paulo' },
+                                { label: 'Rio de Janeiro', value: 'Rio de Janeiro' }
                             ]}
                         />
                     </CCol>
@@ -83,12 +83,20 @@ function UsersFilter({ filter, setFilter, name, saveFilter }) {
                 </CRow>
             </CModalBody>
             <CModalFooter>
-                <CButton color="secondary" onClick={() => setFilter(false)}>
+                <CButton
+                    className='btn-cancel-global'
+                    variant='outline'
+                    onClick={() => setFilter(false)}
+                >
                     Cancelar
                 </CButton>
                 <CButton
-                    onClick={() => saveFilter(valueFilterCity, valueFilterType, valueFilterStartDate, valueFilterFinalDate)}
-                    color="primary" >
+                    className='btn-save-global'
+                    onClick={() => {
+                        saveFilter(valueFilterCity, valueFilterType, valueFilterStartDate, valueFilterFinalDate);
+                        setFilter(false);
+                    }}
+                >
                     Salvar
                 </CButton>
             </CModalFooter>
@@ -96,4 +104,4 @@ function UsersFilter({ filter, setFilter, name, saveFilter }) {
     )
 }
 
-export default  UsersFilter
+export default UsersFilter

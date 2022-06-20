@@ -9,6 +9,7 @@ import Calender from './render/Calendar'
 import SinisterChartLine from './render/SinisterChartLine'
 
 import './css/home.css'
+import { BiSearchAlt2 } from 'react-icons/bi'
 
 const Home = () => {
     const [qtd_total_sinistro, setQtd_total_sinistro] = useState(34)
@@ -22,14 +23,21 @@ const Home = () => {
                             <label className='text-titulo'> Pesquise a placa do veículo</label>
                             <CRow>
                                 <CCol xs={10}>
-                                    <CFormInput
-                                        className=''
-                                        type="text"
-                                        placeholder="Pesquisar"
-                                    />
+                                    <div className="container-icon-input">
+                                        <label
+                                            className='icon-search-global  i-absolute-global'
+                                        >
+                                            <BiSearchAlt2 color="#6D6D6D" />
+                                        </label>
+                                        <CFormInput
+                                            className='input-search-global'
+                                            type="text"
+                                            placeholder="Pesquisar"
+                                        />
+                                    </div>
                                 </CCol>
                                 <CCol>
-                                    <CButton className='' color='light'>
+                                    <CButton className='btn-search-sinister'>
                                         <CIcon icon={cilSearch} size='lg' />
                                     </CButton>
                                 </CCol>
@@ -84,4 +92,4 @@ const Home = () => {
     )
 }
 
-export default  Home;
+export default Home;

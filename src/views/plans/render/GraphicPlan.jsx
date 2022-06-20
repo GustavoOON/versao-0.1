@@ -10,6 +10,7 @@ function GraphicPlan() {
     const random = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
+
     return (
         <CCard className='card'>
             <CCardBody>
@@ -103,4 +104,4 @@ function GraphicPlan() {
     )
 }
 
-export default  GraphicPlan;
+export default GraphicPlan;

@@ -4,7 +4,7 @@ import { CWidgetStatsD, CRow, CCol } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cibFacebook, cibLinkedin, cibTwitter, cilCalendar } from '@coreui/icons'
 import { CChart } from '@coreui/react-chartjs'
-import ButtonRelatory from '../panel/btns/ButtonCall'
+import ButtonRelatory from '../btns/ButtonGraph'
 
 
 
@@ -80,7 +80,7 @@ const WidgetsBrand = ({ withCharts }) => {
           className="mb-4"
           {...(withCharts && {
             chart: (
-              <div> 
+              <div>
                 <ButtonRelatory />
                 <CChart
                   className="position-absolute w-100 h-100"
@@ -101,7 +101,7 @@ const WidgetsBrand = ({ withCharts }) => {
                   options={chartOptions}
                 />
               </div>
-              
+
             ),
           })}
           icon={<CIcon icon={cibTwitter} height={52} className="my-4 text-white" />}
@@ -192,4 +192,4 @@ WidgetsBrand.propTypes = {
   withCharts: PropTypes.bool,
 }
 
-export default  WidgetsBrand
+export default WidgetsBrand;

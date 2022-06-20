@@ -2,38 +2,55 @@
     font-size: 2em;
     margin: 10px;
     color: #6D6D6D;
-} 
+}
 
-.nav-employees{
-    background:#E1E1E1;
+.nav-employees {
+    background: #E1E1E1;
+    color: #6D6D6D;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    cursor:pointer; 
-    height:60px;
+    cursor: pointer;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left:0.5%;
-    margin-right:0.5%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
 }
 
-.nav-employees:hover{
-    background:#6D6D6D;
-    color:white;
+.nav-employees:hover {
+    background: #216CFF;
+    color: white;
 }
-    
-.nav-employees-active{
-    background:#6D6D6D;
-    cursor:pointer; 
+
+.nav-employees-active {
+    background: #216CFF;
+    cursor: pointer;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    color:white;
-    height:60px;
+    color: white;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left:0.5%;
-    margin-right:0.5%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.btn-delete-employee {
+    background-color: #FF2828;
+    border: #FF2828 1px solid;
+    color: white;
+    font-size: 15px;
+}
+
+.btn-delete-employee:hover,
+.btn-delete-employee:active {
+    background-color: #CB1F1F;
+    border: #CB1F1F 1px solid;
+    color: white;
+    font-size: 15px;
+
 }

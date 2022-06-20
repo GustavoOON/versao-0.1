@@ -1,25 +1,20 @@
-import React from 'react'
-import {
-    CFormSwitch
-  } from '@coreui/react'
+import React from 'react';
+import { CForm, CFormSwitch } from '@coreui/react';
 
-const Status = (props) =>{
-
-    if(props.status == true){
+const Status = (props) => {
+    if (props.status == true) {
         return (
-            <>
-               <CFormSwitch  id="formSwitchCheckChecked" size="xl" defaultChecked/>
-            </>
-        )
-    }else{
+            <CForm className="d-flex justify-content-center">
+                <CFormSwitch defaultChecked />
+            </CForm>
+        );
+    } else {
         return (
-            <>
-               <CFormSwitch  id="formSwitchCheckChecked" size="xl"  defaultChecked />
-            </>
-        )
+            <CForm className="d-flex justify-content-center">
+                <CFormSwitch valid={true} defaultChecked />
+            </CForm>
+        );
     }
-    
-}
+};
 
-
-export default  Status
+export default Status;

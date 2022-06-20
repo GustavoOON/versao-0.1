@@ -61,6 +61,8 @@ function BtnAddPlan({ savePlan }) {
     return (
         <>
             <CButton
+                className='btn-save-global'
+                size='lg'
                 onClick={() => setVisible(!visible)}
             >
                 Adicionar plano
@@ -72,7 +74,7 @@ function BtnAddPlan({ savePlan }) {
                 onClose={() => setVisible(false)}
             >
                 <CModalHeader>
-                    <CModalTitle>Adicionar plano</CModalTitle>
+                    <CModalTitle className="title-modal">Adicionar plano</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                     <CRow>
@@ -151,7 +153,8 @@ function BtnAddPlan({ savePlan }) {
                 </CModalBody>
                 <CModalFooter>
                     <CButton
-                        color="secondary"
+                        className='btn-cancel-global'
+                        variant='outline'
                         onClick={() => setVisible(false)}
                     >
                         Cancelar
@@ -163,7 +166,7 @@ function BtnAddPlan({ savePlan }) {
                             customize,
                             fixed,
                         )}
-                        color="primary"
+                        className='btn-save-global'
                     >
                         Salvar
                     </CButton>
@@ -173,4 +176,4 @@ function BtnAddPlan({ savePlan }) {
     )
 }
 
-export default  BtnAddPlan;
+export default BtnAddPlan;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-    CButton,
+    CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle,
 
   } from '@coreui/react'
 
@@ -21,28 +21,26 @@ const Resume = () =>{
     return (
         <> 
             <CButton onClick={verifica} > Gerar relatório </CButton>
-
-            <Modal 
-                show={show} 
-                onHide={handleClose}
+            <CModal 
+                visible={show} 
+                onClose={handleClose}
                 fullscreen={fullscreen}
                 // size="xl"
             >
-                    
-                <Modal.Header  closeButton>
-                    <Modal.Title>Resumo da operação </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className='container-body'>
+                <CModalHeader  closeButton>
+                    <CModalTitle className="title-modal">Resumo da operação </CModalTitle>
+                </CModalHeader>
+                <CModalBody className='container-body'>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus repellat suscipit consequatur dignissimos veritatis! Dolores, voluptates iure quasi laboriosam aperiam, tempore praesentium est rerum itaque commodi, quos dignissimos magnam excepturi?</p>
-                </Modal.Body>
-                <Modal.Footer>  
+                </CModalBody>
+                <CModalFooter>  
                     <CButton  onClick={handleClose}>
                         Sair
                     </CButton>
                  
-                </Modal.Footer>
+                </CModalFooter>
                     
-            </Modal>
+            </CModal>
         </>
     )   
 }

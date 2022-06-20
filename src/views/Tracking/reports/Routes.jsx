@@ -1,54 +1,68 @@
 import React, { useState } from 'react';
-import { CButton, CCol, CRow } from '@coreui/react';
+import { CButton, CCol, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CRow } from '@coreui/react';
 import { Modal } from 'react-bootstrap';
 
 import FormatDate from '../components/FormatDate';
 import CustomerData from '../components/CustomerData';
 
-const Routes = () =>{
-    const [visible, setVisible] = useState(false)  
+const Routes = () => {
+    const [visible, setVisible] = useState(false)
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [fullscreen, setFullscreen] = useState(true);
-    
-    function verifica(breakpoint){
+
+    function verifica(breakpoint) {
         setFullscreen(breakpoint);
-        const handleShow =  setShow(true);
+        const handleShow = setShow(true);
     }
     return (
-        <> 
-            <CButton onClick={verifica} > Gerar relatório </CButton>
-            <Modal 
-                show={show} 
-                onHide={handleClose}
+        <>
+            <CButton
+                onClick={verifica}
+                className='btn-save-global'
+            >
+                Gerar relatório
+            </CButton>
+            <CModal
+                visible={show}
+                onCLose={handleClose}
                 size="xl"
             >
-                <Modal.Header closeButton>
+                <CModalHeader closeButton>
                     <div>
-                    <Modal.Title className="font-info-title">Rotas</Modal.Title>
-                    <FormatDate date={new Date()} />
+                        <CModalTitle className="title-modal">Rotas</CModalTitle>
+                        <FormatDate />
                     </div>
-                </Modal.Header>
-                <Modal.Body>
+                </CModalHeader>
+                <CModalBody>
                     <CRow>
                         <CCol>
                             <CustomerData />
                         </CCol>
                         <CCol>
-                            <label  className='font-info-subTitle'>Rotas realizadas no mês</label>
+                            <label className='font-info-subTitle'>Rotas realizadas no mês</label>
                             <br />
-                            
+
                         </CCol>
                     </CRow>
-                </Modal.Body>
-                <Modal.Footer>  
-                    <CButton onClick={handleClose}>
-                        Sair
+                </CModalBody>
+                <CModalFooter>
+                    <CButton
+                        className='btn-cancel-global'
+                        variant='outline'
+                        onClick={handleClose}
+                    >
+                        Cancelar
                     </CButton>
-                </Modal.Footer>
-            </Modal>
+                    <CButton className='btn-save-global'
+                        onClick={handleClose}
+                    >
+                        Baixar relatório
+                    </CButton>
+                </CModalFooter>
+            </CModal>
         </>
-    )   
+    )
 }
 
-export default  Routes;
+export default Routes;

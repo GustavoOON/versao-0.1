@@ -9,14 +9,11 @@ import {
     CTableHead,
     CTableHeaderCell,
     CNavbar,
-    CForm,
     CFormInput,
-    CButton,
     CNavbarBrand,
 } from '@coreui/react';
-import CIcon from '@coreui/icons-react';
-import { cilMagnifyingGlass } from '@coreui/icons';
 
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 const CallsPerformance = () => {
     const [atendimentos, setAtendimentos] = useState(
@@ -34,8 +31,6 @@ const CallsPerformance = () => {
 
     const pegandoBusca = (e) => {
         setBusca(e.target.value)
-        busca = e.target.value
-        BuscaUser()
     }
 
     const BuscaUser = () => {
@@ -55,12 +50,21 @@ const CallsPerformance = () => {
             <CCardBody>
                 <CNavbar>
                     <CNavbarBrand href="#"></CNavbarBrand>
-                    <CForm className="d-flex">
-                        <CFormInput type="search" className="me-2" onChange={pegandoBusca} value={busca2} placeholder="Pesquisar" />
-                        <CButton type="button" color='secondary' >
-                            <CIcon icon={cilMagnifyingGlass} size="lg" />
-                        </CButton>
-                    </CForm>
+                    <div>
+                        <div className="container-icon-input float-end mb-3">
+                            <i
+                                className='icon-search-global i-absolute-global'
+                            >
+                                <BiSearchAlt2 color="#6D6D6D" />
+                            </i>
+                            <CFormInput
+                                type="search"
+                                className="input-search-global"
+                                onChange={pegandoBusca}
+                                placeholder="Pesquisar"
+                            />
+                        </div>
+                    </div>
                 </CNavbar>
                 <CTable striped hover>
                     <CTableHead>
@@ -103,4 +107,4 @@ const CallsPerformance = () => {
     )
 }
 
-export default  CallsPerformance;
+export default CallsPerformance;

@@ -1,52 +1,28 @@
-import React, { useState, Component } from 'react'
-import {CFormSelect, CContainer, CRow, CCol, CButton, CInputGroupText, CFormInput} from '@coreui/react'
-import { Button, Modal,  Form  }  from 'react-bootstrap';
+import React, { useState } from 'react'
+import { CForm, CFormSelect, CFormLabel, CCol, CButton, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CFormInput } from '@coreui/react'
 import axios from "axios"
-import CIcon from '@coreui/icons-react'
-import {cilLoopCircular, cilPlus } from '@coreui/icons'
-import Cookies from 'js-cookie'
-import './../css/newUser.css'
-
-import UrlDomain from './../../../config'
 
 import Permissions from './../permissons/NewUserPermissons'
+import UrlDomain from './../../../config'
+
+import './../css/newUser.css'
 
 const NewUser = (props) => {
+    const [visible, setVisible] = useState(false)
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [department, setDepartment] = useState('')
+    const [district, setDistrict] = useState('')
+    const [number, setNumber] = useState('')
+    const [city, setCity] = useState('')
+    const [typeUser, setTypeUser] = useState('')
+    const [cep, setCep] = useState('')
+    const [road, setRoad] = useState('')
+    const [complement, setComplement] = useState('')
+    const [state, setState] = useState('')
 
-    const handleClose = () => setShow(false);
-    const [visible, setVisible] = useState(false)  
-    const [show, setShow] = useState(false);
-    const verifica = ()=>{setShow(true)}
-    
-    // Variaveis de nome 
-    const [firstName, setFirstName] = useState()
-    const firstNameUser = (e) =>{setFirstName(e.target.value)} 
-
-    const [fullName, setFullName] = useState()
-    const fullNameUser = (e) =>{setFullName(e.target.value)} 
-
-    const [phone, setPhone] = useState('')    
-    const phoneUser = (e) =>{setPhone(e.target.value)}
-
-    const [email, setEmail] = useState()
-    const emailUser = (e) =>{setEmail(e.target.value)}
-
-    const [password, setPassword] = useState()
-    const passwordUser = (e) =>{setPassword(e.target.value)}
-
-    const [passwordConfirm, setPasswordConfirm] = useState()
-    const PasswordConfirmUser = (e) =>{setPasswordConfirm(e.target.value)}
-
-    const [depart, setDepart] = useState()
-    const departUser = (e) =>{setDepart(e.target.value)}
-
-    const [typeUser, setTypeUser] = useState()
-    const typeUsers = (e) => {setTypeUser(e.target.value)}
-
-    const [flagSenha, setFlagSenha] = useState()
-    const [flagEmail, setFlagEmail] = useState()
-
-    const [status, setStatus] = useState('')
 
     const [departs, setDeparts] = useState([
         'Selecionar departamentos',
@@ -58,185 +34,164 @@ const NewUser = (props) => {
         { label: 'ADMINISTRAÇÃO', value: 'ADMINISTRATION' }
     ])
 
-    const salvarInfos = () => {
-        
-        if((email.includes('oonseguros')) || (email.includes('oonpayperuse'))){
-            setFlagEmail(0)
-            verififyNumberOfTelephone()
-        }else{
-            setFlagEmail(1)
-        }
-        
-    }
-
-    function verififyNumberOfTelephone () {
-
-        if(phone.length < 11){
-            setStatus('Número errado')
-        }else if (phone.length == 11){
-            
-            if(parseInt(phone[2]) === 9){
-                CreateUser()
-                setStatus('')
-            }else{
-                setStatus('Número errado')
-            }
-            
-        }else{
-            setStatus('Número errado')
-        }
-    }
-
-    // const [arrayPermission, setArrayPermission] = useState()
-    // let array
-    // const gettingPermissions = (e) =>{
-    //     array = e
-    //     setArrayPermission(e)
-    // }
-
     // faz requisicao para api 
-    const CreateUser = () =>{
-        
-        let newUser =  {firstName:firstName, fullName:fullName, phone:phone, email:email, department:depart, employeeRole:typeUser}
-        // Configuracoes para envio de mensagem 
-        const token = Cookies.get('TokenID')
+    const CreateUser = () => {
 
+        // let newUser = { firstName: firstName, fullName: fullName, phone: phone, email: email, department: depart, employeeRole: typeUser }
+        // // Configuracoes para envio de mensagem 
 
-        let config = {
-            headers: {
-            'Authorization': `Bearer ${token}`, 
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            }
-        };
-        axios 
-            .post(`${UrlDomain}/employees`,  newUser, config )
-            .then((response) => {
-                props.callBack()
-                setShow(false);     
-                
-            })
-            .catch(r =>{ 
-                console.log('erro na api createUser', r )
-                alert('Ops... houve algum erro 🤕 \n - Tente um novo e-mail.\n - Se persistir o erro, realize um novo login.' )
-            })
+        // const config = configCookies()
+
+        // axios
+        //     .post(`${UrlDomain}/employees`, newUser, config)
+        //     .then((response) => {
+        //         props.callBack()
+
+        //     })
+        //     .catch(r => {
+        //         console.log('erro na api createUser', r)
+        //         alert('Ops... houve algum erro 🤕 \n - Tente um novo e-mail.\n - Se persistir o erro, realize um novo login.')
+        //     })
 
     }
- 
+
     // PEGAR o TIPO DE USUARIO QUE IRÁ INERIR o USUARIO
     const user = 'ADMIN'
-    if(user == 'ADMIN'){
+    if (user == 'ADMIN') {
         return (
-            <div> 
-                <CButton  color="secondary" className='icon-css' onClick={verifica}> 
-                    <CIcon icon={cilPlus} /> Adicionar 
+            <>
+                <CButton
+                    className='btn-save-global '
+                    onClick={() => setVisible(!visible)}
+                >
+                    Adicionar
                 </CButton>
-                <Modal 
-                    show={show} 
-                    onHide={handleClose}
+                <CModal
+                    visible={visible}
+                    onClose={() => setVisible(false)}
                     size="lg"
                 >
-                    {/* <Modal.Header  closeButton>
-                        <Modal.Title>Inserir Ususário </Modal.Title>
-                    </Modal.Header> */}
-                    <Modal.Body style={{padding:'3em'}} className='container-body'>
-                        
-                        <CRow>
-                            
-                            <CCol>
-                                <Form>
-                                    {/* <Form.Group className="mb-3" controlId="formBasicEmail"> */}
-                                        <label className='newUserTil'>Dados</label>
-                                        <br />
-                                        <br />
-                                        <Form.Label> Primeiro Nome </Form.Label>
-                                        <Form.Control type="text" onChange={firstNameUser} placeholder= 'Digite primeiro Nome' />
-                                        <br />
-                                        <Form.Label> Sobrenome </Form.Label>
-                                        <Form.Control type="text" onChange={fullNameUser} placeholder= 'Digite o sobrenome' />
-                                        <br />
-                                        <Form.Label> E-mail </Form.Label>
-                                        <Form.Control type="email" onChange={emailUser} placeholder= 'Digite o E-mail' />
-                                        {
-                                            flagEmail == 1 ? (
-                                                <div> 
-                                                    <label className='newUser-input-IncorrectEmail' > E-mail incorreto</label>
-                                                </div>
-                                            )
-                                            : null
-                                        }
-
-                                        {/* <br />
-                                        <Form.Label> Senha </Form.Label>
-                                        <Form.Control type="password" onChange={passwordUser} placeholder= 'Minímo 6 caracteres' />
-                                        <br />
-                                        <Form.Label> Confirme a Senha </Form.Label>
-                                        <Form.Control type="password" onChange={PasswordConfirmUser} placeholder= 'Digite novamente' />
-                                        {
-                                            flagSenha == 1 ? (
-                                                <div> 
-                                                    <label> Senha incorreta</label>
-                                                </div>
-                                            )
-                                            : null
-                                        } */}
-
-                                        <br />
-                                       
-                                        
-                                        <Form.Label> Telefone </Form.Label>
-                                        <Form.Control type="text" onChange={phoneUser} placeholder= 'Digite o Telefone' />
-                                        {
-                                            status != '' ?
-                                                (<>  <label className='newUser-input-IncorrectEmail' > Telefone incorreto</label> </>)
-                                            :null
-                                        }
-
-                                        <br />
-                                        <Form.Label> Departamentos </Form.Label>
-                                        <CFormSelect 
-                                            aria-label="Default select example"
-                                            options={departs}
-                                            onChange={departUser}
-                                        />
-
-                                        <br />
-                                        <Form.Label> Tipo de usuário </Form.Label>
-                                        <CFormSelect className="mb-3" onChange={typeUsers} aria-label="Large select example">
-                                            <option> Categoria do usuário  </option>
-                                            <option value="SUPPORT">Suporte</option>
-                                            <option value="MANAGER">Manager</option>
-                                            <option value="ADMIN">Admin</option>
-                                        </CFormSelect>
-                                    {/* </Form.Group> */}
-                                </Form> 
+                    <CModalHeader>
+                        <CModalTitle className="title-modal">Adicionar funcionário</CModalTitle>
+                    </CModalHeader>
+                    <CModalBody className='container-body'>
+                        <CForm className='row g-3'>
+                            <CCol md={6}>
+                                <CFormLabel>Nome</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setFirstName(target.value)}
+                                />
                             </CCol>
-                            {/* <CCol className='container-newUser-permission'> 
-                                <Permissions choices = {gettingPermissions} />  
-                            </CCol> */}
-                            
-                        </CRow>
-                    </Modal.Body>
-    
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Sair
-                        </Button>
-                        <Button onClick = {salvarInfos} variant="primary" >
-                            Salvar Alterações
-                        </Button>
-                    </Modal.Footer>
-    
-                </Modal>
-    
-            </div>
+                            <CCol md={6}>
+                                <CFormLabel>Sobrenome</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setLastName(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Departamentos</CFormLabel>
+                                <CFormSelect
+                                    options={departs}
+                                    onChange={({ target }) => setDepartment(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Tipo de usuário</CFormLabel>
+                                <CFormSelect
+                                    options={departs}
+                                    onChange={({ target }) => setTypeUser(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>E-mail</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setEmail(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={3}>
+                                <CFormLabel>Contato</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setPhone(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={3}>
+                                <CFormLabel>CEP</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setCep(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Bairro</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setDistrict(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Rua</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setRoad(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Número</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setNumber(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Complemento</CFormLabel>
+                                <CFormInput
+                                    type="text"
+                                    onChange={({ target }) => setComplement(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Cidade</CFormLabel>
+                                <CFormSelect
+                                    options={departs}
+                                    onChange={({ target }) => setCity(target.value)}
+                                />
+                            </CCol>
+                            <CCol md={6}>
+                                <CFormLabel>Estado</CFormLabel>
+                                <CFormSelect
+                                    options={departs}
+                                    onChange={({ target }) => setState(target.value)}
+                                />
+                            </CCol>
+                        </CForm>
+                    </CModalBody>
+
+                    <CModalFooter>
+                        <CButton
+                            variant="outline"
+                            className='btn-cancel-global'
+                            onClick={() => setVisible(false)}>
+                            Cancelar
+                        </CButton>
+                        <CButton
+                            className='btn-save-global'
+                        >
+                            Adicionar
+                        </CButton>
+                    </CModalFooter>
+
+                </CModal>
+            </ >
         )
-        
-    }else{
+    } else {
         return (<> </>)
     }
 
 }
 
 
-export default  NewUser
+export default NewUser
