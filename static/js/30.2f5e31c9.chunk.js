@@ -1,2 +1,0 @@
-(this["webpackJsonpoon-seguros"]=this["webpackJsonpoon-seguros"]||[]).push([[30],{766:function(e,s,t){},783:function(e,s,t){"use strict";t.r(s);t(0);var o=t(193),n=(t(766),t(2));s.default=function(){return Object(n.jsxs)("div",{className:"container-home min-vh-100",children:[Object(n.jsx)("label",{className:"font-home-titulo",children:"OON Seguros"}),Object(n.jsx)("hr",{}),Object(n.jsx)("div",{className:"d-flex justify-content-center",children:Object(n.jsx)("img",{src:o.a,alt:"logo-oon-seguros",width:500})})]})}}}]);
-//# sourceMappingURL=30.2f5e31c9.chunk.js.map
