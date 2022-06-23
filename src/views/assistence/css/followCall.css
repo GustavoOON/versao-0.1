@@ -1,0 +1,17 @@
+.btn-call {
+    margin-right: 2em;
+    border-radius: 8px;
+    background-color: #216CFF;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.title-follow-call {
+    color: #14142B;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.container-btn-fallow-call {
+    align-self: center;
+}

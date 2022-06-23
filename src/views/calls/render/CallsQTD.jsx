@@ -6,35 +6,39 @@ import ButtonCalls from '../btns/ButtonCalls';
 const CallsQTD = () => {
     return (
         <>
-            <CCard className='card-atend'>
-                <CCallout className="callout" color="primary">
+            <CCard className="card-atend">
+                <CCallout className="callout-call" color="primary">
                     <CRow>
-                        <div className="btn-filter">
+                        <div className="btn-filter-call">
                             <ButtonCalls />
                         </div>
-                        <CCol className='text-center'>
+                        <CCol className="text-center">
                             <h2>55</h2>
-                            <label className="call-subTitle">Atendimentos em Aberto</label>
+                            <label className="call-sub-title">
+                                Atendimentos em Aberto
+                            </label>
                         </CCol>
                     </CRow>
                 </CCallout>
             </CCard>
             <br />
-            <CCard className='text-center card-atend'>
-                <CCallout className="callout" color="info">
+            <CCard className="text-center card-atend">
+                <CCallout className="callout-call" color="info">
                     <CRow>
-                        <div className="btn-filter">
+                        <div className="btn-filter-call">
                             <ButtonCalls />
                         </div>
-                        <CCol className='text-center'>
+                        <CCol className="text-center">
                             <h2>25</h2>
-                            <label className="call-subTitle">Atendimentos encerrados na última hora</label>
+                            <label className="call-sub-title">
+                                Atendimentos encerrados na última hora
+                            </label>
                         </CCol>
                     </CRow>
                 </CCallout>
             </CCard>
         </>
-    )
-}
+    );
+};
 
-export default  CallsQTD;
+export default CallsQTD;

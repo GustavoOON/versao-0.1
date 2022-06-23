@@ -7,15 +7,15 @@ import MonthYear from 'src/views/components/MonthYear';
 
 const Channel = () => {
     return (
-        <CCard className='card'>
+        <CCard className="card-call">
             <CCardBody>
                 <CRow>
                     <CCol>
-                        <label className="call-title">Comparativo</label >
+                        <label className="call-title">Comparativo</label>
                         <br />
                         <MonthYear />
                     </CCol>
-                    <CCol className='btn-filter'>
+                    <CCol className="btn-filter-call">
                         <ButtonGraph />
                     </CCol>
                 </CRow>
@@ -26,21 +26,33 @@ const Channel = () => {
                             legend: {
                                 position: 'bottom',
                             },
-                        }
+                        },
                     }}
                     data={{
                         datasets: [
                             {
-                                backgroundColor: ['#EB9B00', '#E7E6E6', '#B836F5', '#96BAF1', '#C9F196'],
+                                backgroundColor: [
+                                    '#EB9B00',
+                                    '#E7E6E6',
+                                    '#B836F5',
+                                    '#96BAF1',
+                                    '#C9F196',
+                                ],
                                 data: [40, 20, 80, 10, 5],
                             },
                         ],
-                        labels: ['Chat do aplicativo', 'E-mail', 'Instagram', 'Whatsapp', 'Outro'],
+                        labels: [
+                            'Chat do aplicativo',
+                            'E-mail',
+                            'Instagram',
+                            'Whatsapp',
+                            'Outro',
+                        ],
                     }}
                 />
             </CCardBody>
         </CCard>
-    )
-}
+    );
+};
 
-export default  Channel;
+export default Channel;

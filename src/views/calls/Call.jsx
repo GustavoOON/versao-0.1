@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { CCol, CRow } from '@coreui/react';
 
-import Calls from './render/Calls'
-import CallsQTD from './render/CallsQTD'
-import CallsBranch from './render/CallsBranch'
-import Channel from './render/Channel'
-import CallsPerformance from './render/CallsPerformance'
-import CalendarAtts from './render/CalendarAtts'
+import Calls from './render/Calls';
+import CallsQTD from './render/CallsQTD';
+import CallsBranch from './render/CallsBranch';
+import Channel from './render/Channel';
+import CallsPerformance from './render/CallsPerformance';
+import CalendarAtts from './render/CalendarAtts';
 
-import './css/call.css'
+import './css/call.css';
 
 const Call = () => {
     return (
-        <div className='mx-2'>
+        <div className="mx-2">
             <CRow>
                 <CCol xs={8}>
                     <Calls />
@@ -40,7 +40,7 @@ const Call = () => {
                 </CCol>
             </CRow>
         </div>
-    )
-}
+    );
+};
 
-export default  Call;
+export default Call;

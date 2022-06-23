@@ -1,7 +1,6 @@
 .container-devices-pagination {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     background: #f2f2f3;
     margin-top: 5%;
@@ -11,11 +10,12 @@
 
 .container-qtd-employeer {
     position: initial;
-    padding-left: 3%;
+    padding-left: 3em;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-weight: 600;
+    width: 100%;
 }
 
 .container-pagination-align {
@@ -23,7 +23,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 81%;
+    width: 100%;
+    margin-right: 3em;
 }
 
 

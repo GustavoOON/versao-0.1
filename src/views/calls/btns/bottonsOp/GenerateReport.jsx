@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import {
-    CButton ,
-  } from '@coreui/react'
+import { CButton } from '@coreui/react';
 
-
-const GerarRelatorio = () =>{
-
+const GerarRelatorio = () => {
     return (
         <>
-            <CButton color="secondary" size="sm" variant="ghost">Gerar relatório</CButton>
+            <CButton color="secondary" size="sm" variant="ghost">
+                Gerar relatório
+            </CButton>
         </>
-    )
-}
+    );
+};
 
-export default  GerarRelatorio
+export default GerarRelatorio;

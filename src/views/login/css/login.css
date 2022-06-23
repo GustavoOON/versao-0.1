@@ -1,6 +1,6 @@
 .login-esq {
     background: #FFFFFF;
-    height: 100vh;
+    height: 120vh;
     width: 50vw;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,6 @@
     align-items: center;
 }
 
-
 .title-login-esq {
     font-size: 64px;
     font-family: 'Roboto';
@@ -39,7 +38,6 @@
     font-weight: 700;
     margin-top: 1em;
 }
-
 
 .subtitle-login-dir {
     color: #216CFF;

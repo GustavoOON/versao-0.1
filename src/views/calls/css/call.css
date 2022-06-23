@@ -1,4 +1,4 @@
-.card {
+.card-call {
     border-radius: 20px;
     height: 100%;
 }
@@ -8,13 +8,13 @@
     border-radius: 20px;
 }
 
-.callout {
+.callout-call {
     margin: 0;
     border-radius: 20px;
     height: 100%;
 }
 
-.chart-line {
+.chart-line-call {
     height: 15em;
 }
 
@@ -26,30 +26,27 @@
     font-size: 10pt;
 }
 
-.btn-filter {
+.btn-filter-call {
     text-align: right;
 }
 
-.call-subTitle {
+.call-sub-title {
     font-size: 18px;
     font-weight: 500;
 }
 
-.card-protocolo {
+.card-protocolo-call {
     height: 100%;
     border-radius: 20px;
 }
 
-.hour-date {
-    font-size: 13px;
-}
 
-.card-calender .calender {
-    margin-top: 5%;
+.card-calender-call,
+.calender {
     width: 100%;
-    /*vw; */
     border-color: white;
     letter-spacing: 1px;
     align-items: center;
     font-size: 10pt;
+    border-radius: 20px;
 }

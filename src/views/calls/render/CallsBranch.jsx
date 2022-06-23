@@ -7,15 +7,15 @@ import MonthYear from 'src/views/components/MonthYear';
 
 const CallsBranch = () => {
     return (
-        <CCard className='card'>
+        <CCard className="card-call">
             <CCardBody>
                 <CRow>
                     <CCol>
-                        <label className="call-title">Comparativo</label >
+                        <label className="call-title">Comparativo</label>
                         <br />
                         <MonthYear />
                     </CCol>
-                    <CCol className='btn-filter'>
+                    <CCol className="btn-filter-call">
                         <ButtonRelatory />
                     </CCol>
                 </CRow>
@@ -26,10 +26,16 @@ const CallsBranch = () => {
                             legend: {
                                 position: 'bottom',
                             },
-                        }
+                        },
                     }}
                     data={{
-                        labels: ['WhatsApp', 'E-mail', 'Chat', 'Instagram', 'Outro'],
+                        labels: [
+                            'WhatsApp',
+                            'E-mail',
+                            'Chat',
+                            'Instagram',
+                            'Outro',
+                        ],
                         datasets: [
                             {
                                 label: 'Chamadas de clientes',
@@ -49,7 +55,7 @@ const CallsBranch = () => {
                 />
             </CCardBody>
         </CCard>
-    )
-}
+    );
+};
 
-export default  CallsBranch;
+export default CallsBranch;

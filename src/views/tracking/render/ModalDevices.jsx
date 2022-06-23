@@ -1,27 +1,34 @@
 import React from 'react';
-import { CButton, CFormInput, CInputGroup, CModal, CModalBody, CModalHeader, CModalTitle } from '@coreui/react'
-import { Modal } from 'react-bootstrap'
+import {
+    CButton,
+    CFormInput,
+    CInputGroup,
+    CModal,
+    CModalBody,
+    CModalHeader,
+    CModalTitle,
+} from '@coreui/react';
+import { Modal } from 'react-bootstrap';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
-import InfoCars from './InfosCars'
+import InfoCars from './InfosCars';
 
 function ModalDevices({ show2, closeModal2 }) {
     return (
-        <CModal
-            visible={show2}
-            onClose={closeModal2}
-            size="xl"
-        >
+        <CModal visible={show2} onClose={closeModal2} size="xl">
             <CModalHeader closeButton>
-                <CModalTitle className='w-50 title-modal'>Dispositivos</CModalTitle>
-                <CInputGroup className='w-50'>
+                <CModalTitle className="w-50 title-modal">
+                    Dispositivos
+                </CModalTitle>
+                <CInputGroup className="w-50">
                     <div className="d-flex">
                         <div className="  container-icon-input">
-                            <i className='icon-dispositivos i-absolute-global'>
+                            <i className="icon-dispositivos i-absolute-global">
                                 <BiSearchAlt2 color="#6D6D6D" />
                             </i>
                             <CFormInput
-                                className="input-search-global" placeholder="Pesquisar placa"
+                                className="input-search-global"
+                                placeholder="Pesquisar placa"
                                 size="sm"
                                 type="text"
                             />
@@ -54,7 +61,7 @@ function ModalDevices({ show2, closeModal2 }) {
                 <InfoCars />
             </CModalBody>
         </CModal>
-    )
+    );
 }
 
 export default ModalDevices;

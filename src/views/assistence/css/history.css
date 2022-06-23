@@ -1,0 +1,44 @@
+.btn-history {
+    margin-right: 2em;
+    border-radius: 8px;
+    background-color: #216CFF;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.title-history {
+    color: #14142B;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.container-btn-history {
+    align-self: center;
+}
+
+.btn-come-back-history {
+    padding: 1em 0;
+}
+
+.font-history-header {
+    font-weight: 700;
+    font-size: 14px;
+    color: #14142B;
+}
+
+.font-history-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #14142B;
+    margin-bottom: 5px;
+}
+
+.btn-come-back-call-info {
+    padding: 1em 0;
+}
+
+.title-history {
+    font-weight: 700;
+    font-size: 20px;
+    color: #14142B;
+}

@@ -1,19 +1,29 @@
-import React from 'react'
+import React from 'react';
 import { CButton, CPagination } from '@coreui/react';
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 
-import './pagination.css'
+import './pagination.css';
 
-function Pagination({ numberOfPages, page, previousPage, setPreviousPage, currentPage, setCurrentPage, nextPage, setNextPage, qtdElements, name }) {
-
+function Pagination({
+    numberOfPages,
+    page,
+    previousPage,
+    setPreviousPage,
+    currentPage,
+    setCurrentPage,
+    nextPage,
+    setNextPage,
+    qtdElements,
+    name,
+}) {
     function capturePreviousPage(e, nPage) {
         if (currentPage == 1) {
-            setPreviousPage("");
+            setPreviousPage('');
             setNextPage(2);
         } else if (e == nPage) {
             setNextPage(2);
             setCurrentPage(1);
-            setPreviousPage("");
+            setPreviousPage('');
         } else {
             setNextPage(currentPage);
             setCurrentPage(currentPage - 1);
@@ -25,13 +35,12 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
 
     // Proxima pagina
     function captureNextPage(e, nPage) {
-
         if (currentPage == 1 && nPage == 2) {
-            setNextPage("");
+            setNextPage('');
             setCurrentPage(currentPage + 1);
             setPreviousPage(1);
         } else if (e == nPage) {
-            setNextPage("");
+            setNextPage('');
             setCurrentPage(e);
             setPreviousPage(numberOfPages - 1);
         } else if (currentPage == 1 && nPage != 2) {
@@ -52,12 +61,13 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
             className="container-devices-pagination"
             aria-label="Page navigation example"
         >
-            {qtdElements ?
-                <label className="container-qtd-employeer w-100">
+            {qtdElements ? (
+                <label className="container-qtd-employeer">
                     Há {qtdElements} {name}
-                </label> : null}
+                </label>
+            ) : null}
             <div className="container-pagination-align justify-content-end">
-                {previousPage != "" ? (
+                {previousPage != '' ? (
                     <>
                         <CButton
                             className="btn-user-pagination"
@@ -75,12 +85,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                             <>
                                 <CButton
                                     className="btn-user-pagination"
-                                    onClick={() =>
-                                        capturePreviousPage(
-                                            1,
-                                            1
-                                        )
-                                    }
+                                    onClick={() => capturePreviousPage(1, 1)}
                                     variant="outline"
                                 >
                                     1
@@ -124,10 +129,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         <CButton
                             className="btn-user-pagination"
                             onClick={() =>
-                                captureNextPage(
-                                    nextPage,
-                                    numberOfPages
-                                )
+                                captureNextPage(nextPage, numberOfPages)
                             }
                             variant="outline"
                         >
@@ -136,10 +138,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         <CButton
                             className="btn-user-pagination"
                             onClick={() =>
-                                captureNextPage(
-                                    nextPage,
-                                    numberOfPages
-                                )
+                                captureNextPage(nextPage, numberOfPages)
                             }
                             variant="outline"
                         >
@@ -147,16 +146,12 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         </CButton>
                     </>
                 ) : null}
-                {nextPage < numberOfPages &&
-                    nextPage !== "" ? (
+                {nextPage < numberOfPages && nextPage !== '' ? (
                     <>
                         <CButton
                             className="btn-user-pagination"
                             onClick={() =>
-                                captureNextPage(
-                                    nextPage,
-                                    numberOfPages
-                                )
+                                captureNextPage(nextPage, numberOfPages)
                             }
                             variant="outline"
                         >
@@ -166,10 +161,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         <CButton
                             className="btn-user-pagination"
                             onClick={() =>
-                                captureNextPage(
-                                    numberOfPages,
-                                    numberOfPages
-                                )
+                                captureNextPage(numberOfPages, numberOfPages)
                             }
                             variant="outline"
                         >
@@ -178,10 +170,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                         <CButton
                             className="btn-user-pagination"
                             onClick={() =>
-                                captureNextPage(
-                                    nextPage,
-                                    numberOfPages
-                                )
+                                captureNextPage(nextPage, numberOfPages)
                             }
                             variant="outline"
                         >
@@ -191,7 +180,7 @@ function Pagination({ numberOfPages, page, previousPage, setPreviousPage, curren
                 ) : null}
             </div>
         </CPagination>
-    )
+    );
 }
 
 export default Pagination;

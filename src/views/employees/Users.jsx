@@ -325,8 +325,6 @@ const Clients = () => {
                             retiraFiltro={retiraFiltro}
                             dadosOri={dadosOri}
                         />
-                        <br />
-                        <br />
                         <Pagination
                             page={page}
                             numberOfPages={numberOfPages}

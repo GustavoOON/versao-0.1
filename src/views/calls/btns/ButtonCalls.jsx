@@ -1,6 +1,6 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
-import { cilOptions } from '@coreui/icons'
+import React from 'react';
+import CIcon from '@coreui/icons-react';
+import { cilOptions } from '@coreui/icons';
 import {
     CButton,
     CDropdown,
@@ -8,7 +8,7 @@ import {
     CDropdownMenu,
     CDropdownToggle,
     CPopover,
-} from '@coreui/react'
+} from '@coreui/react';
 
 function ButtonCalls() {
     const month = [
@@ -27,40 +27,33 @@ function ButtonCalls() {
     ];
 
     return (
-
         <CDropdown alignment="end">
-            <CDropdownToggle
-                color="transparent"
-                caret={false}
-                className="p-0"
-            >
+            <CDropdownToggle color="transparent" caret={false} className="p-0">
                 <CIcon icon={cilOptions} />
             </CDropdownToggle>
             <CDropdownMenu>
                 <CPopover
                     content={
                         <>
-                            {
-                                month.map((name, index) => (
-                                    <div key={index}>
-                                        <CButton
-                                            color="link"
-                                            variant="outline"
-                                            onClick={() => console.log("Funcionouuuuuuu")}>
-                                            {name}
-                                        </CButton>
-                                        <br />
-                                    </div>
-                                ))
-                            }
+                            {month.map((name, index) => (
+                                <div key={index}>
+                                    <CButton
+                                        color="link"
+                                        variant="outline"
+                                        onClick={() =>
+                                            console.log('Funcionouuuuuuu')
+                                        }
+                                    >
+                                        {name}
+                                    </CButton>
+                                    <br />
+                                </div>
+                            ))}
                         </>
                     }
                     placement="left"
                 >
-                    <CDropdownItem
-                        color="link">
-                        Alterar mês
-                    </CDropdownItem>
+                    <CDropdownItem color="link">Alterar mês</CDropdownItem>
                 </CPopover>
                 <CDropdownItem
                 // onClick={() => setVisibleReport(true)}
@@ -72,12 +65,10 @@ function ButtonCalls() {
                 >
                     Gerar gráfico...
                 </CDropdownItem>
-                <CDropdownItem disabled>
-                    Mais Ferramentas
-                </CDropdownItem>
+                <CDropdownItem disabled>Mais Ferramentas</CDropdownItem>
             </CDropdownMenu>
         </CDropdown>
-    )
+    );
 }
 
-export default ButtonCalls
+export default ButtonCalls;

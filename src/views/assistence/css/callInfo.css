@@ -1,0 +1,22 @@
+.font-info-call-header {
+    font-weight: 700;
+    font-size: 14px;
+    color: #14142B;
+}
+
+.font-info-call-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #14142B;
+    margin-bottom: 5px;
+}
+
+.btn-come-back-call-info {
+    padding: 1em 0;
+}
+
+.title-info-call {
+    font-weight: 700;
+    font-size: 20px;
+    color: #14142B;
+}

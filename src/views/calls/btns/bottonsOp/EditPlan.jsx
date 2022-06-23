@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import {
-    CButton ,
-  } from '@coreui/react'
+import { CButton } from '@coreui/react';
 
-
-const BtnEditPlan = () =>{
-
+const BtnEditPlan = () => {
     return (
         <>
-            <CButton color="secondary" size="sm" variant="ghost">Editar Plano</CButton>
+            <CButton color="secondary" size="sm" variant="ghost">
+                Editar Plano
+            </CButton>
         </>
-    )
-}
+    );
+};
 
-export default  BtnEditPlan
+export default BtnEditPlan;

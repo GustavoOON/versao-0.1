@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
-import { Form, Modal } from 'react-bootstrap';
-import { CButton, CRow, CCol, CForm, CFormLabel, CInputGroup, CFormInput, CFormCheck } from '@coreui/react'
+import React, { useState } from 'react';
+import {
+    CButton,
+    CCol,
+    CForm,
+    CFormLabel,
+    CInputGroup,
+    CFormInput,
+} from '@coreui/react';
+
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+
 import logoOon from '../../../assets/images/oon-seguros-logo.svg';
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 const RecoverPassword = ({ setForgotMyPass }) => {
-    const [email, setEmail] = useState('')
-    const recoverLogin = (e) => { setEmail(e.target.value) } //  pegando valores do email
+    const [email, setEmail] = useState('');
+    const recoverLogin = (e) => {
+        setEmail(e.target.value);
+    }; //  pegando valores do email
     const [recoverPasswordEmail, setRecoverPasswordEmail] = useState(true);
 
     // const [respEndpoint, setRespEndpoint] = useState(true) // apos o envio do email, pegar resposta
@@ -28,7 +38,6 @@ const RecoverPassword = ({ setForgotMyPass }) => {
     //         mySubString = 'errado'
     //     }
 
-
     //     // permitir o envio do email somente se tiver dominio oonpayperuse, oonseguros
     //     if ((mySubString === 'oonpayperuse') || (mySubString === 'oonseguros')) {
     //         verificaMail()
@@ -47,13 +56,14 @@ const RecoverPassword = ({ setForgotMyPass }) => {
     // }
 
     const recoverPassword = () => {
-        email != '' & email.includes('@')? setRecoverPasswordEmail(false)
-            : null
-    }
+        (email != '') & email.includes('@')
+            ? setRecoverPasswordEmail(false)
+            : null;
+    };
 
     return recoverPasswordEmail ? (
-        <div className='fundo-body-forgot-password min-vh-100 align-items-center d-flex'>
-            <CCol className='forgot-password-container'>
+        <div className="fundo-body-forgot-password min-vh-100 align-items-center d-flex">
+            <CCol className="forgot-password-container">
                 <img
                     className="img-oon-forgot-password"
                     src={logoOon}
@@ -61,7 +71,10 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                     height={120}
                 />
                 <p className="subtitle-login-dir">Esqueceu sua senha?</p>
-                <p className="text-new-account">Não se preocupe, enviaremos a você as instruções de recuperação.</p>
+                <p className="text-new-account">
+                    Não se preocupe, enviaremos a você as instruções de
+                    recuperação.
+                </p>
                 <div>
                     <CForm>
                         <CFormLabel
@@ -70,11 +83,9 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                         >
                             E-mail
                         </CFormLabel>
-                        <CInputGroup
-                            className="mb-3"
-                        >
+                        <CInputGroup className="mb-3">
                             <CFormInput
-                                className='radius-border'
+                                className="radius-border"
                                 id="email"
                                 type="email"
                                 onChange={recoverLogin}
@@ -86,39 +97,45 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                     <CButton
                         onClick={recoverPassword}
                         className="btns-login btn-save-global"
-                        >
+                    >
                         Recuperar senha
                     </CButton>
                     <CButton
                         color="link"
-                        variant='ghost'
+                        variant="ghost"
                         onClick={() => setForgotMyPass(true)}
                         className="btn-forgot-password mt-1"
                     >
-                        <AiOutlineArrowLeft className='m-1' />
+                        <AiOutlineArrowLeft className="m-1" />
                         Voltar para o log in
                     </CButton>
                 </div>
             </CCol>
         </div>
     ) : (
-        <div className='fundo-body-forgot-password min-vh-100 align-items-center d-flex'>
-            <CCol className='forgot-password-container'>
+        <div className="fundo-body-forgot-password min-vh-100 align-items-center d-flex">
+            <CCol className="forgot-password-container">
                 <img
                     className="img-oon-forgot-password"
                     src={logoOon}
                     alt="logo oon seguros"
                     height={120}
                 />
-                <p className="subtitle-login-dir">Confira sua caixa de e-mail!</p>
-                <p className="text-new-account">Nós enviamos o link de recuperação da sua senha para o e-mail {<br/>}<b>{email}</b></p>
+                <p className="subtitle-login-dir">
+                    Confira sua caixa de e-mail!
+                </p>
+                <p className="text-new-account">
+                    Nós enviamos o link de recuperação da sua senha para o
+                    e-mail {<br />}
+                    <b>{email}</b>
+                </p>
                 <div>
                     <CButton
                         onClick={() => setForgotMyPass(true)}
                         className="btns-login btn-save-global"
                         style={{
                             backgroundColor: '#216CFF',
-                            borderColor: '#216CFF'
+                            borderColor: '#216CFF',
                         }}
                     >
                         Voltar para o log in
@@ -127,8 +144,9 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                         <label> Não recebeu o e-mail? </label>
                         <CButton
                             color="link"
+                            variant="ghost"
                             onClick={recoverPassword}
-                            className="p-0 ps-1"
+                            className="p-0 ps-1 btn-link-global"
                         >
                             Enviar novamente.
                         </CButton>
@@ -136,7 +154,7 @@ const RecoverPassword = ({ setForgotMyPass }) => {
                 </div>
             </CCol>
         </div>
-    )
-}
+    );
+};
 
-export default  RecoverPassword;
+export default RecoverPassword;

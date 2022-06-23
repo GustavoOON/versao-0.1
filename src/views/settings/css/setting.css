@@ -46,8 +46,6 @@
     border-radius: 20px;
 }
 
-
-
 .ButtonAlterarSenha {
     float: inline-end;
 }
@@ -79,6 +77,4 @@
 .container-profile-photo {
     width: 100%;
     padding: 1%;
-
 }
-

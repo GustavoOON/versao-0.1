@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import {
-    CButton ,
-  } from '@coreui/react'
+import { CButton } from '@coreui/react';
 
-
-const Config = () =>{
-
+const Config = () => {
     return (
         <>
-            <CButton color="secondary" size="sm" variant="ghost">Mais Ferramentas</CButton>
+            <CButton color="secondary" size="sm" variant="ghost">
+                Mais Ferramentas
+            </CButton>
         </>
-    )
-}
+    );
+};
 
-export default  Config
+export default Config;

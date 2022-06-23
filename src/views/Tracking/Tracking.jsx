@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, Marker, Polyline, useJsApiLoader } from '@react-google-maps/api';
+import {
+    GoogleMap,
+    Marker,
+    Polyline,
+    useJsApiLoader,
+} from '@react-google-maps/api';
 import { Spinner } from 'react-bootstrap';
 import { CRow, CCol, CCard, CCardBody } from '@coreui/react';
 
-import carSynced from "../../assets/images/car-synced.png"
-import carNoSignal3d from "../../assets/images/car-no-signal-3d.png"
-import carNoSignal7d from "../../assets/images/car-no-signal-7d.png"
+import carSynced from '../../assets/images/car-synced.png';
+import carNoSignal3d from '../../assets/images/car-no-signal-3d.png';
+import carNoSignal7d from '../../assets/images/car-no-signal-7d.png';
 
-import InfoWindowPopup from './render/InfoWindow'
+import InfoWindowPopup from './render/InfoWindow';
 
-import tokenMap from '../../configMap'
+import tokenMap from '../../configMap';
 import WidgetsTracking from './render/WidgetsTracking';
 import ModalDevices from './render/ModalDevices';
 import ModalReports from './render/ModalReports';
 
-import './css/tracking.css'
+import './css/tracking.css';
 // import "../devices/css/devices.css";
 
 const Tracking = () => {
-
     //Public API that will echo messages sent to it back to the client
     // const [socketUrl, setSocketUrl] = useState('wss://echo.websocket.org');
     // const [messageHistory, setMessageHistory] = useState([]);
@@ -28,7 +32,7 @@ const Tracking = () => {
 
     useEffect(() => {
         setCars(pos);
-    }, [])
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -42,8 +46,8 @@ const Tracking = () => {
             setFlagBTN(true);
             setShow2(false);
             setFlagBTN2(true);
-        }
-    }, [])
+        };
+    }, []);
 
     const containerStyle = {
         width: '100%',
@@ -53,7 +57,7 @@ const Tracking = () => {
 
     const center = {
         lat: -19.9190991,
-        lng: -43.9385985
+        lng: -43.9385985,
     };
 
     const options = {
@@ -62,23 +66,22 @@ const Tracking = () => {
         zoomControl: true,
         fullscreenControl: true,
         streetViewControl: true,
-    }
+    };
 
-    const libraries = ["places"];
+    const libraries = ['places'];
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: tokenMap,  // trocar o token aqui, TOKEN PESSOAL 
+        googleMapsApiKey: tokenMap, // trocar o token aqui, TOKEN PESSOAL
         libraries,
-    })
+    });
 
     // const [statusCarro, setStatusCarro] = useState(false)
     const [map, setMap] = React.useState(null);
 
     const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
-    }, [])
-
+        setMap(null);
+    }, []);
 
     const pos = [
         {
@@ -87,13 +90,13 @@ const Tracking = () => {
             actuallyPosition: { lat: -19.956813, lng: -43.957453 },
             path: [
                 { lat: -19.956813, lng: -43.957453 },
-                { lat: -19.958517, lng: -43.957120 },
+                { lat: -19.958517, lng: -43.95712 },
                 { lat: -19.959273, lng: -43.957313 },
-                { lat: -19.960473, lng: -43.957410 },
-                { lat: -19.961623, lng: -43.957206 }
+                { lat: -19.960473, lng: -43.95741 },
+                { lat: -19.961623, lng: -43.957206 },
             ],
             status: 1,
-            title: "Uluru (Ayers Rock)"
+            title: 'Uluru (Ayers Rock)',
         },
         {
             id: 3,
@@ -108,7 +111,7 @@ const Tracking = () => {
                 { lat: -19.951154, lng: -44.007984 },
             ],
             status: 0,
-            title: "Uluru (Ayers Rock)222"
+            title: 'Uluru (Ayers Rock)222',
         },
         {
             id: 4,
@@ -117,11 +120,11 @@ const Tracking = () => {
             status: 2,
             path: [
                 { lat: -19.963912, lng: -43.962984 },
-                { lat: -19.964376, lng: -43.962540 },
+                { lat: -19.964376, lng: -43.96254 },
                 { lat: -19.964684, lng: -43.962052 },
                 { lat: -19.965087, lng: -43.960722 },
             ],
-            title: "Uluru (Ayers Rock)222"
+            title: 'Uluru (Ayers Rock)222',
         },
         {
             id: 5,
@@ -133,12 +136,12 @@ const Tracking = () => {
                 { lat: -19.967467, lng: -43.943652 },
                 { lat: -19.966489, lng: -43.942332 },
                 { lat: -19.966045, lng: -43.940937 },
-                { lat: -19.965400, lng: -43.939542 }
+                { lat: -19.9654, lng: -43.939542 },
             ],
             status: 2,
-            title: "Uluru (Ayers Rock)22"
+            title: 'Uluru (Ayers Rock)22',
         },
-    ]
+    ];
 
     const [op1, setOp1] = useState(false);
     const [op2, setOp2] = useState(false);
@@ -146,19 +149,27 @@ const Tracking = () => {
     const [op4, setOp4] = useState(false);
 
     function open1() {
-        setOp1(true), setOp2(false), setOp3(false), setOp4(false), allVehicles()
+        setOp1(true),
+            setOp2(false),
+            setOp3(false),
+            setOp4(false),
+            allVehicles();
     }
 
     function open2() {
-        setOp1(false), setOp2(true), setOp3(false), setOp4(false), openModal2()
+        setOp1(false), setOp2(true), setOp3(false), setOp4(false), openModal2();
     }
 
     function open3() {
-        setOp1(false), setOp2(false), setOp3(true), setOp4(false), openModal()
+        setOp1(false), setOp2(false), setOp3(true), setOp4(false), openModal();
     }
-    
+
     function open4() {
-        setOp1(false), setOp2(false), setOp3(false), setOp4(true), syncedDevices()
+        setOp1(false),
+            setOp2(false),
+            setOp3(false),
+            setOp4(true),
+            syncedDevices();
     }
 
     const [show, setShow] = useState(false);
@@ -167,84 +178,99 @@ const Tracking = () => {
     // Modal 1 de relatorio
     function openModal() {
         const handleShow = setShow(true);
-        setFlagBTN(false)
-        setFlagBTN2(false)
+        setFlagBTN(false);
+        setFlagBTN2(false);
     }
 
     const closePopup = () => {
-        setSelecionado('')
-    }
+        setSelecionado('');
+    };
 
     const closeModal = () => {
-        setFlagBTN(true)
-        setFlagBTN2(true)
-        setShow(false)
-    }
+        setFlagBTN(true);
+        setFlagBTN2(true);
+        setShow(false);
+    };
 
     const syncedDevices = () => {
-        const synced = cars.filter((car) => car.status === 1)
-        setCars(synced)
-    }
+        const synced = cars.filter((car) => car.status === 1);
+        setCars(synced);
+    };
 
     const allVehicles = () => {
-        setCars(pos)
-    }
+        setCars(pos);
+    };
     const [show2, setShow2] = useState(false);
-    const [flagBTN2, setFlagBTN2] = useState(true)
+    const [flagBTN2, setFlagBTN2] = useState(true);
 
-    // Modal 2 de informações dos carros 
+    // Modal 2 de informações dos carros
     function openModal2() {
         const handleShow2 = setShow2(true);
-        setFlagBTN2(false)
-        setFlagBTN(false)
+        setFlagBTN2(false);
+        setFlagBTN(false);
     }
 
     const closeModal2 = () => {
-        setFlagBTN2(true)
-        setFlagBTN(true)
-        setShow2(false)
-    }
-
-    const onLoad = polyline => {
-        console.log('polyline: ', polyline)
+        setFlagBTN2(true);
+        setFlagBTN(true);
+        setShow2(false);
     };
 
+    const onLoad = (polyline) => {
+        console.log('polyline: ', polyline);
+    };
 
-    const [selecionado, setSelecionado] = useState('')
+    const [selecionado, setSelecionado] = useState('');
 
     // escolhe o carro no map
     const selected = (e) => {
-        setSelecionado(e)
-    }
+        setSelecionado(e);
+    };
 
     if (isLoaded) {
         return (
             <>
                 <ModalReports show={show} closeModal={closeModal} />
                 <ModalDevices show2={show2} closeModal2={closeModal2} />
-                <CCard className='behind'>
+                <CCard className="behind">
                     <CCardBody>
                         <CRow>
                             <CCol>
-                                <img className="cars-icon-tracking" src={carSynced} alt="car-synced" />
-                                <span>
-                                    Dispositivos sincronizados
-                                </span>
+                                <img
+                                    className="cars-icon-tracking"
+                                    src={carSynced}
+                                    alt="car-synced"
+                                />
+                                <span>Dispositivos sincronizados</span>
                             </CCol>
                             <CCol>
-                                <img className="cars-icon-tracking" src={carNoSignal3d} alt="car-no-signal-3d" />
-                                <span>
-                                    Sem sinal há 3 dias
-                                </span>
+                                <img
+                                    className="cars-icon-tracking"
+                                    src={carNoSignal3d}
+                                    alt="car-no-signal-3d"
+                                />
+                                <span>Sem sinal há 3 dias</span>
                             </CCol>
                             <CCol>
-                                <img className="cars-icon-tracking" src={carNoSignal7d} alt="car-no-signal-7d" />
-                                <span>
-                                    Sem sinal há 7 dias
-                                </span>
+                                <img
+                                    className="cars-icon-tracking"
+                                    src={carNoSignal7d}
+                                    alt="car-no-signal-7d"
+                                />
+                                <span>Sem sinal há 7 dias</span>
                             </CCol>
+                            <CCol></CCol>
                         </CRow>
-                        <WidgetsTracking open1={open1} open2={open2} open3={open3} open4={open4} op1={op1} op2={op2} op3={op3} op4={op4} />
+                        <WidgetsTracking
+                            open1={open1}
+                            open2={open2}
+                            open3={open3}
+                            open4={open4}
+                            op1={op1}
+                            op2={op2}
+                            op3={op3}
+                            op4={op4}
+                        />
                         <GoogleMap
                             mapContainerStyle={containerStyle}
                             center={center}
@@ -256,101 +282,145 @@ const Tracking = () => {
                                 if (item.status == 1) {
                                     return (
                                         <div key={index.toString()}>
-                                            <Polyline
-                                                path={item.path}
-                                            />
+                                            <Polyline path={item.path} />
                                             <Marker
                                                 key={item.id}
-                                                position={{ lat: item.actuallyPosition.lat, lng: item.actuallyPosition.lng }}
+                                                position={{
+                                                    lat: item.actuallyPosition
+                                                        .lat,
+                                                    lng: item.actuallyPosition
+                                                        .lng,
+                                                }}
                                                 icon={{
                                                     url: carSynced,
-                                                    scaledSize: new window.google.maps.Size(32, 32),
-                                                    origin: new window.google.maps.Point(0, 0),
-                                                    anchor: new window.google.maps.Point(15, 15),
+                                                    scaledSize:
+                                                        new window.google.maps.Size(
+                                                            32,
+                                                            32
+                                                        ),
+                                                    origin: new window.google.maps.Point(
+                                                        0,
+                                                        0
+                                                    ),
+                                                    anchor: new window.google.maps.Point(
+                                                        15,
+                                                        15
+                                                    ),
                                                 }}
-                                                
-                                                onClick={() => { selected(item) }}
+                                                onClick={() => {
+                                                    selected(item);
+                                                }}
                                             />
-                                            {selecionado != '' ?
-                                                (
-                                                    <InfoWindowPopup openModal={openModal} closePop={closePopup} device={selecionado} />
-                                                )
-                                                : null
-                                            }
+                                            {selecionado != '' ? (
+                                                <InfoWindowPopup
+                                                    openModal={openModal}
+                                                    closePop={closePopup}
+                                                    device={selecionado}
+                                                />
+                                            ) : null}
                                         </div>
-                                    )
+                                    );
                                 } else if (item.status == 0) {
                                     return (
                                         <div key={index.toString()}>
-                                            <Polyline
-                                                path={item.path}
-                                            />
+                                            <Polyline path={item.path} />
                                             <Marker
                                                 key={item.id}
-                                                position={{ lat: item.actuallyPosition.lat, lng: item.actuallyPosition.lng }}
+                                                position={{
+                                                    lat: item.actuallyPosition
+                                                        .lat,
+                                                    lng: item.actuallyPosition
+                                                        .lng,
+                                                }}
                                                 icon={{
                                                     url: carNoSignal7d,
-                                                    scaledSize: new window.google.maps.Size(30, 30),
-                                                    origin: new window.google.maps.Point(0, 0),
-                                                    anchor: new window.google.maps.Point(15, 15),
+                                                    scaledSize:
+                                                        new window.google.maps.Size(
+                                                            30,
+                                                            30
+                                                        ),
+                                                    origin: new window.google.maps.Point(
+                                                        0,
+                                                        0
+                                                    ),
+                                                    anchor: new window.google.maps.Point(
+                                                        15,
+                                                        15
+                                                    ),
                                                 }}
-                                                onClick={() => { selected(item) }}
+                                                onClick={() => {
+                                                    selected(item);
+                                                }}
                                             />
 
-                                            {selecionado != '' ?
-                                                (
-                                                    <InfoWindowPopup
-                                                        openModal={openModal}
-                                                        closePop={closePopup}
-                                                        device={selecionado}
-                                                    />
-                                                )
-                                                : null
-                                            }
+                                            {selecionado != '' ? (
+                                                <InfoWindowPopup
+                                                    openModal={openModal}
+                                                    closePop={closePopup}
+                                                    device={selecionado}
+                                                />
+                                            ) : null}
                                         </div>
-                                    )
+                                    );
                                 } else {
                                     return (
                                         <div key={index.toString()}>
-                                            <Polyline
-                                                path={item.path}
-                                            />
+                                            <Polyline path={item.path} />
                                             <Marker
                                                 key={item.id}
-                                                position={{ lat: item.actuallyPosition.lat, lng: item.actuallyPosition.lng }}
+                                                position={{
+                                                    lat: item.actuallyPosition
+                                                        .lat,
+                                                    lng: item.actuallyPosition
+                                                        .lng,
+                                                }}
                                                 icon={{
                                                     url: carNoSignal3d,
-                                                    scaledSize: new window.google.maps.Size(30, 30),
-                                                    origin: new window.google.maps.Point(0, 0),
-                                                    anchor: new window.google.maps.Point(15, 15),
+                                                    scaledSize:
+                                                        new window.google.maps.Size(
+                                                            30,
+                                                            30
+                                                        ),
+                                                    origin: new window.google.maps.Point(
+                                                        0,
+                                                        0
+                                                    ),
+                                                    anchor: new window.google.maps.Point(
+                                                        15,
+                                                        15
+                                                    ),
                                                 }}
-                                                onClick={() => { selected(item) }}
+                                                onClick={() => {
+                                                    selected(item);
+                                                }}
                                             />
 
-                                            {selecionado != '' ?
-                                                (
-                                                    <InfoWindowPopup openModal={openModal} closePop={closePopup} device={selecionado} />
-                                                )
-                                                : null
-                                            }
+                                            {selecionado != '' ? (
+                                                <InfoWindowPopup
+                                                    openModal={openModal}
+                                                    closePop={closePopup}
+                                                    device={selecionado}
+                                                />
+                                            ) : null}
                                         </div>
-                                    )
+                                    );
                                 }
                             })}
                         </GoogleMap>
                     </CCardBody>
                 </CCard>
             </>
-        )
+        );
     } else {
         return (
             <>
-                <h4> <Spinner animation="grow" variant="info" />  </h4>
+                <h4>
+                    {' '}
+                    <Spinner animation="grow" variant="info" />{' '}
+                </h4>
             </>
-        )
+        );
     }
-
-
-}
+};
 
 export default Tracking;

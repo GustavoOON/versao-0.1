@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
     CCard,
     CCardBody,
@@ -10,16 +10,15 @@ import {
     CInputGroup,
     CFormSelect,
     CFormInput,
-} from '@coreui/react'
+} from '@coreui/react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
 // import './report.css'
 
 // import bibliotecas
-import Resumo from '../reports/Resume'
-import Viagens from '../reports/Travel'
-import Rotas from '../reports/Routes'
-
+import Resumo from '../reports/Resume';
+import Viagens from '../reports/Travel';
+import Rotas from '../reports/Routes';
 
 const Report = () => {
     var data = new Date();
@@ -30,9 +29,9 @@ const Report = () => {
     // const [hourPass, setHourPass] = useState()
     // const [hourActually, setHourActually] = useState()
 
-    const [dateInicio, setDateInicio] = useState()
+    const [dateInicio, setDateInicio] = useState();
     // const [dateFinal, setDateFinal] = useState()
-    // const [dateMax, setDateMax] = useState() // data maxima 
+    // const [dateMax, setDateMax] = useState() // data maxima
     // Pega data e hora
     // useEffect(()=>{
     // setDay(data.getDate())
@@ -68,49 +67,47 @@ const Report = () => {
     // }
 
     if (dateInicio == '') {
-        return (
-            <h3> Carregando... </h3>
-        )
+        return <h3> Carregando... </h3>;
     } else {
         return (
-            <CContainer fluid className='menu-report'>
+            <CContainer fluid className="menu-report">
                 <h5>Filtrar Relatórios</h5>
                 <br />
                 <h6>Escolha um filtro</h6>
                 <CRow className="align-items-start">
                     <CCol>
                         <CFormSelect
-                            className=''
+                            className=""
                             aria-label="Cidade"
                             options={[
                                 'Cidade',
                                 { label: 'BH', value: '1' },
                                 { label: 'SP', value: '2' },
-                                { label: 'RJ', value: '3' }
+                                { label: 'RJ', value: '3' },
                             ]}
                         />
                     </CCol>
                     <CCol>
                         <CFormSelect
-                            className=''
+                            className=""
                             aria-label="Status"
                             options={[
                                 'Status',
                                 { label: 'A', value: '1' },
                                 { label: 'B', value: '2' },
-                                { label: 'C', value: '3' }
+                                { label: 'C', value: '3' },
                             ]}
                         />
                     </CCol>
                     <CCol>
                         <CInputGroup className="mb-3">
                             <div className="  container-icon-input">
-                                <i className='icon-search-global  i-absolute-global'>
+                                <i className="icon-search-global  i-absolute-global">
                                     <BiSearchAlt2 color="#6D6D6D" />
                                 </i>
                                 <CFormInput
                                     className="input-search-global"
-                                    placeholder='Pesquisar placa do veículo'
+                                    placeholder="Pesquisar placa do veículo"
                                 />
                             </div>
                         </CInputGroup>
@@ -122,20 +119,26 @@ const Report = () => {
                         <h6>Data de início</h6>
                         <div className="d-flex">
                             <CFormInput className=" me-2" type="date" />
-                            <CFormInput className="" style={{ width: '70%' }} type="time" />
+                            <CFormInput
+                                className=""
+                                style={{ width: '70%' }}
+                                type="time"
+                            />
                         </div>
                     </CCol>
                     <CCol xs={3}>
                         <h6>Data de fim</h6>
                         <div className="d-flex">
                             <CFormInput className=" me-2" type="date" />
-                            <CFormInput className="" style={{ width: '70%' }} type="time" />
+                            <CFormInput
+                                className=""
+                                style={{ width: '70%' }}
+                                type="time"
+                            />
                         </div>
                     </CCol>
                 </CRow>
                 <br />
-
-
 
                 {/* ESTA DANDO ERRO DE WARNING    😔  - refazer   */}
                 {/* <CRow className="align-items-start">
@@ -151,16 +154,16 @@ const Report = () => {
                         </CCol>
                     </CRow>  */}
 
-
                 <br />
-                <div style={{ alignItems: "center" }}  >
+                <div style={{ alignItems: 'center' }}>
                     <CRow>
                         <CCol>
-                            <CCard className='card-report'>
+                            <CCard className="card-report">
                                 <CCardBody>
                                     <CCardTitle>Resumo</CCardTitle>
                                     <CCardText>
-                                        Informações sobre a placa do veículo selecionada.
+                                        Informações sobre a placa do veículo
+                                        selecionada.
                                     </CCardText>
 
                                     {/* Passar valores do filtro  */}
@@ -170,11 +173,12 @@ const Report = () => {
                         </CCol>
 
                         <CCol>
-                            <CCard className='card-report'>
+                            <CCard className="card-report">
                                 <CCardBody>
                                     <CCardTitle>Viagens</CCardTitle>
                                     <CCardText>
-                                        Relatórios de viagens do {<br />} dispositivo.
+                                        Relatórios de viagens do {<br />}{' '}
+                                        dispositivo.
                                     </CCardText>
                                     {/* Passar valores do filtro  */}
                                     <Viagens />
@@ -183,7 +187,7 @@ const Report = () => {
                         </CCol>
 
                         <CCol>
-                            <CCard className='card-report'>
+                            <CCard className="card-report">
                                 <CCardBody>
                                     <CCardTitle>Rotas</CCardTitle>
                                     <CCardText>
@@ -199,9 +203,8 @@ const Report = () => {
                 </div>
                 <br />
             </CContainer>
-        )
+        );
     }
-
-}
+};
 
 export default Report;

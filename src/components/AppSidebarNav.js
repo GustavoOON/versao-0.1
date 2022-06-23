@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { CBadge, CNavLink } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+import { CBadge, CNavLink } from '@coreui/react';
+import CIcon from '@coreui/icons-react';
 
 export const AppSidebarNav = ({ items }) => {
     const [activeKey, setActiveKey] = useState(0);
@@ -28,17 +28,17 @@ export const AppSidebarNav = ({ items }) => {
 
         const Component = component;
 
-        let colorIcon = "#6D6D6D";
+        let colorIcon = '#6D6D6D';
 
-        activeKey !== index ? colorIcon : (colorIcon = "#216CFF");
+        activeKey !== index ? colorIcon : (colorIcon = '#216CFF');
 
-        return component.render.displayName === "CNavTitle" ? (
+        return component.render.displayName === 'CNavTitle' ? (
             <Component
-                style={{ color: "#6D6D6D" }}
+                style={{ color: '#6D6D6D' }}
                 {...(rest.to &&
                     !rest.items && {
                         component: NavLink,
-                        activeClassName: "active",
+                        activeClassName: 'active',
                     })}
                 key={index}
                 {...rest}
@@ -51,14 +51,14 @@ export const AppSidebarNav = ({ items }) => {
                     style={
                         activeKey === index
                             ? {
-                                  borderColor: "#216CFF",
-                                  borderWidth: "3px",
-                                  borderStyle: "none none none solid",
-                                  backgroundColor: "rgba(231, 231, 231, 0.35)",
+                                  borderColor: '#216CFF',
+                                  borderWidth: '3px',
+                                  borderStyle: 'none none none solid',
+                                  backgroundColor: 'rgba(231, 231, 231, 0.35)',
                                   borderRadius: 0,
-                                  color: "#216CFF",
+                                  color: '#216CFF',
                               }
-                            : { color: "#6D6D6D" }
+                            : { color: '#6D6D6D' }
                     }
                     active={activeKey === index}
                     onClick={() => setActiveKey(index)}
